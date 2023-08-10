@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/users")
-public class OnlinebankingController {
+public class UserController {
 	@GetMapping("/allUsers")
 	public List<User> getAllUsers() {
 		return service.getAllUsers();
