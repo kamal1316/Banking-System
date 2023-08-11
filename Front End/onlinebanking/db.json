@@ -1,0 +1,24 @@
+{
+  "user": [
+    {
+      "id": "shres",
+      "name": "aaa",
+      "password": "1234",
+      "email": "s@gmail.com",
+      "phone": "",
+      "country": "india",
+      "address": "",
+      "gender": "female"
+    },
+    {
+      "id": "Anandb",
+      "name": "Anand bhai",
+      "password": "pappu",
+      "email": "ab@gmail.com",
+      "phone": "9876543210",
+      "country": "india",
+      "address": "",
+      "gender": "male"
+    }
+  ]
+}
