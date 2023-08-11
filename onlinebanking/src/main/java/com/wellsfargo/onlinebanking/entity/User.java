@@ -6,12 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import javax.validation.constraints.Pattern;
+
 
 @Entity
-@Table(name = "User")
+@Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"accountNumber"})})
 public class User {
 	private int id;
 	private String userId;
+	
+	@Pattern(regexp = "^[0-9]{5}$")
 	private String accountNumber;
 	private String passcode;
 	
@@ -37,7 +43,7 @@ public class User {
 	
 	@Column(name = "userId", nullable = false)
 	public String getUserId() {
-		return userId;
+		return this.userId;
 	}
 
 	public void setUserId(String userId) {
@@ -46,7 +52,7 @@ public class User {
 	
 	@Column(name = "accountNumber", nullable = false)
 	public String getAccountNumber() {
-		return accountNumber;
+		return this.accountNumber;
 	}
 
 	public void setAccountNumber(String accountNumber) {
@@ -55,7 +61,7 @@ public class User {
 	
 	@Column(name = "passcode", nullable = false)
 	public String getPasscode() {
-		return passcode;
+		return this.passcode;
 	}
 
 	public void setPasscode(String passcode) {
