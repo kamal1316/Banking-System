@@ -5,11 +5,11 @@ import { toast } from "react-toastify";
 const Signup = () => {
  
 
-    const [id, idchange] = useState("");
+    const [userId, idchange] = useState("");
     const [name, namechange] = useState("");
     const [password, passwordchange] = useState("");
     const [email, emailchange] = useState("");
-    const [phone, phonechange] = useState("");
+    const [mobile, phonechange] = useState("");
     const [country, countrychange] = useState("india");
     const [address, addresschange] = useState("");
     const [gender, genderchange] = useState("female");
@@ -19,7 +19,7 @@ const Signup = () => {
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = 'Please enter the value in ';
-        if (id === null || id === '') {
+        if (userId === null || userId === '') {
             isproceed = false;
             errormessage += ' Username';
         }
@@ -27,9 +27,9 @@ const Signup = () => {
             isproceed = false;
             errormessage += ' Fullname';
         }
-        if (password === null || password === '') {
+        if (password=== null || password=== '') {
             isproceed = false;
-            errormessage += ' Password';
+            errormessage += ' password';
         }
         if (email === null || email === '') {
             isproceed = false;
@@ -51,12 +51,12 @@ const Signup = () => {
 
     const handlesubmit = (e) => {
         e.preventDefault();
-        let regobj = { id, name, password, email, phone, country, address, gender };
+        let regobj = { userId, name, password, email, mobile, country, address, gender };
         if (IsValidate()) {
         //console.log(regobj);
-        fetch("http://localhost:8000/user", {
+        fetch("http://localhost:8080/personalDetails/createPersonalDetails", {
             method: "POST",
-            headers: { 'content-type': 'application/json' },
+           // headers: { 'content-type': 'application/json' },
             body: JSON.stringify(regobj)
         }).then((res) => {
             toast.success('Registered successfully.')
@@ -74,7 +74,7 @@ const Signup = () => {
             <form className="container" onSubmit={handlesubmit}>
                 <div className="card">
                     <div className="card-header">
-                        <h1>User Registeration</h1>
+                        <h1>User Registration</h1>
                     </div>
                     <div className="card-body">
 
@@ -82,12 +82,12 @@ const Signup = () => {
                             <div className="col-lg-6">
                                 <div className="form-group">
                                     <label>User Name <span className="errmsg">*</span></label>
-                                    <input value={id} onChange={e => idchange(e.target.value)} className="form-control"></input>
+                                    <input value={userId} onChange={e => idchange(e.target.value)} className="form-control"></input>
                                 </div>
                             </div>
                             <div className="col-lg-6">
                                 <div className="form-group">
-                                    <label>Password <span className="errmsg">*</span></label>
+                                    <label>password<span className="errmsg">*</span></label>
                                     <input value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
                                 </div>
                             </div>
@@ -105,8 +105,8 @@ const Signup = () => {
                             </div>
                             <div className="col-lg-6">
                                 <div className="form-group">
-                                    <label>Phone <span className="errmsg"></span></label>
-                                    <input value={phone} onChange={e => phonechange(e.target.value)} className="form-control"></input>
+                                    <label>mobile <span className="errmsg"></span></label>
+                                    <input value={mobile} onChange={e => phonechange(e.target.value)} className="form-control"></input>
                                 </div>
                                 </div>
                                 <div className="col-lg-6">

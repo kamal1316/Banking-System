@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wellsfargo.onlinebanking.entity.Account;
 import com.wellsfargo.onlinebanking.entity.User;
-import com.wellsfargo.onlinebanking.userrepository.AccountRepository;
-import com.wellsfargo.onlinebanking.userrepository.UserRepository;
+import com.wellsfargo.onlinebanking.repository.AccountRepository;
 
 @Service
 public class AccountService implements IAccountService{
