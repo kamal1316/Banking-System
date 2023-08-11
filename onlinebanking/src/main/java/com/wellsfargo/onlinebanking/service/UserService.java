@@ -11,10 +11,10 @@ import com.wellsfargo.onlinebanking.userrepository.UserRepository;
 
 @Service
 public class UserService implements IUserService {
-	
+
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Override
 	public Optional<User> getUser(Integer id) {
 		return userRepo.findById(id);
