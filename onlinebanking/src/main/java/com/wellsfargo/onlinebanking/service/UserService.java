@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellsfargo.onlinebanking.entity.User;
-import com.wellsfargo.onlinebanking.userrepository.UserRepository;
+import com.wellsfargo.onlinebanking.repository.UserRepository;
 
 @Service
 public class UserService implements IUserService {

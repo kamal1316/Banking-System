@@ -1,4 +1,4 @@
-package com.wellsfargo.onlinebanking.userrepository;
+package com.wellsfargo.onlinebanking.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
