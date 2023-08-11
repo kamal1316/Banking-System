@@ -6,16 +6,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Transaction")
 public class Transaction {
 	
 	private Integer refId;
+	
+	@Pattern(regexp = "^[0-9]{5}$")
 	private String fromAccount;
+	
+	@Pattern(regexp = "^[0-9]{5}$")
 	private String toAccount;
+	
 	private int amount;
+	
+	@Pattern(regexp = "^(ntfs|rtgs|imps$")
 	private String type;
+	
 	private String transactionDate;
 	private String remark;
 	
@@ -60,8 +69,7 @@ public class Transaction {
 
 	public void setToAccount(String toAccount) {
 		this.toAccount = toAccount;
-	}
-	
+	}	
 
 	@Column(name = "amount", nullable = false)
 	public int getAmount() {
@@ -70,8 +78,7 @@ public class Transaction {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-	
+	}	
 
 	@Column(name = "transactionDate", nullable = false)
 	public String getTransactionDate() {
