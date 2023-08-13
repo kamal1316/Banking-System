@@ -15,9 +15,7 @@ const Login = () => {
   const ProceedLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-        ///implentation
-        // console.log('proceed');
-        fetch("http://localhost:8000/user/" + username).then((res) => {
+        fetch("http://localhost:8080/users/" + username).then((res) => {
             return res.json();
         }).then((resp) => {
             //console.log(resp)

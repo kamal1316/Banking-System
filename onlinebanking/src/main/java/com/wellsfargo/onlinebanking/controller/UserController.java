@@ -30,9 +30,9 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
-	@GetMapping("/{id}")
-	public User getUserByID(@PathVariable Integer id) {
-		return service.getUser(id);
+	@GetMapping("/{userId}")
+	public User getUserByUserID(@PathVariable String userId) {
+		return service.getUserByUserId(userId);
 	}
 	
 	@PostMapping("/createUser")

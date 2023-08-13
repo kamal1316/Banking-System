@@ -15,8 +15,8 @@ public class UserService implements IUserService {
 	UserRepository userRepo;
 
 	@Override
-	public User getUser(Integer id) {
-		return userRepo.findById(id).get();
+	public User getUserByUserId(String userId) {
+		return userRepo.findByUserId(userId);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class UserService implements IUserService {
 		
 		changedUser.setUserId(updatedUser.getUserId());
 		changedUser.setAccountNumber(updatedUser.getAccountNumber());
-		changedUser.setPasscode(updatedUser.getPasscode());
+		changedUser.setPassword(updatedUser.getPassword());
 		
 		return userRepo.save(changedUser);
 	}

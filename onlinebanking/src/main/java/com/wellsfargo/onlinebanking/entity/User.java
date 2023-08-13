@@ -12,24 +12,24 @@ import javax.validation.constraints.Pattern;
 
 
 @Entity
-@Table(name = "User", uniqueConstraints = {@UniqueConstraint(columnNames = {"accountNumber"})})
+@Table(name = "User")
 public class User {
 	private int id;
 	private String userId;
 	
 	@Pattern(regexp = "^[0-9]{5}$")
 	private String accountNumber;
-	private String passcode;
+	private String password;
 	
 	public User() {
 		super();
 	}
 	
-	public User(String userId, String accountNumber, String passcode) {
+	public User(String userId, String accountNumber, String password) {
 		super();
 		this.userId = userId;
 		this.accountNumber = accountNumber;
-		this.passcode = passcode;
+		this.password = password;
 	}
 	
 	@Id
@@ -50,7 +50,7 @@ public class User {
 		this.userId = userId;
 	}
 	
-	@Column(name = "accountNumber", nullable = false)
+	@Column(name = "accountNumber")
 	public String getAccountNumber() {
 		return this.accountNumber;
 	}
@@ -59,12 +59,12 @@ public class User {
 		this.accountNumber = accountNumber;
 	}
 	
-	@Column(name = "passcode", nullable = false)
-	public String getPasscode() {
-		return this.passcode;
+	@Column(name = "password", nullable = false)
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setPasscode(String passcode) {
-		this.passcode = passcode;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
