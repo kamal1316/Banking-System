@@ -7,7 +7,7 @@ import com.wellsfargo.onlinebanking.entity.User;
 public interface IUserService {
 
 	
-	User getUser(Integer id);
+	User getUserByUserId(String userId);
 
 	List<User> getAllUsers();
 

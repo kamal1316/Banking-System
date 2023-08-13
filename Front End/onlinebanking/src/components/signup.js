@@ -53,10 +53,24 @@ const Signup = () => {
         e.preventDefault();
         let regobj = { userId, name, password, email, mobile, country, address, gender };
         if (IsValidate()) {
-        //console.log(regobj);
+        console.log(regobj);
+
+        let userobj = {userId, password};
+
+        fetch("http://localhost:8080/users/createUser", {
+            method: "POST",
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(userobj)
+        }).then((res) => {
+            console.log("user details added sucessfully");
+        }).catch((err) => {
+            toast.error('Failed :' + err.message);
+        });
+
+
         fetch("http://localhost:8080/personalDetails/createPersonalDetails", {
             method: "POST",
-           // headers: { 'content-type': 'application/json' },
+            headers: { 'content-type': 'application/json' },
             body: JSON.stringify(regobj)
         }).then((res) => {
             toast.success('Registered successfully.')
