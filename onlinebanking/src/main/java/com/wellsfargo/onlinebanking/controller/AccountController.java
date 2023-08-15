@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.wellsfargo.onlinebanking.service.AccountService;
 import com.wellsfargo.onlinebanking.service.UserService;
 
 @RestController
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/accounts")
 public class AccountController {
 

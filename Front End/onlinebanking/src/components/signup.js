@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Signup = () => {
- 
 
     const [userId, idchange] = useState("");
     const [name, namechange] = useState("");
@@ -16,12 +15,19 @@ const Signup = () => {
 
     const usenavigate = useNavigate();
 
+    useEffect(()=>{
+        let token = sessionStorage.getItem('JwtToken');
+        if(!(token===''||token===null)){
+            usenavigate('/dashboard');
+        }
+    },[usenavigate]);
+
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = 'Please enter the value in ';
         if (userId === null || userId === '') {
             isproceed = false;
-            errormessage += ' Username';
+            errormessage += ' User Id';
         }
         if (name === null || name === '') {
             isproceed = false;
@@ -51,33 +57,32 @@ const Signup = () => {
 
     const handlesubmit = (e) => {
         e.preventDefault();
-        let regobj = { userId, name, password, email, mobile, country, address, gender };
-        if (IsValidate()) {
-        console.log(regobj);
 
+        let regobj = {userId, name, password, email, mobile, country, address, gender };
         let userobj = {userId, password};
+        
+        if (IsValidate()) {
+            
+            fetch("http://localhost:8080/users/createUser", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(userobj)
+            }).then((res) => {
+            }).catch((err) => {
+                toast.error('Failed :' + err.message);
+            });
 
-        fetch("http://localhost:8080/users/createUser", {
-            method: "POST",
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(userobj)
-        }).then((res) => {
-            console.log("user details added sucessfully");
-        }).catch((err) => {
-            toast.error('Failed :' + err.message);
-        });
 
-
-        fetch("http://localhost:8080/personalDetails/createPersonalDetails", {
-            method: "POST",
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(regobj)
-        }).then((res) => {
-            toast.success('Registered successfully.')
-            usenavigate('/login');
-        }).catch((err) => {
-            toast.error('Failed :' + err.message);
-        });
+            fetch("http://localhost:8080/personalDetails/createPersonalDetails", {
+                method: "POST",
+                headers: {"Content-Type": "application/json" },
+                body: JSON.stringify(regobj)
+            }).then((res) => {
+                toast.success('Registered successfully.')
+                usenavigate('/login');
+            }).catch((err) => {
+                toast.error('Failed :' + err.message);
+            });
     }
 }
 
@@ -95,13 +100,13 @@ const Signup = () => {
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="form-group">
-                                    <label>User Name <span className="errmsg">*</span></label>
+                                    <label>User Id <span className="errmsg">*</span></label>
                                     <input value={userId} onChange={e => idchange(e.target.value)} className="form-control"></input>
                                 </div>
                             </div>
                             <div className="col-lg-6">
                                 <div className="form-group">
-                                    <label>password<span className="errmsg">*</span></label>
+                                    <label>Password<span className="errmsg">*</span></label>
                                     <input value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
                                 </div>
                             </div>
@@ -119,7 +124,7 @@ const Signup = () => {
                             </div>
                             <div className="col-lg-6">
                                 <div className="form-group">
-                                    <label>mobile <span className="errmsg"></span></label>
+                                    <label>Mobile <span className="errmsg"></span></label>
                                     <input value={mobile} onChange={e => phonechange(e.target.value)} className="form-control"></input>
                                 </div>
                                 </div>
@@ -157,12 +162,10 @@ const Signup = () => {
                             <button type="submit" className="btn btn-primary">Register</button> |
                             <Link to={'/login'} className="btn btn-danger">Close</Link>
                         </div>
-                    </div>
-                </form>
-            </div>
-
-
+                </div>
+            </form>
         </div>
+    </div>
     );
 };
 
