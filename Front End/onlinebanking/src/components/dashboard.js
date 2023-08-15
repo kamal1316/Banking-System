@@ -1,22 +1,25 @@
 import React from 'react';
-import { useEffect, useState } from "react";
-import { useNavigate,Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
+import DashboardNavbar from './dashboardNavbar';
+import MyCard from './mycard';
 
 const Dashboard = () => {
 
     const usenavigate = useNavigate();
 
     useEffect(()=>{
-        let username = sessionStorage.getItem('username');
-        if(username===''||username===null){
+        let token = sessionStorage.getItem('JwtToken');
+        if(token===''||token===null){
             usenavigate('/login');
         }
-    },[]);
-
+    },[usenavigate]);
 
   return (
     <div>
-      <h2>Welcome User</h2>
+      <DashboardNavbar />
+      <MyCard/>
     </div>
   );
 };
