@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import React,{useState} from 'react';
+import {Button, Form} from 'react-bootstrap';
 
 const Payment = () => {
   const[auth,setAuth] = useState(false);

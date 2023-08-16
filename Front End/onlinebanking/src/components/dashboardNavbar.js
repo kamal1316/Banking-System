@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DashboardNavbar = () => {
 
@@ -28,7 +28,7 @@ const DashboardNavbar = () => {
               <NavDropdown.Item href="#action/3.1">To Beneficiary</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.2">
-                By Account Number
+                <Link to ={"/payment"} >Quick Transfer</Link>
               </NavDropdown.Item>
             </NavDropdown>
 
