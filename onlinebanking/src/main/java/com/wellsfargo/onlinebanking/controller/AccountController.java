@@ -31,17 +31,14 @@ public class AccountController {
 		return service.getAllAccounts();
 	}
 	
-	@GetMapping("/{id}")
-	public Optional<Account> getAccountById(@PathVariable Integer id) {
-		return service.getAccountById(id);
+	@GetMapping("/{userId}")
+	public Account getAccountByUserId(@PathVariable String userId) {
+		return service.getAccountByUserId(userId);
 	}
 	
 	@PostMapping("/createAccount")
 	public Account createAccount(@Validated @RequestBody Account newAccount) {
 		return service.createAccount(newAccount);
 	}
-	
-	
-
 }
 
