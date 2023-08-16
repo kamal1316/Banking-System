@@ -4,50 +4,55 @@ import { toast } from "react-toastify";
 
 const Signup = () => {
 
-    const [userId, idchange] = useState("");
+    //const [userId, idchange] = useState("");
     const [name, namechange] = useState("");
-    const [password, passwordchange] = useState("");
+    const [fatherName, fathernamechange] = useState("");
+    //const [password, passwordchange] = useState("");
     const [email, emailchange] = useState("");
     const [mobile, phonechange] = useState("");
+    const [aadhaar, aadhaarchange] = useState("");
+    const [pan, panchange] = useState("");
     const [country, countrychange] = useState("india");
     const [address, addresschange] = useState("");
     const [gender, genderchange] = useState("female");
 
     const usenavigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         let token = sessionStorage.getItem('JwtToken');
-        if(!(token===''||token===null)){
+        if (!(token === '' || token === null)) {
             usenavigate('/dashboard');
         }
-    },[usenavigate]);
+    }, [usenavigate]);
 
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = 'Please enter the value in ';
-        if (userId === null || userId === '') {
-            isproceed = false;
-            errormessage += ' User Id';
-        }
+        
         if (name === null || name === '') {
             isproceed = false;
             errormessage += ' Fullname';
         }
-        if (password=== null || password=== '') {
+        if (fatherName === null || fatherName === '') {
             isproceed = false;
-            errormessage += ' password';
+            errormessage += ' Father\'s name';
         }
+        // if (password === null || password === '') {
+        //     isproceed = false;
+        //     errormessage += ' password';
+        // }
         if (email === null || email === '') {
             isproceed = false;
             errormessage += ' Email';
         }
 
-        if(!isproceed){
-            toast.warning(errormessage)
-        }else{
-            if(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)){
 
-            }else{
+        if (!isproceed) {
+            toast.warning(errormessage)
+        } else {
+            if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
+
+            } else {
                 isproceed = false;
                 toast.warning('Please enter the valid email')
             }
@@ -58,47 +63,47 @@ const Signup = () => {
     const handlesubmit = (e) => {
         e.preventDefault();
 
-        let regobj = {userId, name, password, email, mobile, country, address, gender };
-        let userobj = {userId, password};
-        
+        let regobj = { name, fatherName, email, mobile, aadhaar, pan, country, address, gender };
+        //let userobj = { userId, password };
+
         if (IsValidate()) {
-            
-            fetch("http://localhost:8080/users/createUser", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(userobj)
-            }).then((res) => {
-            }).catch((err) => {
-                toast.error('Failed :' + err.message);
-            });
+
+            // fetch("http://localhost:8080/users/createUser", {
+            //     method: "POST",
+            //     headers: { "Content-Type": "application/json" },
+            //     body: JSON.stringify(userobj)
+            // }).then((res) => {
+            // }).catch((err) => {
+            //     toast.error('Failed :' + err.message);
+            // });
 
 
-            fetch("http://localhost:8080/personalDetails/createPersonalDetails", {
+            fetch("http://localhost:8080/admin/openAccount", {
                 method: "POST",
-                headers: {"Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(regobj)
             }).then((res) => {
-                toast.success('Registered successfully.')
+                toast.success('Applied successfully.')
                 usenavigate('/login');
             }).catch((err) => {
                 toast.error('Failed :' + err.message);
             });
+        }
     }
-}
 
-  
-  return (
-    <div>
-        <div className="offset-lg-3 col-lg-6">
-            <form className="container" onSubmit={handlesubmit}>
-                <div className="card">
-                    <div className="card-header">
-                        <h1>User Registration</h1>
-                    </div>
-                    <div className="card-body">
 
-                        <div className="row">
-                            <div className="col-lg-6">
+    return (
+        <div>
+            <div className="offset-lg-3 col-lg-6">
+                <form className="container" onSubmit={handlesubmit}>
+                    <div className="card">
+                        <div className="card-header">
+                            <h1>Apply for Account</h1>
+                        </div>
+                        <div className="card-body">
+
+                            <div className="row">
+                                {/* <div className="col-lg-6">
                                 <div className="form-group">
                                     <label>User Id <span className="errmsg">*</span></label>
                                     <input value={userId} onChange={e => idchange(e.target.value)} className="form-control"></input>
@@ -109,24 +114,42 @@ const Signup = () => {
                                     <label>Password<span className="errmsg">*</span></label>
                                     <input value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
                                 </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>Full Name <span className="errmsg">*</span></label>
-                                    <input value={name} onChange={e => namechange(e.target.value)} className="form-control"></input>
+                            </div> */}
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>Full Name <span className="errmsg">*</span></label>
+                                        <input value={name} onChange={e => namechange(e.target.value)} className="form-control"></input>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>Email <span className="errmsg">*</span></label>
-                                    <input value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>Father's Name <span className="errmsg">*</span></label>
+                                        <input value={fatherName} onChange={e => fathernamechange(e.target.value)} className="form-control"></input>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>Mobile <span className="errmsg"></span></label>
-                                    <input value={mobile} onChange={e => phonechange(e.target.value)} className="form-control"></input>
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>Email <span className="errmsg">*</span></label>
+                                        <input value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
+                                    </div>
                                 </div>
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>Mobile <span className="errmsg"></span></label>
+                                        <input value={mobile} onChange={e => phonechange(e.target.value)} className="form-control"></input>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>Aadhaar <span className="errmsg"></span></label>
+                                        <input value={aadhaar} onChange={e => aadhaarchange(e.target.value)} className="form-control"></input>
+                                    </div>
+                                </div>
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>PAN <span className="errmsg"></span></label>
+                                        <input value={pan} onChange={e => panchange(e.target.value)} className="form-control"></input>
+                                    </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
@@ -152,6 +175,8 @@ const Signup = () => {
                                         <label>Male</label>
                                         <input type="radio" checked={gender === 'female'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check"></input>
                                         <label>Female</label>
+                                        <input type="radio" checked={gender === 'prefer not to say'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check"></input>
+                                        <label>Prefer Not to Say</label>
                                     </div>
                                 </div>
 
@@ -159,13 +184,13 @@ const Signup = () => {
 
                         </div>
                         <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">Register</button> |
+                            <button type="submit" className="btn btn-primary">Submit</button> |
                             <Link to={'/login'} className="btn btn-danger">Close</Link>
                         </div>
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
     );
 };
 
