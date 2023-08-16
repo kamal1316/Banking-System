@@ -5,9 +5,11 @@ import React,{useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
 
 const Payment = () => {
+  const usenavigate = useNavigate();
+  
   const[auth,setAuth] = useState(false);
   if(auth){
-    return <Redirect to='/success'/>
+    usenavigate('/success');
   }
   const [data,setData] =useState({
     UseraccountNumber : '',
@@ -22,7 +24,7 @@ const Payment = () => {
     e.preventDefault()
     console.log(data);
   }
-  const usenavigate = useNavigate();
+  
 
     useEffect(()=>{
       let token = sessionStorage.getItem('JwtToken');
