@@ -22,8 +22,9 @@ public class Account {
 		
 		super();
 	}
-	public Account(String accountNumber, String name, int balance, String ifsc, String accountType, String branch) {
+	public Account(String userId, String accountNumber, String name, int balance, String ifsc, String accountType, String branch) {
 		super();
+		this.setUserId(userId);
 		this.setAccountNumber(accountNumber);
 		this.setName(name);
 		this.setBalance(balance);

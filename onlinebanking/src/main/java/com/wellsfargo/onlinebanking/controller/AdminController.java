@@ -63,7 +63,7 @@ public class AdminController {
 		PersonalDetails personalDetails = new PersonalDetails(newPerson.getUserId(), newPerson.getName(),newPerson.getEmail(), newPerson.getMobile(), newPerson.getAddress(), newPerson.getGender(), newPerson.getCountry(), newPerson.getFatherName() 
 				,newPerson.getAadhaarNumber(), newPerson.getPan());
 		
-		Account account = new Account(newPerson.getAccountNumber(), newPerson.getName(), newPerson.getBalance(), newPerson.getIfsc(), newPerson.getAccountType(), newPerson.getBranch());
+		Account account = new Account(newPerson.getUserId(), newPerson.getAccountNumber(), newPerson.getName(), newPerson.getBalance(), newPerson.getIfsc(), newPerson.getAccountType(), newPerson.getBranch());
 		
 		userService.createUser(user);
 		personalDetailsService.createPersonalDetails(personalDetails);

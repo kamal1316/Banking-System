@@ -12,7 +12,7 @@ const Dashboard = () => {
     useEffect(()=>{
         let token = sessionStorage.getItem('JwtToken');
         if(token===''||token===null){
-            usenavigate('/login');
+            usenavigate('/home');
         }
     },[usenavigate]);
 

@@ -8,7 +8,9 @@ const MyCard = () => {
   const [name, setName] = useState('unknown');
   const [balance, setBalance] = useState('xxx');
   const [accountNumber, setAccountNumber] = useState('yyyy');
-
+  const [accountType, setAccountType] = useState('');
+  const [branch, setBranch] = useState('');
+  
   useEffect(() => {
     let token = sessionStorage.getItem('JwtToken');
     fetch(" http://localhost:8080/accounts/" + sessionStorage.getItem('userId'), {
@@ -18,11 +20,11 @@ const MyCard = () => {
     }).then((res) => {
         return res.json();
     }).then ((resp) => {
-      // console.log(resp);
-      // console.log(resp.balance);
       setBalance(resp.balance);
       setName(resp.name);
       setAccountNumber(resp.accountNumber);
+      setAccountType(resp.accountType);
+      setBranch(resp.branch);
     }).catch((err) => {
         console.log(err.message);
     })  
@@ -38,16 +40,16 @@ const MyCard = () => {
         <Card.Text></Card.Text>
         <Card.Text></Card.Text>
         <Card.Text>
-          {name}
+          Name: {name}
         </Card.Text>
         <Card.Text>
           Account Number: {accountNumber}
         </Card.Text>
         <Card.Text>
-          Account Type: Savings
+          Account Type: {accountType}
         </Card.Text>
         <Card.Text>
-          Branch: Hyderabad
+          Branch: {branch}
         </Card.Text>
         <Button variant="primary">Show Full Details</Button>
       </Card.Body>
