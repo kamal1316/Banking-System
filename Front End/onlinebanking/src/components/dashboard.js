@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import DashboardNavbar from './dashboardNavbar';
 import MyCard from './mycard';
+import Payment from './payment';
 
 const Dashboard = () => {
 
@@ -19,7 +20,8 @@ const Dashboard = () => {
   return (
     <div>
       <DashboardNavbar />
-      <MyCard/>
+      <Payment/>
+      //<MyCard/>
     </div>
   );
 };
