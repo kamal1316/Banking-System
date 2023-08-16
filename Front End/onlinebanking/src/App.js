@@ -5,6 +5,8 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
 import Payment from './components/payment';
+import Transactions from './components/transactions';
+import PersonalDetails from './components/personaldetails';
 import { ToastContainer } from 'react-toastify';
 
 const App = () => {
@@ -19,6 +21,8 @@ const App = () => {
           <Route path="/signup"  element={<Signup/>}></Route> 
           <Route path="/dashboard"  element={<Dashboard/>}></Route> 
           <Route path="/payment"  element={<Payment/>}></Route> 
+          <Route path="/transactions"  element={<Transactions/>}></Route> 
+          <Route path="/personaldetails"  element={<PersonalDetails/>}></Route> 
         </Routes>
       </div>
     </BrowserRouter></>
