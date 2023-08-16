@@ -26,6 +26,8 @@ const Login = () => {
 
         let userobj = {userId, password};
 
+        sessionStorage.setItem('userId', userId);
+
         fetch("http://localhost:8080/authenticate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -43,7 +45,7 @@ const Login = () => {
             sessionStorage.setItem('JwtToken',data);
             // setToken(data);
             toast.success('Success');
-            usenavigate('/dashboard')
+            usenavigate('/dashboard');
         }).catch((err) => {
             toast.error('Login Failed due to :' + err.message);
         });

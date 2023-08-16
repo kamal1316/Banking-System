@@ -10,8 +10,10 @@ import com.wellsfargo.onlinebanking.entity.User;
 import com.wellsfargo.onlinebanking.service.UserService;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @CrossOrigin("http://localhost:3000")
 @RequestMapping("/users")
 public class UserController {
+	
+	
 	@GetMapping("/allUsers")
 	public List<User> getAllUsers() {
 		return service.getAllUsers();
@@ -35,8 +39,11 @@ public class UserController {
 		return service.getUserByUserId(userId);
 	}
 	
+	
+	
 	@PostMapping("/createUser")
 	public User createUser(@Validated @RequestBody User newUser) {
+		
 		return service.createUser(newUser);
 	}
 	

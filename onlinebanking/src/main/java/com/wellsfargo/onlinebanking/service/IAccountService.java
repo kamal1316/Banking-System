@@ -1,7 +1,6 @@
 package com.wellsfargo.onlinebanking.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.wellsfargo.onlinebanking.entity.Account;
 
@@ -12,6 +11,6 @@ public interface IAccountService {
 
 	List<Account> getAllAccounts();
 
-	Optional<Account> getAccountById(Integer id);
+	Account getAccountByUserId(String userId);
 
 }
