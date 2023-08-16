@@ -1,0 +1,31 @@
+/* Container for the personal details page */
+.personal-details-container {
+    padding: 20px;
+  }
+  
+  /* Styling for the details container */
+  .details {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for each detail item */
+  .detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  /* Styling for labels */
+  .detail-item label {
+    font-weight: bold;
+    width: 150px;
+  }
+  
+  /* Styling for details */
+  .detail-item span {
+    font-weight: normal;
+  }
+  
