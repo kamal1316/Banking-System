@@ -18,7 +18,9 @@ public class PersonalDetails {
 	private String userId;
 	private String name;
 	private String email;
-	private String password;
+	private String fatherName;
+	private String aadhaarNumber;
+	private String pan;
 	private String mobile;
 	private String address;
 	private String gender;
@@ -28,12 +30,14 @@ public class PersonalDetails {
 		super();
 	}
 	
-	public PersonalDetails(String userId, String name, String email, String password, String mobile, String address, String gender, String country) {
+	public PersonalDetails(String userId, String name, String email, String mobile, String address, String gender, String country, String fatherName, String aadhaarNumber, String pan) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.email = email;
-		this.password = password;
+		this.fatherName = fatherName;
+		this.aadhaarNumber = aadhaarNumber;
+		this.pan = pan;
 		this.mobile = mobile;
 		this.address = address;
 		this.gender = gender;
@@ -76,15 +80,6 @@ public class PersonalDetails {
 		this.email = email;
 	}
 	
-	@Column(name = "password", nullable = false)
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
 	@Column(name = "mobile", nullable = false)
 	public String getMobile() {
 		return this.mobile;
@@ -119,6 +114,30 @@ public class PersonalDetails {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getAadhaarNumber() {
+		return aadhaarNumber;
+	}
+
+	public void setAadhaarNumber(String aadhaarNumber) {
+		this.aadhaarNumber = aadhaarNumber;
+	}
+
+	public String getPan() {
+		return pan;
+	}
+
+	public void setPan(String pan) {
+		this.pan = pan;
 	}
 	
 }

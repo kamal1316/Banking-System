@@ -18,8 +18,8 @@ public class AccountService implements IAccountService{
 	AccountRepository accountRepository;
 	
 	@Override
-	public Optional<Account> getAccountById(Integer id) {
-		return accountRepository.findById(id);
+	public Account getAccountByUserId(String userId) {
+		return accountRepository.findByUserId(userId);
 	}
 
 	@Override

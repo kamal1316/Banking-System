@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { CardGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -6,6 +7,32 @@ import { useEffect } from "react";
 import {Link, useNavigate } from 'react-router-dom';
 
 const MyCard = () => {
+
+  const [name, setName] = useState('unknown');
+  const [balance, setBalance] = useState('xxx');
+  const [accountNumber, setAccountNumber] = useState('yyyy');
+  const [accountType, setAccountType] = useState('');
+  const [branch, setBranch] = useState('');
+  
+  useEffect(() => {
+    let token = sessionStorage.getItem('JwtToken');
+    fetch(" http://localhost:8080/accounts/" + sessionStorage.getItem('userId'), {
+      method: "GET",
+      headers: { "Authorization" : `Bearer ${token}`,
+      "Content-Type": "application/json" }
+    }).then((res) => {
+        return res.json();
+    }).then ((resp) => {
+      setBalance(resp.balance);
+      setName(resp.name);
+      setAccountNumber(resp.accountNumber);
+      setAccountType(resp.accountType);
+      setBranch(resp.branch);
+    }).catch((err) => {
+        console.log(err.message);
+    })  
+}, [])
+
   return (
     <CardGroup style={{padding: '50px'}}>
     <Card border='primary' style={{ width: '15rem', padding: '10px'}} bg='light' text = 'dark'>
@@ -16,16 +43,16 @@ const MyCard = () => {
         <Card.Text></Card.Text>
         <Card.Text></Card.Text>
         <Card.Text>
-          Sangram Ray
+          Name: {name}
         </Card.Text>
         <Card.Text>
-          Account Number: 123459876
+          Account Number: {accountNumber}
         </Card.Text>
         <Card.Text>
-          Account Type: Savings
+          Account Type: {accountType}
         </Card.Text>
         <Card.Text>
-          Branch: Hyderabad
+          Branch: {branch}
         </Card.Text>
         <Button variant="primary">
         <Link to="/personaldetails" className="btn btn-default">Show Personal Details</Link>
@@ -41,7 +68,7 @@ const MyCard = () => {
         <Card.Text></Card.Text>
         <Card.Text></Card.Text>
         <Card.Text>
-          Balance: 15000
+          Balance: {balance}
         </Card.Text>
         <Card.Text>
           Last Transaction: +1000

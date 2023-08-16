@@ -11,20 +11,26 @@ import javax.persistence.Table;
 @Table(name="Account")
 public class Account {
 	int id;
+	private String userId;
     private String accountNumber;
     private String name;
     private int balance;
     private String IFSC;
+    private String accountType;
+    private String branch;
 	public Account() {
 		
 		super();
 	}
-	public Account(String accountNumber, String name, int balance, String ifsc) {
+	public Account(String userId, String accountNumber, String name, int balance, String ifsc, String accountType, String branch) {
 		super();
+		this.setUserId(userId);
 		this.setAccountNumber(accountNumber);
 		this.setName(name);
 		this.setBalance(balance);
 		this.setIFSC(ifsc);
+		this.setAccountType(accountType);
+		this.setBranch(branch);
 	}
 	
 	@Id
@@ -34,9 +40,17 @@ public class Account {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}	
+	}
 	
-	@Column(name = "accountNumber", nullable = false)
+	@Column(name = "userId", nullable = false)
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	@Column(name = "accountNumber")
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -66,6 +80,22 @@ public class Account {
 	}
 	public void setBalance(int balance) {
 		this.balance = balance;
+	}
+	
+	@Column(name = "accountType", nullable = false)
+	public String getAccountType() {
+		return accountType;
+	}
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+	
+	@Column(name = "branch", nullable = false)
+	public String getBranch() {
+		return branch;
+	}
+	public void setBranch(String branch) {
+		this.branch = branch;
 	}
 
 }

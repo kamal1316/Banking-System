@@ -1,15 +1,32 @@
-import React from 'react';
+//import React from 'react';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import React,{useState} from 'react';
 
 const Payment = () => {
-
-    const usenavigate = useNavigate();
+  const[auth,setAuth] = useState(false);
+  if(auth){
+    return <Redirect to='/success'/>
+  }
+  const [data,setData] =useState({
+    UseraccountNumber : '',
+    ToAccountNumber : '',
+    Amount : '',
+    password : ''
+  })
+  const changeHandler = e => {
+    setData({...data,[e.target.name]:[e.target.value]})
+  }
+  const submithandler = e => {
+    e.preventDefault()
+    console.log(data);
+  }
+  const usenavigate = useNavigate();
 
     useEffect(()=>{
       let token = sessionStorage.getItem('JwtToken');
       if(token===''||token===null){
-          usenavigate('/login');
+          usenavigate('/home');
       }
   },[usenavigate]);
 
@@ -17,6 +34,32 @@ const Payment = () => {
   return (
     <div>
         <h1>Payment Page</h1>
+        <Form>
+      <Form.Group className="mb-3" controlId="FormBasicText">
+        <Form.Label>UserAccountNumber </Form.Label>
+        <Form.Control type="number" placeholder="Enter your account number" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="FormBasicText">
+        <Form.Label>ToAccountNumber</Form.Label>
+        <Form.Control type="number" placeholder="Enter receiver Account Number" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="FormBasicText">
+        <Form.Label>Amount</Form.Label>
+        <Form.Control type = "number" placeholder="Enter Amount to be send" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+       <Form.Label>Password</Form.Label>
+        <Form.Check type="password" label="Enter Password" />
+      </Form.Group>
+    
+      <Button variant="primary" type="submit" OnClick={()=> setAuth(true)}>
+        Submit
+      </Button>
+
+    </Form>
     </div>
   );
 };

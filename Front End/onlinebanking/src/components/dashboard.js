@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import DashboardNavbar from './dashboardNavbar';
 import MyCard from './mycard';
+import Payment from './payment';
 
 const Dashboard = () => {
 
@@ -12,14 +13,15 @@ const Dashboard = () => {
     useEffect(()=>{
         let token = sessionStorage.getItem('JwtToken');
         if(token===''||token===null){
-            usenavigate('/login');
+            usenavigate('/home');
         }
     },[usenavigate]);
 
   return (
     <div>
       <DashboardNavbar />
-      <MyCard/>
+      <Payment/>
+      //<MyCard/>
     </div>
   );
 };

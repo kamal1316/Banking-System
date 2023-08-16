@@ -19,7 +19,7 @@ const Home = () => {
         <Link to="/login">Login</Link>
       </button>
       <button>
-        <Link to="/signup">Sign up</Link>
+        <Link to="/openAccount">New User? Apply for Account</Link>
       </button>
     </div>
   );
