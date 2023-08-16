@@ -9,6 +9,7 @@ import Transactions from './components/transactions';
 import PersonalDetails from './components/personaldetails';
 import { ToastContainer } from 'react-toastify';
 
+
 const App = () => {
   return (
     <><ToastContainer theme='colored' position='top-center'></ToastContainer>

@@ -20,10 +20,11 @@ const Dashboard = () => {
   return (
     <div>
       <DashboardNavbar />
-      <Payment/>
-      //<MyCard/>
+      
+      <MyCard/>
     </div>
   );
 };
 
 export default Dashboard;
+

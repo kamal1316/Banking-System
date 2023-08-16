@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import React,{useState} from 'react';
+import {Button, Form} from 'react-bootstrap';
 
 const Payment = () => {
   const[auth,setAuth] = useState(false);
@@ -37,20 +38,20 @@ const Payment = () => {
         <Form>
       <Form.Group className="mb-3" controlId="FormBasicText">
         <Form.Label>UserAccountNumber </Form.Label>
-        <Form.Control type="number" placeholder="Enter your account number" />
+        <Form.Control type="number" placeholder="Enter your account number" onChange={changeHandler}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="FormBasicText">
         <Form.Label>ToAccountNumber</Form.Label>
-        <Form.Control type="number" placeholder="Enter receiver Account Number" />
+        <Form.Control type="number" placeholder="Enter receiver Account Number"  onChange={changeHandler}/>
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="FormBasicText">
+      <Form.Group className="mb-3" controlId="FormBasicText"  onChange={changeHandler}>
         <Form.Label>Amount</Form.Label>
         <Form.Control type = "number" placeholder="Enter Amount to be send" />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="mb-3" controlId="formBasicPassword"  onChange={changeHandler}>
        <Form.Label>Password</Form.Label>
         <Form.Check type="password" label="Enter Password" />
       </Form.Group>
