@@ -12,7 +12,7 @@ const DashboardNavbar = () => {
 
   const handleLogout = (e) => {
     sessionStorage.clear();
-    usenaviagte('/login');
+    usenaviagte('/home');
   }
 
   return (
@@ -22,7 +22,6 @@ const DashboardNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/dashboard">Home</Nav.Link>
             
             <NavDropdown title="Fund Transfer" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">To Beneficiary</NavDropdown.Item>
@@ -32,7 +31,6 @@ const DashboardNavbar = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="/profile">Profile</Nav.Link>
             <Nav.Link href="/changepassword">Change Password</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
 
