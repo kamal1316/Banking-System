@@ -9,9 +9,12 @@ import Transactions from './components/transactions';
 import PersonalDetails from './components/personaldetails';
 import Success from './components/success';
 import { ToastContainer } from 'react-toastify';
-
+import axios from 'axios' ;
+import ChangePassword from './components/changepassword';
 
 const App = () => {
+
+
   return (
     <><ToastContainer theme='colored' position='top-center'></ToastContainer>
      <BrowserRouter>
@@ -23,6 +26,7 @@ const App = () => {
           <Route path="/openAccount"  element={<Signup/>}></Route> 
           <Route path="/dashboard"  element={<Dashboard/>}></Route> 
           <Route path="/payment"  element={<Payment/>}></Route> 
+          <Route path="/changePassword" element={<ChangePassword/>}></Route>
           <Route path="/transactions"  element={<Transactions/>}></Route> 
           <Route path="/personaldetails"  element={<PersonalDetails/>}></Route>
           <Route path="/success" element ={<Success/>}></Route>
