@@ -30,7 +30,6 @@ public class TransactionController {
 	AccountService accountService;
 	
 	@GetMapping("{accountNumber}/transactions")
-
 	public List<Transaction> getTransactions(@PathVariable String accountNumber) {
 		return transService.getTransactions(accountNumber, accountNumber); 
 	}
