@@ -6,4 +6,5 @@ import com.wellsfargo.onlinebanking.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Integer>{
 	Account findByUserId(String userId);
+	Account findByAccountNumber(String accountNumber);
 }

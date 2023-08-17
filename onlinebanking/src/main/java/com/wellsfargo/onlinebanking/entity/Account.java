@@ -14,7 +14,6 @@ import javax.validation.constraints.Pattern;
 @Entity
 @Table(name="Account")
 public class Account {
-	int id;
 		
 	private String userId;
 	
@@ -45,16 +44,10 @@ public class Account {
 		this.setBranch(branch);
 	}
 	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	@Column(name = "userId", nullable = false, unique = true)
+	@Column(name = "userId", nullable = false)
+
 	public String getUserId() {
 		return userId;
 	}

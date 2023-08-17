@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wellsfargo.onlinebanking.entity.Account;
 import com.wellsfargo.onlinebanking.entity.Transaction;
+import com.wellsfargo.onlinebanking.service.AccountService;
 import com.wellsfargo.onlinebanking.service.TransactionService;
 
 @RestController
@@ -23,8 +25,12 @@ public class TransactionController {
 	
 	@Autowired
 	TransactionService transService;
+
+	@Autowired
+	AccountService accountService;
 	
-	@GetMapping("/{accountNumber}/transaction")
+	@GetMapping("{accountNumber}/transactions")
+
 	public List<Transaction> getTransactions(@PathVariable String accountNumber) {
 		return transService.getTransactions(accountNumber, accountNumber); 
 	}
@@ -34,10 +40,30 @@ public class TransactionController {
 		return transService.getTransaction(refId);
 	}
 	
+
 	
-	@PostMapping("/createTransaction")
-	public Transaction createTransaction(@Validated @RequestBody Transaction transaction) {
-		return transService.createTransaction(transaction);
-	}
+//	@PostMapping("/executeTransaction")
+	//public Transaction executeTransaction( @RequestBody Transaction transaction) {
+//		System.out.println(transaction);
+//		return "hello";
+	//	return transaction;
+//		Account sender = accountService.getAccountByAccountNumber(transaction.getFromAccount());
+//		Account receiver = accountService.getAccountByAccountNumber(transaction.getToAccount());
+//		
+//		if(accountService.getAccountByAccountNumber(transaction.getFromAccount()).getBalance() < transaction.getAmount()) {
+//			return "Insufficient Balance";
+//		}
+//		
+//		sender.setBalance(sender.getBalance()-transaction.getAmount());
+//		receiver.setBalance(receiver.getBalance()+transaction.getAmount());
+//		
+//		accountService.updateAccount(receiver);
+//		accountService.updateAccount(sender);
+//		transService.createTransaction(transaction);
+//		
+//		return "successfully transfered";
+//	}
+
+	
 	
 }

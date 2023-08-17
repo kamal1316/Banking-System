@@ -22,6 +22,7 @@ public class Transaction {
 	
 	private int amount;
 	
+
 	private String name;
 	
 	@Pattern(regexp = "^(ntfs|rtgs|imps)$")

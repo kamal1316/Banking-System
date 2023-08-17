@@ -35,8 +35,8 @@ public class TransactionService implements ITransactionService {
 	}
 	
 	@Override
-	public Transaction createTransaction(Transaction transaction) {
-		return transRepo.save(transaction);
+	public void createTransaction(Transaction transaction) {
+		transRepo.save(transaction);
 	}
 
 }
