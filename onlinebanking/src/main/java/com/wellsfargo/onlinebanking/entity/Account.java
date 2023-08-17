@@ -33,7 +33,7 @@ public class Account {
 		this.setBranch(branch);
 	}
 	
-	@Id
+	
     @GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return id;
@@ -42,6 +42,7 @@ public class Account {
 		this.id = id;
 	}
 	
+	@Id
 	@Column(name = "userId", nullable = false)
 	public String getUserId() {
 		return userId;

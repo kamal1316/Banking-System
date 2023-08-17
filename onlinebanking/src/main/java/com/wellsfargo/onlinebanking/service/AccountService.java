@@ -21,6 +21,11 @@ public class AccountService implements IAccountService{
 	public Account getAccountByUserId(String userId) {
 		return accountRepository.findByUserId(userId);
 	}
+	
+	@Override
+	public Account getAccountByAccountNumber(String accountNumber) {
+		return accountRepository.findByAccountNumber(accountNumber);
+	}
 
 	@Override
 	public List<Account> getAllAccounts() {
@@ -32,6 +37,11 @@ public class AccountService implements IAccountService{
 	public Account createAccount(Account newAccount) {
 	
 		return accountRepository.save(newAccount);
+	}
+	
+	@Override
+	public Account updateAccount(Account updatedAccount) {
+		return accountRepository.save(updatedAccount);
 	}
 
 }

@@ -43,6 +43,7 @@ const Login = () => {
             }
         }).then((data)=>{
             sessionStorage.setItem('JwtToken',data);
+            console.log(data);
             // setToken(data);
             toast.success('Success');
             usenavigate('/dashboard');
@@ -104,7 +105,7 @@ const validate = () => {
                     <div className="card-footer">
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span style={{"paddingRight": "20px"}}></span>
-                        <Link className="btn btn-success" to={'/signup'}>New User</Link>
+                        <Link className="btn btn-success" to={'/openAccount'}>New User? Apply for account</Link>
                     </div>
                 </div>
             </form>

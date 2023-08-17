@@ -22,8 +22,8 @@ public class Transaction {
 	
 	private int amount;
 	
-	@Pattern(regexp = "^(ntfs|rtgs|imps$")
-	private String type;
+//	@Pattern(regexp = "^(ntfs|rtgs|imps$")
+//	private String type;
 	
 	private String transactionDate;
 	private String remark;
@@ -32,9 +32,9 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(Integer refId, String fromAccount, String toAccount, int amount, String type, String transactionDate, String remark) {
+	public Transaction(String fromAccount, String toAccount, int amount, String transactionDate, String remark) {
 		super();
-		this.refId = refId;
+//		this.refId = refId;
 		this.fromAccount = fromAccount;
 		this.toAccount = toAccount;
 		this.amount = amount;

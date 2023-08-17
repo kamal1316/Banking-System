@@ -12,5 +12,9 @@ public interface IAccountService {
 	List<Account> getAllAccounts();
 
 	Account getAccountByUserId(String userId);
+	
+	Account getAccountByAccountNumber(String accountNumber);
+	
+	Account updateAccount(Account updatedAccount);
 
 }
