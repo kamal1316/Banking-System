@@ -22,11 +22,8 @@ public class Transaction {
 	
 	private int amount;
 	
-
-	private String name;
-	
 	@Pattern(regexp = "^(ntfs|rtgs|imps)$")
-	private String type;
+	private String mode;
 	
 	private String timestamp;
 	private String remark;
@@ -35,7 +32,7 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(int refId, String fromAccount, String toAccount, int amount, String type, String timestamp, String remark, String name) {
+	public Transaction(int refId, String fromAccount, String toAccount, int amount, String type, String timestamp, String remark) {
 		super();
 		setRefId(refId);
 		setFromAccount(fromAccount);
@@ -44,9 +41,7 @@ public class Transaction {
 		setType(type);
 		setTimestamp(timestamp);
 		setRemark(remark);
-		setName(name);
 	}
-
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -103,15 +98,6 @@ public class Transaction {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	@Column(name = "name", nullable = false)
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	@Column(name = "type", nullable = false)

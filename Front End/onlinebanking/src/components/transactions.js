@@ -10,7 +10,7 @@ function Transactions() {
   useEffect(() => {
     let token = sessionStorage.getItem('JwtToken');
 
-    fetch(" http://localhost:8080/transaction/" + sessionStorage.getItem('accountNumber') + "/transaction", {
+    fetch(" http://localhost:8080/transaction/" + sessionStorage.getItem('accountNumber') + "/transactions", {
       method: "GET",
       headers: { "Authorization" : `Bearer ${token}`,
       "Content-Type": "application/json" }

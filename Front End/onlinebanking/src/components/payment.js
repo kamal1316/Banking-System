@@ -12,10 +12,12 @@ const Payment = () => {
     usenavigate('/success');
   }
   const [data,setData] =useState({
-    UseraccountNumber : '',
-    ToAccountNumber : '',
-    Amount : '',
-    password : ''
+    fromAccountNumber : '',
+    toAccountNumber : '',
+    amount : '',
+    password : '',
+    mode: '',
+    timestamp: ''
   })
   const changeHandler = e => {
     setData({...data,[e.target.name]:[e.target.value]})
@@ -38,10 +40,6 @@ const Payment = () => {
     <div>
         <h1>Payment Page</h1>
         <Form>
-      <Form.Group className="mb-3" controlId="FormBasicText">
-        <Form.Label>UserAccountNumber </Form.Label>
-        <Form.Control type="number" placeholder="Enter your account number" onChange={changeHandler}/>
-      </Form.Group>
 
       <Form.Group className="mb-3" controlId="FormBasicText">
         <Form.Label>ToAccountNumber</Form.Label>
@@ -51,6 +49,10 @@ const Payment = () => {
       <Form.Group className="mb-3" controlId="FormBasicText"  onChange={changeHandler}>
         <Form.Label>Amount</Form.Label>
         <Form.Control type = "number" placeholder="Enter Amount to be send" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="FormBasicText"  onChange={changeHandler}>
+        
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword"  onChange={changeHandler}>
