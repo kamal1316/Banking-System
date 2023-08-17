@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
 
@@ -17,12 +17,24 @@ public class PersonalDetails {
 	private int id;
 	private String userId;
 	private String name;
+	
+//	@Pattern(regexp = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$")
+	@Email
 	private String email;
+	
 	private String fatherName;
+	
+	@Pattern(regexp = "^$|^[0-9]{12}$")
 	private String aadhaarNumber;
+	
+	@Pattern(regexp = "^$|^[A-Z]{5}[0-9]{4}[A-Z]{1}$")
 	private String pan;
+	
+	@Pattern(regexp = "^$|^[0-9]{10}$")
 	private String mobile;
 	private String address;
+	
+	@Pattern(regexp = "^(male|female|other)$")
 	private String gender;
 	private String country;
 	

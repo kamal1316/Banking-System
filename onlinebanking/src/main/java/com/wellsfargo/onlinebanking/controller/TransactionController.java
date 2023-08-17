@@ -24,7 +24,7 @@ public class TransactionController {
 	@Autowired
 	TransactionService transService;
 	
-	@GetMapping("{accountNumber}/transactions")
+	@GetMapping("/{accountNumber}/transaction")
 	public List<Transaction> getTransactions(@PathVariable String accountNumber) {
 		return transService.getTransactions(accountNumber, accountNumber); 
 	}

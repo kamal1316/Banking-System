@@ -95,7 +95,7 @@ const Signup = () => {
     return (
         <div>
             <div className="offset-lg-3 col-lg-6">
-                <form className="container" onSubmit={handlesubmit}>
+                <form className="container" onSubmit={handlesubmit} style = {{padding: "20px"}}>
                     <div className="card">
                         <div className="card-header">
                             <h1>Apply for Account</h1>
@@ -103,18 +103,6 @@ const Signup = () => {
                         <div className="card-body">
 
                             <div className="row">
-                                {/* <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>User Id <span className="errmsg">*</span></label>
-                                    <input value={userId} onChange={e => idchange(e.target.value)} className="form-control"></input>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="form-group">
-                                    <label>Password<span className="errmsg">*</span></label>
-                                    <input value={password} onChange={e => passwordchange(e.target.value)} type="password" className="form-control"></input>
-                                </div>
-                            </div> */}
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Full Name <span className="errmsg">*</span></label>
@@ -172,11 +160,13 @@ const Signup = () => {
                                         <label>Gender</label>
                                         <br></br>
                                         <input type="radio" checked={gender === 'male'} onChange={e => genderchange(e.target.value)} name="gender" value="male" className="app-check"></input>
-                                        <label>Male</label>
+                                        <label> Male</label>
+                                        <span style = {{padding : "5px"}}></span>
                                         <input type="radio" checked={gender === 'female'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check"></input>
-                                        <label>Female</label>
+                                        <label> Female</label>
+                                        <span style = {{padding : "5px"}}></span>
                                         <input type="radio" checked={gender === 'prefer not to say'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check"></input>
-                                        <label>Prefer Not to Say</label>
+                                        <label> Prefer Not to Say</label>
                                     </div>
                                 </div>
 
@@ -184,7 +174,8 @@ const Signup = () => {
 
                         </div>
                         <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">Submit</button> |
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <span style = {{padding : "10px"}}></span>
                             <Link to={'/login'} className="btn btn-danger">Close</Link>
                         </div>
                     </div>

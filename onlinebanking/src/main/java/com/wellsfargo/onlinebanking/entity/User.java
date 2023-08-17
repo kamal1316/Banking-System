@@ -1,12 +1,14 @@
 package com.wellsfargo.onlinebanking.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import javax.validation.constraints.Pattern;
 
@@ -15,7 +17,12 @@ import javax.validation.constraints.Pattern;
 @Table(name = "User")
 public class User {
 	private int id;
+	
 	private String userId;
+	
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "userId", referencedColumnName = "userId")
+//	private Account account;
 	
 	@Pattern(regexp = "^[0-9]{5}$")
 	private String accountNumber;
@@ -27,9 +34,9 @@ public class User {
 	
 	public User(String userId, String accountNumber, String password) {
 		super();
-		this.userId = userId;
-		this.accountNumber = accountNumber;
-		this.password = password;
+		setUserId(userId);
+		setAccountNumber(accountNumber);
+		setPassword(password);
 	}
 	
 	@Id
@@ -41,7 +48,7 @@ public class User {
 		this.id = id;
 	}	
 	
-	@Column(name = "userId", nullable = false)
+	@Column(name = "userId", nullable = false, unique = true)
 	public String getUserId() {
 		return this.userId;
 	}
@@ -50,7 +57,7 @@ public class User {
 		this.userId = userId;
 	}
 	
-	@Column(name = "accountNumber")
+	@Column(name = "accountNumber", nullable = false, unique = true)
 	public String getAccountNumber() {
 		return this.accountNumber;
 	}

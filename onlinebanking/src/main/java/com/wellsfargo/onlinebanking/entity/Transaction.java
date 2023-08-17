@@ -22,26 +22,31 @@ public class Transaction {
 	
 	private int amount;
 	
-	@Pattern(regexp = "^(ntfs|rtgs|imps$")
+	private String name;
+	
+	@Pattern(regexp = "^(ntfs|rtgs|imps)$")
 	private String type;
 	
-	private String transactionDate;
+	private String timestamp;
 	private String remark;
 	
 	public Transaction() {
 		super();
 	}
 	
-	public Transaction(Integer refId, String fromAccount, String toAccount, int amount, String type, String transactionDate, String remark) {
+	public Transaction(Integer refId, String fromAccount, String toAccount, int amount, String type, String timestamp, String remark, String name) {
 		super();
-		this.refId = refId;
-		this.fromAccount = fromAccount;
-		this.toAccount = toAccount;
-		this.amount = amount;
-		this.transactionDate = transactionDate;
-		this.remark = remark;
+		setRefId(refId);
+		setFromAccount(fromAccount);
+		setToAccount(toAccount);
+		setAmount(amount);
+		setType(type);
+		setTimestamp(timestamp);
+		setRemark(remark);
+		setName(name);
 	}
-	
+
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer getRefId() {
@@ -80,13 +85,13 @@ public class Transaction {
 		this.amount = amount;
 	}	
 
-	@Column(name = "transactionDate", nullable = false)
-	public String getTransactionDate() {
-		return transactionDate;
+	@Column(name = "timestamp", nullable = false)
+	public String getTimestamp() {
+		return timestamp;
 	}
 
-	public void setTransactionDate(String transactionDate) {
-		this.transactionDate = transactionDate;
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 
@@ -97,6 +102,24 @@ public class Transaction {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@Column(name = "name", nullable = false)
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Column(name = "type", nullable = false)
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	
