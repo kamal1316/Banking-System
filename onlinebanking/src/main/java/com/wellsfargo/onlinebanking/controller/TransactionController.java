@@ -25,11 +25,12 @@ public class TransactionController {
 	
 	@Autowired
 	TransactionService transService;
-	
+
 	@Autowired
 	AccountService accountService;
 	
 	@GetMapping("{accountNumber}/transactions")
+
 	public List<Transaction> getTransactions(@PathVariable String accountNumber) {
 		return transService.getTransactions(accountNumber, accountNumber); 
 	}

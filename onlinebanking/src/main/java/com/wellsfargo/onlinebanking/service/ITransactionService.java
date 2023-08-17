@@ -8,6 +8,7 @@ import com.wellsfargo.onlinebanking.entity.Transaction;
 public interface ITransactionService {
 	
 	List<Transaction> getTransactions(String fromAccount, String toAccount);
-	void createTransaction(Transaction transaction);
+	Transaction createTransaction(Transaction transaction);
+
 	Optional<Transaction> getTransaction(Integer refId);
 }

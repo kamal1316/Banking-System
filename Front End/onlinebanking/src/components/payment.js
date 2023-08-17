@@ -55,7 +55,7 @@ const Payment = () => {
 
       <Form.Group className="mb-3" controlId="formBasicPassword"  onChange={changeHandler}>
        <Form.Label>Password</Form.Label>
-        <Form.Check type="password" label="Enter Password" />
+        <Form.Control type="password" label="Enter Password" />
       </Form.Group>
     
       <Button variant="primary" type="submit" OnClick={()=> setAuth(true)}>

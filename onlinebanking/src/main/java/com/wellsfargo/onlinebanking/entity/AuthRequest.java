@@ -11,8 +11,8 @@ public class AuthRequest {
 	
 	public AuthRequest(String userId, String password) {
 		super();
-		this.userId = userId;
-		this.password = password;
+		setUserId(userId);
+		setPassword(password);
 	}
 	
 	public String getUserId() {

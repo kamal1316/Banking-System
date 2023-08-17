@@ -1,25 +1,36 @@
 package com.wellsfargo.onlinebanking.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="Account")
 public class Account {
-	int id;
+		
 	private String userId;
+	
+//	@OneToOne(mappedBy = "user")
+//	private User user;
+	
+	@Pattern(regexp = "^[0-9]{5}$")
     private String accountNumber;
-    private String name;
+    
+	private String name;
+	
     private int balance;
     private String IFSC;
     private String accountType;
     private String branch;
-	public Account() {
-		
+	
+    public Account() {	
 		super();
 	}
 	public Account(String userId, String accountNumber, String name, int balance, String ifsc, String accountType, String branch) {
@@ -33,17 +44,10 @@ public class Account {
 		this.setBranch(branch);
 	}
 	
-	
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	@Id
 	@Column(name = "userId", nullable = false)
+
 	public String getUserId() {
 		return userId;
 	}
@@ -51,7 +55,7 @@ public class Account {
 		this.userId = userId;
 	}
 	
-	@Column(name = "accountNumber")
+	@Column(name = "accountNumber", nullable = false, unique = true)
 	public String getAccountNumber() {
 		return accountNumber;
 	}
