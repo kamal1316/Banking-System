@@ -6,7 +6,7 @@ import Signup from './components/signup';
 import Dashboard from './components/dashboard';
 import Payment from './components/payment';
 import Transactions from './components/transactions';
-import PersonalDetails from './components/personaldetails';
+import PersonalDetails from './components/personalDetails';
 import Success from './components/success';
 import { ToastContainer } from 'react-toastify';
 
@@ -24,7 +24,7 @@ const App = () => {
           <Route path="/dashboard"  element={<Dashboard/>}></Route> 
           <Route path="/payment"  element={<Payment/>}></Route> 
           <Route path="/transactions"  element={<Transactions/>}></Route> 
-          <Route path="/personaldetails"  element={<PersonalDetails/>}></Route>
+          <Route path="/personalDetails"  element={<PersonalDetails/>}></Route>
           <Route path="/success" element ={<Success/>}></Route>
         </Routes>
       </div>
