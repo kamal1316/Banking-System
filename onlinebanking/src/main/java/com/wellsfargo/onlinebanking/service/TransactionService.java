@@ -16,18 +16,10 @@ public class TransactionService implements ITransactionService {
 	@Autowired
 	TransactionRepository transRepo;
 	
-//	@Override
-//	public Optional<Transaction> getTransaction(String refId) {
-//		return transRepo.findByRefId(refId);
-//		
-//	}
-	
 	@Override
 	public Optional<Transaction> getTransaction(Integer refId) {
-		return transRepo.findById(refId);
-		
+		return transRepo.findById(refId);	
 	}
-	
 	
 	@Override
 	public List<Transaction> getTransactions(String fromAccount, String toAccount) {
@@ -35,8 +27,8 @@ public class TransactionService implements ITransactionService {
 	}
 	
 	@Override
-	public void createTransaction(Transaction transaction) {
-		transRepo.save(transaction);
+	public Transaction createTransaction(Transaction transaction) {
+		return transRepo.save(transaction);
 	}
 
 }

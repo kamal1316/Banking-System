@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Table(name="Transaction")
 public class Transaction {
 	
-	private Integer refId;
+	private int refId;
 	
 	@Pattern(regexp = "^[0-9]{5}$")
 	private String fromAccount;
@@ -35,7 +35,7 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(Integer refId, String fromAccount, String toAccount, int amount, String type, String timestamp, String remark, String name) {
+	public Transaction(int refId, String fromAccount, String toAccount, int amount, String type, String timestamp, String remark, String name) {
 		super();
 		setRefId(refId);
 		setFromAccount(fromAccount);
@@ -50,10 +50,10 @@ public class Transaction {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getRefId() {
+	public int getRefId() {
 		return refId;
 	}
-	public void setRefId(Integer refId) {
+	public void setRefId(int refId) {
 		this.refId = refId;
 	}
 	
