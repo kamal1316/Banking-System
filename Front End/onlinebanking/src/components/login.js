@@ -43,6 +43,7 @@ const Login = () => {
             }
         }).then((data)=>{
             sessionStorage.setItem('JwtToken',data);
+            console.log(data);
             // setToken(data);
             toast.success('Success');
             usenavigate('/dashboard');
