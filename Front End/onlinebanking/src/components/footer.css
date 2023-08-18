@@ -1,0 +1,8 @@
+/* Styling for the footer */
+.footer {
+    background-color: red; /* Change background color to red */
+    color: rgb(20, 18, 18);
+    text-align: center;
+    padding: 20px; 
+  }
+  
