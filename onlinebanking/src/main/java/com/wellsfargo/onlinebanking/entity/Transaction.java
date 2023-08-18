@@ -32,13 +32,13 @@ public class Transaction {
 		super();
 	}
 	
-	public Transaction(int refId, String fromAccount, String toAccount, int amount, String type, String timestamp, String remark) {
+	public Transaction(int refId, String fromAccount, String toAccount, int amount, String mode, String timestamp, String remark) {
 		super();
 		setRefId(refId);
 		setFromAccount(fromAccount);
 		setToAccount(toAccount);
 		setAmount(amount);
-		setType(type);
+		setMode(mode);
 		setTimestamp(timestamp);
 		setRemark(remark);
 	}
@@ -100,14 +100,12 @@ public class Transaction {
 		this.remark = remark;
 	}
 	
-	@Column(name = "type", nullable = false)
-	public String getType() {
-		return type;
+	@Column(name = "mode", nullable = false)
+	public String getMode() {
+		return mode;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
-	
-	
 }

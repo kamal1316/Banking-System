@@ -41,14 +41,13 @@ public class TransactionController {
 	
 	@PostMapping("/executeTransaction")
 	public String executeTransaction(@Validated @RequestBody Transaction transaction) {
-//		System.out.println(transaction);
-//		return "hello";
-//		return transaction;
+
 		Account sender = accountService.getAccountByAccountNumber(transaction.getFromAccount());
 		Account receiver = accountService.getAccountByAccountNumber(transaction.getToAccount());
 		
 		if(accountService.getAccountByAccountNumber(transaction.getFromAccount()).getBalance() < transaction.getAmount()) {
-			return "Insufficient Balance";
+//			return "Insufficient Balance";
+			throw new Error("Insufficient Balance");
 		}
 		
 		sender.setBalance(sender.getBalance()-transaction.getAmount());
