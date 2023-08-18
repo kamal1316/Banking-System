@@ -174,7 +174,6 @@ const Signup = () => {
                                         <label> Prefer Not to Say</label>
                                     </div>
                                 </div>
-
                             </div>
 
                         </div>

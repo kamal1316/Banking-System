@@ -3,7 +3,7 @@ import { CardGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from 'react';
-import {Link, useNavigate } from 'react-router-dom';
+import {Link } from 'react-router-dom';
 
 const MyCard = () => {
 
@@ -69,9 +69,6 @@ const MyCard = () => {
         <Card.Text></Card.Text>
         <Card.Text>
           Balance: {balance}
-        </Card.Text>
-        <Card.Text>
-          Last Transaction: +1000
         </Card.Text>
         
         <Button variant="primary">

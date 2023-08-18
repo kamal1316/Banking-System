@@ -108,6 +108,4 @@ public class Transaction {
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
-	
-	
 }
