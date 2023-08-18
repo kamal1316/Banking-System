@@ -34,8 +34,10 @@ function PersonalDetails() {
           <span>{details.name}</span>
         </div>
         <div className="detail-item">
+
           <label>userId:</label>
           <span>{details.userId}</span>
+
         </div>
         <div className="detail-item">
           <label>Father's Name:</label>

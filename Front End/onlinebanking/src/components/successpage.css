@@ -1,0 +1,27 @@
+/* Container for the success page */
+.success-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Styling for the success message */
+  .success-container h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .success-container p {
+    margin-bottom: 15px;
+  }
+  
+  .success-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .success-container a:hover {
+    color: #0056b3;
+  }
+  

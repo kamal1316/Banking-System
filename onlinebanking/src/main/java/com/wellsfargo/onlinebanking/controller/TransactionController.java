@@ -42,13 +42,18 @@ public class TransactionController {
 	@PostMapping("/executeTransaction")
 	public String executeTransaction(@Validated @RequestBody Transaction transaction) {
 
+
 		Account sender = accountService.getAccountByAccountNumber(transaction.getFromAccount());
 		Account receiver = accountService.getAccountByAccountNumber(transaction.getToAccount());
 		
+    	
+		if(receiver==null || sender == null)
+			throw new Errow("Incorrect receiver/sender account number");
 		if(accountService.getAccountByAccountNumber(transaction.getFromAccount()).getBalance() < transaction.getAmount()) {
-//			return "Insufficient Balance";
+
 			throw new Error("Insufficient Balance");
 		}
+
 		
 		sender.setBalance(sender.getBalance()-transaction.getAmount());
 		receiver.setBalance(receiver.getBalance()+transaction.getAmount());
@@ -57,7 +62,7 @@ public class TransactionController {
 		accountService.updateAccount(sender);
 		transService.createTransaction(transaction);
 		
-		return "successfully transfered";
+		return "Successfully transfered";
 	}
 
 	

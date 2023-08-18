@@ -59,6 +59,7 @@ const Payment = () => {
                             <h1>Payment Page</h1>
                         </div>
 
+
                         <div className="card-body">
                             <div className="row">
                                 <div className="col-lg-6">
@@ -96,6 +97,7 @@ const Payment = () => {
                             </div>
 
                         </div>
+
 
                         <div className="card-footer">
                             <button type="submit" className="btn btn-primary">Submit</button>
