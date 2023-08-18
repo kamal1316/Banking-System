@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wellsfargo.onlinebanking.entity.Account;
 import com.wellsfargo.onlinebanking.entity.Transaction;
+import com.wellsfargo.onlinebanking.service.AccountService;
 import com.wellsfargo.onlinebanking.service.TransactionService;
 
 @RestController
@@ -23,6 +25,9 @@ public class TransactionController {
 	
 	@Autowired
 	TransactionService transService;
+
+	@Autowired
+	AccountService accountService;
 	
 	@GetMapping("{accountNumber}/transactions")
 	public List<Transaction> getTransactions(@PathVariable String accountNumber) {
@@ -34,10 +39,27 @@ public class TransactionController {
 		return transService.getTransaction(refId);
 	}
 	
-	
-	@PostMapping("/createTransaction")
-	public Transaction createTransaction(@Validated @RequestBody Transaction transaction) {
-		return transService.createTransaction(transaction);
+	@PostMapping("/executeTransaction")
+	public String executeTransaction(@Validated @RequestBody Transaction transaction) {
+		Account sender = accountService.getAccountByAccountNumber(transaction.getFromAccount());
+		Account receiver = accountService.getAccountByAccountNumber(transaction.getToAccount());
+		
+		if(receiver==null)
+			return "Incorrect receiver account number";
+		if(accountService.getAccountByAccountNumber(transaction.getFromAccount()).getBalance() < transaction.getAmount())
+			return "Insufficient balance";
+		
+		
+		sender.setBalance(sender.getBalance()-transaction.getAmount());
+		receiver.setBalance(receiver.getBalance()+transaction.getAmount());
+		
+		accountService.updateAccount(receiver);
+		accountService.updateAccount(sender);
+		transService.createTransaction(transaction);
+		
+		return "Successfully transfered";
 	}
+
+	
 	
 }

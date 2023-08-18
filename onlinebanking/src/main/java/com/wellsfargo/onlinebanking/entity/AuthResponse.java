@@ -22,8 +22,8 @@ public class AuthResponse {
 	}
 	public AuthResponse(String userId, boolean isValid) {
 		super();
-		this.userId = userId;
-		this.isValid = isValid;
+		setUserId(userId);
+		setValid(isValid);
 	}
 	
 }

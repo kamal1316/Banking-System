@@ -12,7 +12,7 @@ import javax.validation.constraints.Pattern;
 @Table(name="Transaction")
 public class Transaction {
 	
-	private Integer refId;
+	private int refId;
 	
 	@Pattern(regexp = "^[0-9]{5}$")
 	private String fromAccount;
@@ -22,32 +22,33 @@ public class Transaction {
 	
 	private int amount;
 	
-	@Pattern(regexp = "^(ntfs|rtgs|imps$")
-	private String type;
+	@Pattern(regexp = "^(ntfs|rtgs|imps)$")
+	private String mode;
 	
-	private String transactionDate;
+	private String timestamp;
 	private String remark;
 	
 	public Transaction() {
 		super();
 	}
 	
-	public Transaction(Integer refId, String fromAccount, String toAccount, int amount, String type, String transactionDate, String remark) {
+	public Transaction(int refId, String fromAccount, String toAccount, int amount, String mode, String timestamp, String remark) {
 		super();
-		this.refId = refId;
-		this.fromAccount = fromAccount;
-		this.toAccount = toAccount;
-		this.amount = amount;
-		this.transactionDate = transactionDate;
-		this.remark = remark;
+		setRefId(refId);
+		setFromAccount(fromAccount);
+		setToAccount(toAccount);
+		setAmount(amount);
+		setMode(mode);
+		setTimestamp(timestamp);
+		setRemark(remark);
 	}
-	
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getRefId() {
+	public int getRefId() {
 		return refId;
 	}
-	public void setRefId(Integer refId) {
+	public void setRefId(int refId) {
 		this.refId = refId;
 	}
 	
@@ -80,13 +81,13 @@ public class Transaction {
 		this.amount = amount;
 	}	
 
-	@Column(name = "transactionDate", nullable = false)
-	public String getTransactionDate() {
-		return transactionDate;
+	@Column(name = "timestamp", nullable = false)
+	public String getTimestamp() {
+		return timestamp;
 	}
 
-	public void setTransactionDate(String transactionDate) {
-		this.transactionDate = transactionDate;
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 
@@ -97,6 +98,15 @@ public class Transaction {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	@Column(name = "mode", nullable = false)
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 	
 	

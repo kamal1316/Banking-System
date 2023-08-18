@@ -16,18 +16,10 @@ public class TransactionService implements ITransactionService {
 	@Autowired
 	TransactionRepository transRepo;
 	
-//	@Override
-//	public Optional<Transaction> getTransaction(String refId) {
-//		return transRepo.findByRefId(refId);
-//		
-//	}
-	
 	@Override
 	public Optional<Transaction> getTransaction(Integer refId) {
-		return transRepo.findById(refId);
-		
+		return transRepo.findById(refId);	
 	}
-	
 	
 	@Override
 	public List<Transaction> getTransactions(String fromAccount, String toAccount) {

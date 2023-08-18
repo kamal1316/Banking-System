@@ -32,7 +32,7 @@ public class Person {
 		this.setCountry(country);
 		this.setAccountNumber(accountNumber);
 		this.setPassword(password);
-		this.setBalance(0);
+		this.setBalance(10000);
 		this.ifsc = "WFIS000123";
 		this.branch = "HYD";
 		this.accountType = "Savings";

@@ -25,6 +25,7 @@ const MyCard = () => {
       setBalance(resp.balance);
       setName(resp.name);
       setAccountNumber(resp.accountNumber);
+      sessionStorage.setItem('accountNumber', resp.accountNumber);
       setAccountType(resp.accountType);
       setBranch(resp.branch);
     }).catch((err) => {
@@ -54,7 +55,7 @@ const MyCard = () => {
           Branch: {branch}
         </Card.Text>
         <Button variant="primary">
-        <Link to="/personaldetails" className="btn btn-default">Show Personal Details</Link>
+        <Link to="/personalDetails" className="btn btn-default">Show Personal Details</Link>
         </Button>
       </Card.Body>
     </Card>
