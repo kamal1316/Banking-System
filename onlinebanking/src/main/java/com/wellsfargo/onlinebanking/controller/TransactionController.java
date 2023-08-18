@@ -48,7 +48,7 @@ public class TransactionController {
 		
     	
 		if(receiver==null || sender == null)
-			throw new Errow("Incorrect receiver/sender account number");
+			throw new Error("Incorrect receiver/sender account number");
 		if(accountService.getAccountByAccountNumber(transaction.getFromAccount()).getBalance() < transaction.getAmount()) {
 
 			throw new Error("Insufficient Balance");

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './successpage.css'; // Import the CSS file for styling
+import './successpage.css'; 
 
 function Successpage() {
   return (
