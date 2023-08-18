@@ -60,7 +60,7 @@ const Payment = () => {
         <Form.Control type="password" label="Enter Password" />
       </Form.Group>
     
-      <Button variant="primary" type="submit" OnClick={()=> setAuth(true)}>
+      <Button variant="primary" type="submit" onClick={()=> setAuth(true)}>
         Submit
       </Button>
 
