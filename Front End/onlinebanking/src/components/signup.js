@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Navbar from './navbar'; 
+import Footer from './footer'; 
+import './signup.css'; 
 
 const Signup = () => {
 
@@ -84,7 +87,7 @@ const Signup = () => {
                 body: JSON.stringify(regobj)
             }).then((res) => {
                 toast.success('Applied successfully.')
-                usenavigate('/login');
+                usenavigate('/successpage');
             }).catch((err) => {
                 toast.error('Failed :' + err.message);
             });
@@ -93,6 +96,8 @@ const Signup = () => {
 
 
     return (
+        <>
+        <Navbar> </Navbar>
         <div>
             <div className="offset-lg-3 col-lg-6">
                 <form className="container" onSubmit={handlesubmit}>
@@ -191,6 +196,8 @@ const Signup = () => {
                 </form>
             </div>
         </div>
+        <Footer> </Footer>
+        </>
     );
 };
 

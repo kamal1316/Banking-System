@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Navbar from './navbar'; 
+import Footer from './footer'; 
+import './login.css';
 
 const Login = () => {
   const [userId, userIdUpdate] = useState('');
@@ -84,6 +87,8 @@ const validate = () => {
 }
 
   return (
+    <> 
+    <Navbar > </Navbar>
     <div className="row">
         <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
             <form onSubmit={ProceedLogin} className="container">
@@ -104,12 +109,14 @@ const validate = () => {
                     <div className="card-footer">
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span style={{"paddingRight": "20px"}}></span>
-                        <Link className="btn btn-success" to={'/signup'}>New User</Link>
+                        <Link className="btn btn-success" to={'/openAccount'}>New User</Link>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <Footer> </Footer>
+    </>
 );
 };
 

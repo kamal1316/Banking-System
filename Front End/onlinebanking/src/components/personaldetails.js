@@ -12,7 +12,7 @@ function PersonalDetails() {
         </div>
         <div className="detail-item">
           <label>Account No:</label>
-          <span>123459876</span>
+          <span>10001</span>
         </div>
         <div className="detail-item">
           <label>Father's Name:</label>

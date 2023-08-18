@@ -1,0 +1,52 @@
+/* Styling for the centered heading */
+  .home-heading {
+    display: flex;
+    flex-direction: column;
+    font-size: 70px;
+    text-align: center;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+    color: #f5ecec;
+  }
+  
+  /* Styling for the buttons */
+  .home-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 25px;
+    padding: 20px 30px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .home-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Styling for the link within the button */
+  .home-button a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+  }
+
+/* Container for the home page */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Change to flex-start for top alignment */
+    height: 100vh;
+    background-image: url('https://s.yimg.com/uu/api/res/1.2/U3dbtNCkqPjp3Z9ksEVteQ--~B/aD0xOTk3O3c9MzAwMDtzbT0xO2FwcGlkPXl0YWNoeW9u/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-images/2020-02/1cd93d50-4ece-11ea-bfb5-fe3091f6d2b2');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    padding-top: 80px; /* Add padding to shift content down */
+  }
+  
+  /* Other styles as before */
+  

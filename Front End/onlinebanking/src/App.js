@@ -8,6 +8,7 @@ import Payment from './components/payment';
 import Transactions from './components/transactions';
 import PersonalDetails from './components/personaldetails';
 import Success from './components/success';
+import SuccessPage from './components/successpage';
 import { ToastContainer } from 'react-toastify';
 
 
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/transactions"  element={<Transactions/>}></Route> 
           <Route path="/personaldetails"  element={<PersonalDetails/>}></Route>
           <Route path="/success" element ={<Success/>}></Route>
+          <Route path="/successpage" element ={<SuccessPage/>}></Route>
         </Routes>
       </div>
     </BrowserRouter></>

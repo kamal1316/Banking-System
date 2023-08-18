@@ -39,23 +39,23 @@ const Payment = () => {
         <h1>Payment Page</h1>
         <Form>
       <Form.Group className="mb-3" controlId="FormBasicText">
-        <Form.Label>UserAccountNumber </Form.Label>
+        <Form.Label>User Account Number </Form.Label>
         <Form.Control type="number" placeholder="Enter your account number" onChange={changeHandler}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="FormBasicText">
-        <Form.Label>ToAccountNumber</Form.Label>
-        <Form.Control type="number" placeholder="Enter receiver Account Number"  onChange={changeHandler}/>
+        <Form.Label>To Account Number</Form.Label>
+        <Form.Control type="number" placeholder="Enter receiver's account number"  onChange={changeHandler}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="FormBasicText"  onChange={changeHandler}>
         <Form.Label>Amount</Form.Label>
-        <Form.Control type = "number" placeholder="Enter Amount to be send" />
+        <Form.Control type = "number" placeholder="Enter the amount to be send" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword"  onChange={changeHandler}>
        <Form.Label>Password</Form.Label>
-        <Form.Check type="password" label="Enter Password" />
+        {<Form.Control type = "password" placeholder="Enter your password" />}
       </Form.Group>
     
       <Button variant="primary" type="submit" OnClick={()=> setAuth(true)}>
