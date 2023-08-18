@@ -10,7 +10,7 @@ import PersonalDetails from './components/personalDetails';
 import Success from './components/success';
 import SuccessPage from './components/successpage';
 import { ToastContainer } from 'react-toastify';
-import axios from 'axios' ;
+
 import ChangePassword from './components/changepassword';
 
 const App = () => {
