@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Form } from "react-bootstrap";
 
 const Login = () => {
   const [userId, userIdUpdate] = useState('');
@@ -101,6 +102,16 @@ const validate = () => {
                             <label>Password <span className="errmsg">*</span></label>
                             <input type="password" value={password} onChange={e => passwordUpdate(e.target.value)} className="form-control"></input>
                         </div>
+                        <Form.Group
+                        className="mb-3"
+                        controlId="formBasicCheckbox"
+                      >
+                        <p className="small">
+                          <a className="text-primary" href="/resetPassword">
+                            Forgot password?
+                          </a>
+                        </p>
+                      </Form.Group>
                     </div>
                     <div className="card-footer">
                         <button type="submit" className="btn btn-primary">Login</button>

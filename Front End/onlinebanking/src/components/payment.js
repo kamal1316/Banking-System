@@ -1,5 +1,5 @@
 //import React from 'react';
-import { useEffect } from "react";
+import { Link, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import React,{useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
@@ -57,11 +57,12 @@ const Payment = () => {
        <Form.Label>Password</Form.Label>
         <Form.Control type="password" label="Enter Password" />
       </Form.Group>
-    
+      
+      <Link to="/success">
       <Button variant="primary" type="submit" OnClick={()=> setAuth(true)}>
         Submit
       </Button>
-
+      </Link>
     </Form>
     </div>
   );

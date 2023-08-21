@@ -67,6 +67,6 @@ public class UserController {
 	
 	@PutMapping("/updateUser/{id}")
 	public User updateUserById(@PathVariable Integer id, @Validated @RequestBody User updatedUser) {
-		return service.updateUserById(id, updatedUser);
+		return service.updateUserById(id, updatedUser); 
 	}
 }
