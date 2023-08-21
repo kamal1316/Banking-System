@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
+import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
 import com.wellsfargo.onlinebanking.repository.PersonalDetailsRepository;
+import com.wellsfargo.onlinebanking.repository.UserRepository;
 import com.wellsfargo.onlinebanking.repository.PersonalDetailsRepository;
 
 @Service
@@ -28,7 +30,12 @@ public class PersonalDetailsService implements IPersonalDetailsService {
 	}
 
 	@Override
-	public PersonalDetails createPersonalDetails(PersonalDetails newPersonalDetails) {
+	public PersonalDetails createPersonalDetails(PersonalDetails newPersonalDetails) throws UserAlreadyExistsException {
+		
+		if(detailsRepo.existByUserId(newPersonalDetails.getUserId())) {
+			throw new UserAlreadyExistsException("User with the same User Id already exists!!");
+		}
+		
 		return detailsRepo.save(newPersonalDetails);
 	}
 

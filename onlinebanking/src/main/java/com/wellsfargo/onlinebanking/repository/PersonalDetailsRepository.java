@@ -1,6 +1,7 @@
 package com.wellsfargo.onlinebanking.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
 
@@ -8,4 +9,6 @@ public interface PersonalDetailsRepository extends JpaRepository<PersonalDetails
 
 	PersonalDetails findByUserId(String userId);
 
+	@Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM PersonalDetails p WHERE p.userId = ?1")
+	boolean existByUserId(String userId);
 }

@@ -9,37 +9,62 @@ const Payment = () => {
   
   const [toAccount, toAccountChange] = useState("");
   const [amount, amountChange] = useState("");
-  const [mode, modeChange] = useState("");
+  const [mode, modeChange] = useState("imps");
   const [timestamp, timestampChange] = useState("");
   const [remark, remarkChange] = useState("");
 
+  useEffect(() => {
+
+    if(timestamp !== "") {
+
+        let balance = sessionStorage.getItem('balance');
+
+        if(amount < 0) {
+            toast.error("Amount cannot be negative!!");
+            timestampChange("");
+        }
+        else if(amount < 10) {
+            toast.error("Minimum amount should be atleast ₹10");
+            timestampChange("");
+        }
+        else if(parseInt(amount) > parseInt(balance)) {
+            toast.error("Insufficient balance!! Your balance is " + balance + ".");
+            timestampChange("");
+        }
+        else {
+            let fromAccount = sessionStorage.getItem('accountNumber');
+            let transObject  = {fromAccount, toAccount, amount, mode, timestamp, remark};
+
+            let token = sessionStorage.getItem('JwtToken');
+
+            fetch("http://localhost:8080/transaction/executeTransaction", {
+                method: "POST",
+                headers: { "Authorization" : `Bearer ${token}`,
+                "Content-Type": "application/json" },
+                body: JSON.stringify(transObject)
+            }).then((res) => {
+
+                if(!res.ok) {
+                    return res.json().then(data => {throw new Error(data.message)});
+                }
+
+                return res.text();
+
+            }).then((data) => {
+                toast.success(data);
+                usenavigate('/dashboard');
+            }).catch((err) => {
+                toast.error(err.message);
+            });
+        }
+    }
+
+  }, [timestamp]);
+
   const handlesubmit = (e) => {
     e.preventDefault();
+
     timestampChange(new Date());
-    console.log(new Date());
-
-    let fromAccount = sessionStorage.getItem('accountNumber');
-
-    let transObject  = {fromAccount, toAccount, amount, mode, timestamp, remark};
-
-    console.log(transObject);
-
-    let token = sessionStorage.getItem('JwtToken');
-
-    fetch("http://localhost:8080/transaction/executeTransaction", {
-        method: "POST",
-        headers: { "Authorization" : `Bearer ${token}`,
-        "Content-Type": "application/json" },
-        body: JSON.stringify(transObject)
-    }).then((res) => {
-        return res.text();
-    }).then((resp) => {
-      toast.success(resp);
-      // usenavigate('/success');
-    }).catch((err) => {
-        toast.error('Failed :' + err.message);
-    });
-
   }
 
   useEffect(()=>{
@@ -65,24 +90,24 @@ const Payment = () => {
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label style = {{padding: "5px"}}>To Account Number <span className="errmsg">*</span></label>
-                                        <input value={toAccount} onChange={e => toAccountChange(e.target.value)} className="form-control"></input>
+                                        <input pattern = "^[0-9]{5}$" title = "Enter valid 5 digit account number" required value={toAccount} onChange={e => toAccountChange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label style = {{padding: "5px"}}>Amount <span className="errmsg">*</span></label>
-                                        <input value={amount} onChange={e => amountChange(e.target.value)} className="form-control"></input>
+                                        <input pattern = "^[0-9]+$" title = "Enter a valid amount(in ₹)" required value={amount} onChange={e => amountChange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label style = {{padding: "5px"}}>Mode <span className="errmsg">*</span></label>
                                         <br></br>
+                                        <input required type="radio" checked={mode === 'imps'} onChange={e => modeChange(e.target.value)} name="mode" value="imps" className="app-check"></input>
+                                        <label> imps</label>
+                                        <span style = {{padding : "5px"}}></span>
                                         <input type="radio" checked={mode === 'ntfs'} onChange={e => modeChange(e.target.value)} name="mode" value="ntfs" className="app-check"></input>
                                         <label> ntfs</label>
-                                        <span style = {{padding : "5px"}}></span>
-                                        <input type="radio" checked={mode === 'imps'} onChange={e => modeChange(e.target.value)} name="mode" value="imps" className="app-check"></input>
-                                        <label> imps</label>
                                         <span style = {{padding : "5px"}}></span>
                                         <input type="radio" checked={mode === 'rtgs'} onChange={e => modeChange(e.target.value)} name="mode" value="rtgs" className="app-check"></input>
                                         <label> rtgs</label>

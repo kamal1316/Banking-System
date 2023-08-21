@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -25,7 +26,9 @@ public class Account {
     
 	private String name;
 	
+	@Min(value = 1)
     private int balance;
+    
     private String IFSC;
     private String accountType;
     private String branch;

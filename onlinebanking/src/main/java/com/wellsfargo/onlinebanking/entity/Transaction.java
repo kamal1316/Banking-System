@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 @Entity
@@ -20,6 +21,7 @@ public class Transaction {
 	@Pattern(regexp = "^[0-9]{5}$")
 	private String toAccount;
 	
+	@Min(value = 1)
 	private int amount;
 	
 	@Pattern(regexp = "^(ntfs|rtgs|imps)$")

@@ -40,18 +40,13 @@ const Signup = () => {
             isproceed = false;
             errormessage += ' Father\'s name';
         }
-        // if (password === null || password === '') {
-        //     isproceed = false;
-        //     errormessage += ' password';
-        // }
         if (email === null || email === '') {
             isproceed = false;
             errormessage += ' Email';
         }
 
-
         if (!isproceed) {
-            toast.warning(errormessage)
+            toast.warning(errormessage);
         } else {
             if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
 
@@ -67,29 +62,26 @@ const Signup = () => {
         e.preventDefault();
 
         let regobj = { name, fatherName, email, mobile, aadhaar, pan, country, address, gender };
-        //let userobj = { userId, password };
 
         if (IsValidate()) {
-
-            // fetch("http://localhost:8080/users/createUser", {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: JSON.stringify(userobj)
-            // }).then((res) => {
-            // }).catch((err) => {
-            //     toast.error('Failed :' + err.message);
-            // });
-
 
             fetch("http://localhost:8080/admin/openAccount", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(regobj)
-            }).then((res) => {
+            }).then(res => {
+
+                if(!res.ok) {
+                    return res.json().then(data => {throw new Error(data.message)});
+                }
+
+                return res.json();
+            }).then(data => {
+
                 toast.success('Applied successfully.')
                 usenavigate('/successpage');
             }).catch((err) => {
-                toast.error('Failed :' + err.message);
+                toast.error('Failed : ' + err.message);
             });
         }
     }
@@ -111,43 +103,43 @@ const Signup = () => {
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Full Name <span className="errmsg">*</span></label>
-                                        <input value={name} onChange={e => namechange(e.target.value)} className="form-control"></input>
+                                        <input required value={name} onChange={e => namechange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Father's Name <span className="errmsg">*</span></label>
-                                        <input value={fatherName} onChange={e => fathernamechange(e.target.value)} className="form-control"></input>
+                                        <input required value={fatherName} onChange={e => fathernamechange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Email <span className="errmsg">*</span></label>
-                                        <input value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
+                                        <input type = "email" required value={email} onChange={e => emailchange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
-                                        <label>Mobile <span className="errmsg"></span></label>
-                                        <input value={mobile} onChange={e => phonechange(e.target.value)} className="form-control"></input>
+                                        <label>Mobile <span className="errmsg">*</span></label>
+                                        <input pattern="[0-9]{10}" title="Enter 10 digit valid mobile number" required value={mobile} onChange={e => phonechange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Aadhaar <span className="errmsg"></span></label>
-                                        <input value={aadhaar} onChange={e => aadhaarchange(e.target.value)} className="form-control"></input>
+                                        <input pattern="^$|^[0-9]{12}$" title="Enter valid 12 digit aadhaar number" value={aadhaar} onChange={e => aadhaarchange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>PAN <span className="errmsg"></span></label>
-                                        <input value={pan} onChange={e => panchange(e.target.value)} className="form-control"></input>
+                                        <input pattern="^$|^[A-Z]{5}[0-9]{4}[A-Z]{1}$" title="Enter valid PAN. Format:ABCDE1234F" value={pan} onChange={e => panchange(e.target.value)} className="form-control"></input>
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>Country <span className="errmsg">*</span></label>
-                                        <select value={country} onChange={e => countrychange(e.target.value)} className="form-control">
+                                        <select required value={country} onChange={e => countrychange(e.target.value)} className="form-control">
                                             <option value="india">India</option>
                                             <option value="usa">USA</option>
                                             <option value="singapore">Singapore</option>
@@ -162,7 +154,7 @@ const Signup = () => {
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
-                                        <label>Gender</label>
+                                        <label required >Gender <span className="errmsg">*</span></label>
                                         <br></br>
                                         <input type="radio" checked={gender === 'male'} onChange={e => genderchange(e.target.value)} name="gender" value="male" className="app-check"></input>
                                         <label> Male</label>
@@ -170,8 +162,8 @@ const Signup = () => {
                                         <input type="radio" checked={gender === 'female'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check"></input>
                                         <label> Female</label>
                                         <span style = {{padding : "5px"}}></span>
-                                        <input type="radio" checked={gender === 'prefer not to say'} onChange={e => genderchange(e.target.value)} name="gender" value="female" className="app-check"></input>
-                                        <label> Prefer Not to Say</label>
+                                        <input type="radio" checked={gender === 'other'} onChange={e => genderchange(e.target.value)} name="gender" value="other" className="app-check"></input>
+                                        <label>Other</label>
                                     </div>
                                 </div>
                             </div>
