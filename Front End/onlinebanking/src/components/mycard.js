@@ -3,6 +3,7 @@ import { CardGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from 'react';
+import Footer from './footer'; 
 import {Link } from 'react-router-dom';
 
 const MyCard = () => {
@@ -34,6 +35,7 @@ const MyCard = () => {
 }, [])
 
   return (
+    <div>
     <CardGroup style={{padding: '50px'}}>
     <Card border='primary' style={{ width: '15rem', padding: '10px'}} bg='light' text = 'dark'>
       <Card.Body>
@@ -77,6 +79,8 @@ const MyCard = () => {
       </Card.Body>
     </Card>
     </CardGroup>
+    <Footer> </Footer>
+    </div>
   );
 }
 

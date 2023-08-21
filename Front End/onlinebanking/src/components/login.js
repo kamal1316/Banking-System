@@ -90,7 +90,7 @@ const validate = () => {
   return (
     <> 
     <Navbar > </Navbar>
-    <div className="row">
+    <div className="login-container">
         <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
             <form onSubmit={ProceedLogin} className="container">
                 <div className="card">

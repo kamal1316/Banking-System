@@ -1,0 +1,49 @@
+/* Styling for the entire navbar */
+.navbar-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: red;
+    color: rgb(19, 15, 15);
+    padding: 40px 40px;
+    font-size: 15px;
+  }
+  
+  /* Styling for the navbar brand (logo) */
+  .navbar-brand {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  /* Styling for the navbar links */
+  .nav-link {
+    color: rgb(24, 21, 21);
+    font-weight: bold;
+    margin-right: 15px;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #f8f9fa !important;
+  }
+  
+  /* Styling for the dropdown menu */
+  .navbar-nav .nav-item.dropdown:hover .nav-link {
+    color: #f8f9fa !important;
+  }
+  
+  /* Styling for the dropdown items */
+  .dropdown-item {
+    font-weight: bold;
+  }
+  
+  /* Styling for the logout link */
+  .nav-link.logout {
+    cursor: pointer;
+  }
+  
+  /* Styling for the logout link on hover */
+  .nav-link.logout:hover {
+    color: #dc3545 !important;
+  }
+  

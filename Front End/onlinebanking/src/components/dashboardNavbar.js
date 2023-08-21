@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './dashboardNavbar.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -16,9 +16,9 @@ const DashboardNavbar = () => {
   }
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="navbar-body">
       <Container>
-        <Navbar.Brand href="#home">Wells Fargo</Navbar.Brand>
+        <Navbar.Brand href="#home">Wells Fargo Banking App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

@@ -24,7 +24,7 @@
   .navbar-link {
     margin-left: 20px;
     text-decoration: none;
-    color: white;
+    color: rgb(15, 12, 12);
     transition: color 0.3s;
   }
   
@@ -32,11 +32,4 @@
     color: #007bff;
   }
   
-  /* Styling for the footer */
-  .footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px;
-  }
   

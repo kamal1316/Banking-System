@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import React,{useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
+import Navbar from './navbar'; 
+import Footer from './footer';
 
 const ChangePassword = () => {
   const usenavigate = useNavigate();
@@ -33,6 +35,7 @@ const ChangePassword = () => {
 
   return (
     <div>
+      <Navbar> </Navbar>
         <h1>Change Password</h1>
         <Form>
       <Form.Group className="mb-3" controlId="FormBasicPassword">
@@ -48,8 +51,9 @@ const ChangePassword = () => {
       <Button variant="primary" type="submit" OnClick={()=> setAuth(true)}>
         Submit
       </Button>
-    
+      <h1> </h1>
     </Form>
+    <Footer> </Footer>
     </div>
   );
 };
