@@ -1,19 +1,42 @@
 package com.wellsfargo.onlinebanking.entity;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
 public class Person {
 	private String userId;
 	private String name;
+	
+	@Email
 	private String email;
+	
 	private String password;
+	
+	@Pattern(regexp = "^$|^[0-9]{10}$")
 	private String mobile;
+	
 	private String address;
+	
+	@Pattern(regexp = "^(male|female|other)$")
 	private String gender;
+	
 	private String country;
+	
+	@Pattern(regexp = "^[0-9]{5}$")
 	private String accountNumber;
+	
 	private String fatherName;
+	
+	@Pattern(regexp = "^$|^[0-9]{12}$")
 	private String aadhaarNumber;
+	
+	@Pattern(regexp = "^$|^[A-Z]{5}[0-9]{4}[A-Z]{1}$")
 	private String pan;
+	
+	@Min(value = 1)
 	private int balance;
+	
 	private String ifsc;
 	private String branch;
 	private String accountType;
@@ -43,7 +66,6 @@ public class Person {
 	}
 
 	public void setBalance(int balance) {
-		// TODO Auto-generated method stub
 		this.balance = balance;
 	}
 

@@ -1,7 +1,8 @@
 import './personalDetails.css'; // Import the CSS file for styling
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import {Link, useNavigate } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 function PersonalDetails() {
 
@@ -16,11 +17,16 @@ function PersonalDetails() {
       headers: { "Authorization" : `Bearer ${token}`,
       "Content-Type": "application/json" }
     }).then((res) => {
+      if(!res.ok) {
+        throw new Error("Couldn't fetch personal details!!");
+      }
+      else {
         return res.json();
+      }
     }).then ((resp) => {
         setDetails(resp);
     }).catch((err) => {
-      console.log("Error: " + err.message);
+      toast.error(err.message);
     })
 
   }, []);

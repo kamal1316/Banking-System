@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './transactions.css';
 import Button from 'react-bootstrap/Button';
-import {Link, useNavigate } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 function Transactions() {
 
@@ -15,12 +16,18 @@ function Transactions() {
       headers: { "Authorization" : `Bearer ${token}`,
       "Content-Type": "application/json" }
     }).then((res) => {
-        return res.json();
+
+        if(!res.ok) {
+          throw new Error("Couldn't fetch transaction history!!");
+        }
+        else {
+          return res.json();
+        }
     }).then ((resp) => {
       console.log(resp);
       setTransactionData(resp);
     }).catch((err) => {
-      console.log(err.message);
+      toast.error(err.message);
     })
 
   }, []);
@@ -33,23 +40,23 @@ function Transactions() {
             <tr>
               <th>Reference Id</th>
               <th>Payment Mode</th>
-              <th>Other's Name</th>
               <th>Other's Account Number</th>
               <th>Amount</th>
               <th>Timestamp</th>
+              <th>Remark</th>
             </tr>
           </thead>
           <tbody>
             {transactionData.map((transaction) => (
               <tr key={transaction.refId}>
                 <td>{transaction.refId}</td>
-                <td>{transaction.type}</td>
-                <td>{transaction.name}</td>
+                <td>{transaction.mode}</td>
                 {transaction.toAccount === sessionStorage.getItem('accountNumber') ? 
-                (<><td>{transaction.fromAccount}</td> <td>₹{transaction.amount}</td></>) :
-                (<><td>{transaction.toAccount}</td><td>₹{-transaction.amount}</td></>)}
+                (<><td>{transaction.fromAccount}</td><td>₹{transaction.amount}</td></>) :
+                (<><td>{transaction.toAccount}</td><td> - ₹{transaction.amount}</td></>)}
                 
                 <td>{transaction.timestamp}</td>
+                <td>{transaction.remark}</td>
               </tr>
             ))}
           </tbody>

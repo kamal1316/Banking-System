@@ -3,6 +3,7 @@ package com.wellsfargo.onlinebanking.controller;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.service.AccountService;
 import com.wellsfargo.onlinebanking.service.PersonalDetailsService;
 import com.wellsfargo.onlinebanking.service.UserService;
@@ -48,7 +50,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/openAccount")
-	public Person openAccount(@Validated @RequestBody Person newPerson) {
+	public ResponseEntity<Person> openAccount(@Validated @RequestBody Person newPerson) throws UserAlreadyExistsException {
 		int accountNumber = ++baseAccountNumber;
 		int userId = ++baseUserId;
 		
@@ -65,11 +67,28 @@ public class AdminController {
 		
 		Account account = new Account(newPerson.getUserId(), newPerson.getAccountNumber(), newPerson.getName(), newPerson.getBalance(), newPerson.getIfsc(), newPerson.getAccountType(), newPerson.getBranch());
 		
-		userService.createUser(user);
-		personalDetailsService.createPersonalDetails(personalDetails);
-		accountService.createAccount(account);
+		try {
+			userService.createUser(user);
+		}
+		catch(UserAlreadyExistsException ex) {			
+			throw new UserAlreadyExistsException(ex.getMessage());
+		}
 		
-		return newPerson;
+		try {
+			personalDetailsService.createPersonalDetails(personalDetails);
+		}
+		catch(UserAlreadyExistsException ex) {			
+			throw new UserAlreadyExistsException(ex.getMessage());
+		}
+		
+		try {
+			accountService.createAccount(account);
+		}
+		catch(UserAlreadyExistsException ex) {			
+			throw new UserAlreadyExistsException(ex.getMessage());
+		}
+		
+		return ResponseEntity.ok(newPerson);
 	}
 
 }

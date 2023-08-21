@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
+import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.service.UserService;
 
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,16 +38,24 @@ public class UserController {
 	UserService service;
 	
 	@GetMapping("/{userId}")
-	public User getUserByUserID(@PathVariable String userId) {
-		return service.getUserByUserId(userId);
+	public ResponseEntity<User> getUserByUserID(@PathVariable String userId) throws ResourceNotFoundException {
+		User user = service.getUserByUserId(userId);
+		
+		if(user == null) {
+			throw new ResourceNotFoundException("User not found for the userId : " + userId);
+		}
+		
+		return ResponseEntity.ok(user);
 	}
 	
-	
-	
 	@PostMapping("/createUser")
-	public User createUser(@Validated @RequestBody User newUser) {
-		
-		return service.createUser(newUser);
+	public User createUser(@Validated @RequestBody User newUser) throws UserAlreadyExistsException {
+		try {
+			return service.createUser(newUser);
+		}
+		catch(UserAlreadyExistsException ex) {
+			throw new UserAlreadyExistsException(ex.getMessage());
+		}
 	}
 	
 	@DeleteMapping("/deleteUser")
