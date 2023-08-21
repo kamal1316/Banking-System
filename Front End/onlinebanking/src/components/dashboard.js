@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import DashboardNavbar from './dashboardNavbar';
 import MyCard from './mycard';
+import Payment from './payment';
+import ChangePassword from './changepassword';
 
 const Dashboard = () => {
 

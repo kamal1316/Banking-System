@@ -12,9 +12,11 @@ import SuccessPage from './components/successpage';
 import { ToastContainer } from 'react-toastify';
 
 import ChangePassword from './components/changepassword';
+import ResetPassword from './components/resetPassword';
+import VerifyStep from './components/verifyStep';
+import ResetStep from './components/resetStep';
 
 const App = () => {
-
 
   return (
     <><ToastContainer theme='colored' position='top-center'></ToastContainer>
@@ -31,11 +33,18 @@ const App = () => {
           <Route path="/transactions"  element={<Transactions/>}></Route> 
           <Route path="/personalDetails"  element={<PersonalDetails/>}></Route>
           <Route path="/success" element ={<Success/>}></Route>
+<<<<<<< HEAD
           <Route path="/successpage" element ={<SuccessPage/>}></Route>
+=======
+          <Route path="/resetPassword" element ={<ResetPassword/>}></Route>
+          <Route path="/verifyStep" element ={<VerifyStep/>}></Route>
+          <Route path="/resetStep" element ={<ResetStep/>}></Route>
+>>>>>>> e82d6cff6aa8d06e72cf4b38fd944d1edf57b3ea
         </Routes>
       </div>
     </BrowserRouter></>
   );
 };
+
 
 export default App;
