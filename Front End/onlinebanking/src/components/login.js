@@ -11,12 +11,13 @@ const Login = () => {
 
   const usenavigate = useNavigate();
 
-  useEffect(() => {
-    let token = sessionStorage.getItem('JwtToken');
-    if (!(token === '' || token === null)) {
-      usenavigate('/dashboard');
-    }
-  }, [usenavigate]);
+
+    useEffect(()=>{
+        let token = sessionStorage.getItem('JwtToken');
+        if(!(token===''||token===null)){
+            usenavigate('/dashboard');
+        }
+    },[usenavigate]);
 
   const ProceedLogin = (e) => {
     e.preventDefault();
@@ -24,25 +25,31 @@ const Login = () => {
       let userobj = { userId, password };
       sessionStorage.setItem('userId', userId);
 
-      fetch("http://localhost:8080/authenticate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userobj)
-      }).then((response) => {
-        if (!response.ok) {
-          toast.error('Please Enter valid credentials');
-          throw new Error('Response was not ok');
-        } else {
-          return response.text();
-        }
-      }).then((data) => {
-        sessionStorage.setItem('JwtToken', data);
-        console.log(data);
-        toast.success('Success');
-        usenavigate('/dashboard');
-      }).catch((err) => {
-        toast.error('Login Failed due to :' + err.message);
-      });
+
+        let userobj = {userId, password};
+
+        sessionStorage.setItem('userId', userId);
+
+        fetch("http://localhost:8080/authenticate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userobj)
+        }).then((response) => {
+            console.log(response);
+            if(!response.ok) {
+                throw new Error('Please Enter valid credentials');
+            }
+            else {
+                return response.text();
+            }
+        }).then((data)=>{
+            sessionStorage.setItem('JwtToken',data);
+            console.log(data);
+            toast.success('Success');
+            usenavigate('/dashboard');
+        }).catch((err) => {
+            toast.error('Login Failed.' + err.message);
+        });
     }
   }
 

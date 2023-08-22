@@ -5,32 +5,40 @@ import Card from 'react-bootstrap/Card';
 import React from 'react';
 import Footer from './footer'; 
 import {Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const MyCard = () => {
 
   const [name, setName] = useState('unknown');
-  const [balance, setBalance] = useState('xxx');
-  const [accountNumber, setAccountNumber] = useState('yyyy');
-  const [accountType, setAccountType] = useState('');
-  const [branch, setBranch] = useState('');
+  const [balance, setBalance] = useState('xxxx');
+  const [accountNumber, setAccountNumber] = useState('xxxx');
+  const [accountType, setAccountType] = useState('xxxx');
+  const [branch, setBranch] = useState('xxxx');
   
   useEffect(() => {
     let token = sessionStorage.getItem('JwtToken');
+
     fetch(" http://localhost:8080/accounts/" + sessionStorage.getItem('userId'), {
       method: "GET",
       headers: { "Authorization" : `Bearer ${token}`,
       "Content-Type": "application/json" }
     }).then((res) => {
-        return res.json();
+        if(!res.ok) {
+          throw new Error("Couldn't fetch account details!!");
+        }
+        else {
+            return res.json();
+        }
     }).then ((resp) => {
       setBalance(resp.balance);
       setName(resp.name);
       setAccountNumber(resp.accountNumber);
+      sessionStorage.setItem('balance', resp.balance);
       sessionStorage.setItem('accountNumber', resp.accountNumber);
       setAccountType(resp.accountType);
       setBranch(resp.branch);
     }).catch((err) => {
-        console.log(err.message);
+        toast.error(err.message);
     })  
 }, [])
 
@@ -70,7 +78,7 @@ const MyCard = () => {
         <Card.Text></Card.Text>
         <Card.Text></Card.Text>
         <Card.Text>
-          Balance: {balance}
+          Balance: ₹{balance}
         </Card.Text>
         
         <Button variant="primary">

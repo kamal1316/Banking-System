@@ -19,14 +19,15 @@ const DashboardNavbar = () => {
     <Navbar expand="lg" className="navbar-body">
       <Container>
         <Navbar.Brand href="#home">Wells Fargo Banking App</Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             
             <NavDropdown title="Fund Transfer" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">To Beneficiary</NavDropdown.Item>
+              <NavDropdown.Item >To Beneficiary</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">
+              <NavDropdown.Item >
                 <Link to ={"/payment"} >Quick Transfer</Link>
               </NavDropdown.Item>
             </NavDropdown>

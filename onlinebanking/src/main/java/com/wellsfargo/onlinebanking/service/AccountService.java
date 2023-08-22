@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wellsfargo.onlinebanking.entity.Account;
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.repository.AccountRepository;
 
 @Service
@@ -34,8 +35,12 @@ public class AccountService implements IAccountService{
 
 	
 	@Override
-	public Account createAccount(Account newAccount) {
+	public Account createAccount(Account newAccount) throws UserAlreadyExistsException {
 	
+		if(accountRepository.existByUserId(newAccount.getUserId())) {
+			throw new UserAlreadyExistsException("User with the same User Id already exists!!");
+		}
+		
 		return accountRepository.save(newAccount);
 	}
 	

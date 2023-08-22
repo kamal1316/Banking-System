@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
+import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
+import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
 import com.wellsfargo.onlinebanking.service.PersonalDetailsService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,13 +30,24 @@ public class PersonalDetailsController {
 	PersonalDetailsService service;
 	
 	@GetMapping("/{userId}")
-	public PersonalDetails getByPersonalDetailsByID(@PathVariable String userId) {
-		return service.getPersonalDetails(userId);
+	public ResponseEntity<PersonalDetails> getPersonalDetailsByUserId(@PathVariable String userId) throws ResourceNotFoundException {
+		PersonalDetails personalDetails = service.getPersonalDetails(userId);
+	
+		if(personalDetails == null) {
+			throw new ResourceNotFoundException("Personal Details not found for the userId : " + userId);
+		}
+		
+		return ResponseEntity.ok(personalDetails);
 	}
 	
 	@PostMapping("/createPersonalDetails")
-	public PersonalDetails createPersonalDetails(@Validated @RequestBody PersonalDetails newPersonalDetails) {
-		return service.createPersonalDetails(newPersonalDetails);
+	public PersonalDetails createPersonalDetails(@Validated @RequestBody PersonalDetails newPersonalDetails) throws UserAlreadyExistsException {
+		try {
+			return service.createPersonalDetails(newPersonalDetails);
+		}
+		catch(UserAlreadyExistsException ex) {
+			throw new UserAlreadyExistsException(ex.getMessage());
+		}
 	}
 	
 	@DeleteMapping("/deletePersonalDetails")
