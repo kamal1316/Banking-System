@@ -1,6 +1,8 @@
 //import React from 'react';
 import { useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from './navbar'; 
+import Footer from './footer'; 
 import React,{useState} from 'react';
 import { toast } from "react-toastify";
 
@@ -77,6 +79,7 @@ const Payment = () => {
 
   return (
     <div>
+        <Navbar> </Navbar>
         <div className="offset-lg-3 col-lg-6">
                 <form className="container" onSubmit={handlesubmit} style = {{padding: "20px"}}>
                     <div className="card">
@@ -132,6 +135,7 @@ const Payment = () => {
                     </div>
                 </form>
             </div>
+            <Footer> </Footer>
     </div>
   );
 };

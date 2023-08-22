@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/home';
 import Login from './components/login';
+import AdminLogin from './components/adminLogin';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
 import Payment from './components/payment';
@@ -24,6 +25,7 @@ const App = () => {
         <Routes>
           <Route path="/"  element={<Home/>}></Route> 
           <Route path="/login"  element={<Login/>}></Route> 
+          <Route path="/adminLogin"  element={<AdminLogin/>}></Route> 
           <Route path="/openAccount"  element={<Signup/>}></Route> 
           <Route path="/dashboard"  element={<Dashboard/>}></Route> 
           <Route path="/payment"  element={<Payment/>}></Route> 

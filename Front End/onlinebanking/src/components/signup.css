@@ -2,10 +2,13 @@
 .signup-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     justify-content: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-image: url('https://arizent.brightspotcdn.com/dims4/default/af78ea5/2147483647/strip/true/crop/5133x2695+0+371/resize/1200x630!/quality/90/?url=https:%2F%2Fsource-media-brightspot.s3.amazonaws.com%2Fc0%2F28%2F775a0f774902bfed3eddf49b969f%2F363244652.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   /* Styling for the card */

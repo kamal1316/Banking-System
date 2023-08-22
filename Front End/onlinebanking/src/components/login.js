@@ -11,6 +11,7 @@ const Login = () => {
 
   const usenavigate = useNavigate();
 
+
     useEffect(()=>{
         let token = sessionStorage.getItem('JwtToken');
         if(!(token===''||token===null)){
@@ -21,6 +22,9 @@ const Login = () => {
   const ProceedLogin = (e) => {
     e.preventDefault();
     if (validate()) {
+      let userobj = { userId, password };
+      sessionStorage.setItem('userId', userId);
+
 
         let userobj = {userId, password};
 
@@ -47,24 +51,25 @@ const Login = () => {
             toast.error('Login Failed.' + err.message);
         });
     }
-}
-const validate = () => {
-  let result = true;
-  if (userId === '' || userId === null) {
+  }
+
+  const validate = () => {
+    let result = true;
+    if (userId === '' || userId === null) {
       result = false;
       toast.warning('Please Enter userid');
-  }
-  if (password === '' || password === null) {
+    }
+    if (password === '' || password === null) {
       result = false;
       toast.warning('Please Enter Password');
+    }
+    return result;
   }
-  return result;
-}
 
   return (
     <> 
     <Navbar > </Navbar>
-    <div className="row">
+    <div className="login-container">
         <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
             <form onSubmit={ProceedLogin} className="container">
                 <div className="card">
@@ -85,8 +90,10 @@ const validate = () => {
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span style={{"paddingRight": "20px"}}></span>
 
-                        <Link className="btn btn-success" to={'/openAccount'}>New User? Apply for account</Link>
+                        {/* Admin Login Link */}
+                        <Link className="btn btn-info" to={'/adminLogin'}>Admin Login</Link>
 
+                        <Link className="btn btn-success" to={'/openAccount'}>New User? Apply for an account</Link>
                     </div>
                 </div>
             </form>
@@ -94,7 +101,7 @@ const validate = () => {
     </div>
     <Footer> </Footer>
     </>
-);
+  );
 };
 
 export default Login;
