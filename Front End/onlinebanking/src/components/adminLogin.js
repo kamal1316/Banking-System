@@ -5,29 +5,29 @@ import Navbar from './navbar';
 import Footer from './footer'; 
 import './login.css';
 
-const Login = () => {
-  const [userId, userIdUpdate] = useState('');
+const AdminLogin = () => {
+  const [adminId, adminIdUpdate] = useState('');
   const [password, passwordUpdate] = useState('');
 
   const usenavigate = useNavigate();
 
   useEffect(() => {
-    let token = sessionStorage.getItem('JwtToken');
+    let token = sessionStorage.getItem('AdminJwtToken');
     if (!(token === '' || token === null)) {
-      usenavigate('/dashboard');
+      usenavigate('/adminDashboard');
     }
   }, [usenavigate]);
 
-  const ProceedLogin = (e) => {
+  const ProceedAdminLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-      let userobj = { userId, password };
-      sessionStorage.setItem('userId', userId);
+      let adminObj = { adminId, password };
+      sessionStorage.setItem('adminId', adminId);
 
-      fetch("http://localhost:8080/authenticate", {
+      fetch("http://localhost:8080/admin/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userobj)
+        body: JSON.stringify(adminObj)
       }).then((response) => {
         if (!response.ok) {
           toast.error('Please Enter valid credentials');
@@ -36,10 +36,10 @@ const Login = () => {
           return response.text();
         }
       }).then((data) => {
-        sessionStorage.setItem('JwtToken', data);
+        sessionStorage.setItem('AdminJwtToken', data);
         console.log(data);
         toast.success('Success');
-        usenavigate('/dashboard');
+        usenavigate('/adminDashboard');
       }).catch((err) => {
         toast.error('Login Failed due to :' + err.message);
       });
@@ -48,9 +48,9 @@ const Login = () => {
 
   const validate = () => {
     let result = true;
-    if (userId === '' || userId === null) {
+    if (adminId === '' || adminId === null) {
       result = false;
-      toast.warning('Please Enter userid');
+      toast.warning('Please Enter Admin ID');
     }
     if (password === '' || password === null) {
       result = false;
@@ -64,15 +64,15 @@ const Login = () => {
     <Navbar > </Navbar>
     <div className="login-container">
         <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
-            <form onSubmit={ProceedLogin} className="container">
+            <form onSubmit={ProceedAdminLogin} className="container">
                 <div className="card">
                     <div className="card-header">
-                        <h2>User Login</h2>
+                        <h2>Admin Login</h2>
                     </div>
                     <div className="card-body">
                         <div className="form-group">
-                            <label>User Name <span className="errmsg">*</span></label>
-                            <input value={userId} onChange={e => userIdUpdate(e.target.value)} className="form-control"></input>
+                            <label>Admin ID <span className="errmsg">*</span></label>
+                            <input value={adminId} onChange={e => adminIdUpdate(e.target.value)} className="form-control"></input>
                         </div>
                         <div className="form-group">
                             <label>Password <span className="errmsg">*</span></label>
@@ -82,11 +82,7 @@ const Login = () => {
                     <div className="card-footer">
                         <button type="submit" className="btn btn-primary">Login</button>
                         <span style={{"paddingRight": "20px"}}></span>
-
-                        {/* Admin Login Link */}
-                        <Link className="btn btn-info" to={'/adminLogin'}>Admin Login</Link>
-
-                        <Link className="btn btn-success" to={'/openAccount'}>New User? Apply for an account</Link>
+                        <Link className="btn btn-success" to={'/login'}>Sign in to your User Account</Link>
                     </div>
                 </div>
             </form>
@@ -97,4 +93,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;
