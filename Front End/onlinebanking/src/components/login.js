@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Navbar from './navbar'; 
 import Footer from './footer'; 
 import './login.css';
+import { Form } from "react-bootstrap";
 
 const Login = () => {
   const [userId, userIdUpdate] = useState('');
@@ -82,6 +83,13 @@ const Login = () => {
                             <label>Password <span className="errmsg">*</span></label>
                             <input type="password" value={password} onChange={e => passwordUpdate(e.target.value)} className="form-control"></input>
                         </div>
+                        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                        <p className="small">
+                          <a className="text-primary" href="/resetPassword">
+                            Forgot password?
+                          </a>
+                        </p>
+                        </Form.Group>
                     </div>
                     <div className="card-footer">
                         <button type="submit" className="btn btn-primary">Login</button>
