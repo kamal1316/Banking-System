@@ -78,8 +78,8 @@ function RequestDeatails() {
       <Button variant="primary" >
         <Link to="/admin/accountRequest/approve" className="btn btn-default">Approve</Link>
         </Button>
-        <br/>
-        <Button variant="danger" >
+        
+        <Button variant="danger">
         <Link to="admin/accountRequest/reject" className="btn btn-default">Reject</Link>
         </Button>
       </div>

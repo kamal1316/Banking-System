@@ -16,6 +16,9 @@ import ChangePassword from './components/changepassword';
 import ResetPassword from './components/resetPassword';
 import VerifyStep from './components/verifyStep';
 import ResetStep from './components/resetStep';
+import AdminDashboard from './components/AdminDashboard';
+import RequestDeatails from './components/RequestDeatils';
+import AccountRequests from './components/AccountRequests';
 
 const App = () => {
 
@@ -37,6 +40,9 @@ const App = () => {
           <Route path="/success" element ={<Success/>}></Route>
           <Route path="/successpage" element ={<SuccessPage/>}></Route>
           <Route path="/resetPassword" element ={<ResetPassword/>}></Route>
+          <Route path="/adminDashboard" element ={<AdminDashboard/>}></Route>
+          <Route path='/admin/accountRequests' element = {<AccountRequests/>}></Route>
+          <Route path='/admin/accountRequests/details' element = {<RequestDeatails/>}></Route>
           <Route path="/verifyStep" element ={<VerifyStep/>}></Route>
           <Route path="/resetStep" element ={<ResetStep/>}></Route>
         </Routes>
