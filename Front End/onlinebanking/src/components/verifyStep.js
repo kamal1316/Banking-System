@@ -1,44 +1,45 @@
 import React, {useState} from 'react';
-import {Button,Form} from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { toast } from "react-toastify";
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
 
 const VerifyStep = ({generatedOtp}) => {
   
   const [otp,setOtp] = useState('');
   
   const usenavigate = useNavigate();
-  
-    const handleBackToLogin = () => {
-        usenavigate('/login');
-    };
+  const location = useLocation();
+  const email = location.state?.email || '';
 
-  const handleVerifyOtp =({generatedOtp})=>{
+  const handleVerifyOtp =(e)=>{
 
-    // send otp to backend for verficiation.
+    e.preventDefault();
 
-   console.log(otp,generatedOtp);
-//    if(otp.length!==4 || isNaN(otp)){
-//     alert('Invalid OTP format');
-//     return;
-//    }
-//    if(otp !== props.generatedOtp){
-//     alert('Invalid OTP');
-//     return;
-//    }
-//  axios.post('/verify-otp', {otp}).then(response => {
-//     if(response.data.valid){
-//         console.log('verified successfully');
-//         //useNavigate(/ResetStep);
-//     }
-//     else{
-//         alert('Invalid OTP');
-//     }
-//  })
+    let obj = {email, otp};
+    console.log(email, otp);
+        
+        fetch('http://localhost:8080/forgotPassword/verifyOTP', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(obj)
+        }).then(res => {
 
- 
-  
+            if(!res.ok) {
+                return res.json().then(data => {throw new Error(data.message)});
+            }
+
+            return res.text();
+        }).then(data => {
+
+            toast.success(data);
+            usenavigate('/resetStep', { state: { email } });
+
+        }).catch((err) => {
+            toast.error('Failed : ' + err.message);
+        });
     
   };
  
@@ -47,7 +48,7 @@ return(
 
     <div className="row">
     <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
-        <form className="container">
+        <form className="container" onSubmit={handleVerifyOtp}>
             <div className="card">
                 <div className="card-header">
                     <h2>Verify Otp</h2>
@@ -61,9 +62,9 @@ return(
                     
                 </div>
                 <div className="card-footer">
-                    <button className="btn btn-primary" onClick={handleVerifyOtp({generatedOtp})}>Verify Otp</button>
+                    <button className="btn btn-primary" >Verify Otp</button>
                     <span style={{"paddingRight": "20px"}}></span>
-                    <button className="btn btn-primary" onClick={handleBackToLogin}>Back to login</button>
+                        <Link className="btn btn-success" to={'/login'}>Back to login</Link>
                 </div>
             </div>
         </form>

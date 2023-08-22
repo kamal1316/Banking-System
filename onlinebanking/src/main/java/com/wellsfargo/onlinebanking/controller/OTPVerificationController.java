@@ -1,43 +1,44 @@
 package com.wellsfargo.onlinebanking.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.wellsfargo.onlinebanking.entity.VerificationRequest;
-import com.wellsfargo.onlinebanking.entity.VerificationResponse;
+import com.wellsfargo.onlinebanking.entity.ForgotPasswordRequest;
+import com.wellsfargo.onlinebanking.service.PersonalDetailsService;
+import com.wellsfargo.onlinebanking.service.UserService;
 
 
 
 @RestController
 @CrossOrigin("http://localhost:3000")
-
+@RequestMapping("/forgotPassword")
 public class OTPVerificationController {
 	
-	@PostMapping("/sendOtp")
-	public boolean generateOTP(@RequestBody String userId) {
-		String generatedOtp = Integer.toString((int) Math.floor(1000+Math.random()*9000));
-		
-		// send mail to user;
-		
-		// save {userId, otp} in database;
-		
-		return true;
-	}
+	@Autowired
+	PersonalDetailsService service;
 
-private boolean validateOTP(String otp) {
-	System.out.println("Generated OTP:" + generatedOtp);
-	return (generatedOtp==otp);
-}
+    @PostMapping("/generateOTP")
+    public String generateOTP(@Validated @RequestBody String email) {
+    	
+        return service.generateOtp(email);
+    }
 
-@PostMapping("/verify-otp")
-public @ResponseBody VerificationResponse verifyOTP(@RequestBody VerificationRequest request) {
-    
-	
-	boolean isValid= validateOTP(request.getOtp());
-	return new VerificationResponse(isValid);
-}
+    @PostMapping("/verifyOTP")
+    public String verifyOTP(@Validated @RequestBody VerificationRequest request) {
+        return service.verifyOtp(request);
+    }
+
+    @PostMapping("/resetPassword")
+    public String resetPassword(@Validated @RequestBody ForgotPasswordRequest request) {
+        return service.resetPassword(request);
+    }
 
 }

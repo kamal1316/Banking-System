@@ -2,20 +2,40 @@ import React, {useState} from 'react';
 import {Button,Form} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const ResetPassword = () => {
   const [email,setEmail] = useState('');
   const usenavigate = useNavigate();
 
-    const handleSendResetLink = () =>{
-        const generatedOtp=(Math.floor(1000+Math.random()*9000)).toString();
-        console.log('Generated Otp:',generatedOtp);
+    const handleSendResetLink =  (e) =>{
+        e.preventDefault();
 
-        // call backend to generate otp.
-    
+            let obj = [email];
+            
+            fetch('http://localhost:8080/forgotPassword/generateOTP', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: email
+            }).then(res => {
 
-        usenavigate('/verifyStep' , {generatedOtp});
-    };
+                if(!res.ok) {
+                    return res.json().then(data => {throw new Error(data.message)});
+                }
+
+                return res.text();
+            }).then(data => {
+
+                toast.success(data);
+                usenavigate('/verifyStep', { state: { email } });
+
+            }).catch((err) => {
+                toast.error('Failed : ' + err.message);
+            });
+        }
+
 
     const handleBackToLogin = () => {
         usenavigate('/login');
@@ -25,7 +45,7 @@ const ResetPassword = () => {
 return(
 <div className="row">
         <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
-            <form className="container">
+            <form className="container" onSubmit={handleSendResetLink}>
                 <div className="card">
                     <div className="card-header">
                         <h2>Reset Password</h2>
@@ -39,9 +59,9 @@ return(
                         
                     </div>
                     <div className="card-footer">
-                        <button className="btn btn-primary" onClick={handleSendResetLink}>Send Reset Link</button>
+                        <button className="btn btn-primary" >Send Reset Link</button>
                         <span style={{"paddingRight": "20px"}}></span>
-                        <button className="btn btn-primary" onClick = {handleBackToLogin}>Back to login</button>
+                        <Link className="btn btn-success" to={'/login'}>Back to login</Link>
                     </div>
                 </div>
             </form>
@@ -49,7 +69,5 @@ return(
     </div>
 );
 }
-
-
 
 export default ResetPassword;

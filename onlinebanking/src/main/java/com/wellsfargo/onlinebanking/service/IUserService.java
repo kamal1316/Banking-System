@@ -13,13 +13,15 @@ public interface IUserService {
 	List<User> getAllUsers();
 
 	User createUser(User newUser) throws UserAlreadyExistsException;
+	
   
 	void deleteUser(User newUser);
 	void deleteUserByID(Integer id);
 	void deleteAllUsers();
-	User updateUserById(Integer id, User updatedUser);
 
 	boolean existByUserId(String userId);
 
 	boolean existByAccountNumber(String accountNumber);
+
+	User updateUser(User updatedUser);
 }
