@@ -24,7 +24,6 @@ const Login = () => {
     e.preventDefault();
     if (validate()) {
 
-
         let userobj = {userId, password};
 
         sessionStorage.setItem('userId', userId);
