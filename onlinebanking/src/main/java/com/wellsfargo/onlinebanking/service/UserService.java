@@ -1,6 +1,8 @@
 package com.wellsfargo.onlinebanking.service;
 
+
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,8 +66,8 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User updateUserById(Integer id, User updatedUser) {
-		User changedUser = userRepo.findById(id).get();
+	public User updateUser(User updatedUser) {
+		User changedUser = userRepo.findByUserId(updatedUser.getUserId());
 		
 		changedUser.setUserId(updatedUser.getUserId());
 		changedUser.setAccountNumber(updatedUser.getAccountNumber());
@@ -73,4 +75,7 @@ public class UserService implements IUserService {
 		
 		return userRepo.save(changedUser);
 	}
+	
+	
+	
 }
