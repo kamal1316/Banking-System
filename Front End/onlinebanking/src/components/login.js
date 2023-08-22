@@ -23,8 +23,6 @@ const Login = () => {
   const ProceedLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-      let userobj = { userId, password };
-      sessionStorage.setItem('userId', userId);
 
 
         let userobj = {userId, password};

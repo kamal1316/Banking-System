@@ -35,11 +35,6 @@ const ResetPassword = () => {
                 toast.error('Failed : ' + err.message);
             });
         }
-
-
-    const handleBackToLogin = () => {
-        usenavigate('/login');
-    };
   
 
 return(
@@ -59,7 +54,7 @@ return(
                         
                     </div>
                     <div className="card-footer">
-                        <button className="btn btn-primary" >Send Reset Link</button>
+                        <button className="btn btn-primary" >Send OTP</button>
                         <span style={{"paddingRight": "20px"}}></span>
                         <Link className="btn btn-success" to={'/login'}>Back to login</Link>
                     </div>
