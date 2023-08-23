@@ -54,7 +54,7 @@ function RequestDetails() {
     
 
 
-      fetch("http://localhost:8080/admin/accountRequests/rejectRequest/" + {reqId}, {
+      fetch("http://localhost:8080/admin/accountRequests/rejectRequest/" + reqId, {
         method: "DELETE",
         headers: { "Authorization" : `Bearer ${token}`,
       "Content-Type": "application/json" }

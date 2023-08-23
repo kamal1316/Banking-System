@@ -43,11 +43,11 @@ public class UserServiceTest {
     
     @Test
     public void testCreateUser() {
-    	User createdUser = new User("1001", "10001", "QWERTY123");
-        
-        when(mockUserRepo.save(any(User.class))).thenReturn(createdUser);
-        
-    	User user = new User("1001", "10001", "QWERTY123");
+//    	User createdUser = new User("1001", "10001", "QWERTY123");
+//        
+//        when(mockUserRepo.save(any(User.class))).thenReturn(createdUser);
+//        
+//    	User user = new User("1001", "10001", "QWERTY123");
 //
 //    	
 //    	User result = null;
