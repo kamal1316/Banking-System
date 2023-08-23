@@ -7,12 +7,12 @@ const AdminDashboard = () => {
 
     const usenavigate = useNavigate();
 
-    // useEffect(()=>{
-    //     let token = sessionStorage.getItem('JwtToken');
-    //     if(token===''||token===null){
-    //         usenavigate('/home');
-    //     }
-    // },[usenavigate]);
+    useEffect(()=>{
+        let token = sessionStorage.getItem('JwtToken');
+        if(token===''||token===null){
+            usenavigate('/home');
+        }
+    },[usenavigate]);
 
   return (
     <div>

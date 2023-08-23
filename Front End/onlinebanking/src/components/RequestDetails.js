@@ -1,39 +1,18 @@
 import './personalDetails.css'; // Import the CSS file for styling
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
-import {Link } from 'react-router-dom';
-import { toast } from "react-toastify";
+import {Link, useParams } from 'react-router-dom';
+// import { toast } from "react-toastify";
 
-function RequestDeatails() {
+function RequestDetails() {
 
-  const [details, setDetails] = useState('');
+  const {details} = useParams();
 
-//   useEffect(() => {
-//     let token = sessionStorage.getItem('JwtToken');
-//     let userId = sessionStorage.getItem('userId');
-
-//     fetch(" http://localhost:8080/personalDetails/" + userId, {
-//       method: "GET",
-//       headers: { "Authorization" : `Bearer ${token}`,
-//       "Content-Type": "application/json" }
-//     }).then((res) => {
-//       if(!res.ok) {
-//         throw new Error("Couldn't fetch personal details!!");
-//       }
-//       else {
-//         return res.json();
-//       }
-//     }).then ((resp) => {
-//         setDetails(resp);
-//     }).catch((err) => {
-//       toast.error(err.message);
-//     })
-
-//   }, []);
+ 
 
   return (
     <div className="personal-details-container" >
-      <h2>Personal Details</h2>
+      <h2>Request Details</h2>
       <div className="details">
         <div className="detail-item">
           <label>Name:</label>
@@ -88,4 +67,4 @@ function RequestDeatails() {
   );
 }
 
-export default RequestDeatails;
+export default RequestDetails;

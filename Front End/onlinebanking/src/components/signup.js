@@ -65,7 +65,7 @@ const Signup = () => {
 
         if (IsValidate()) {
 
-            fetch("http://localhost:8080/admin/openAccount", {
+            fetch("http://localhost:8080/admin/createRequest", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(regobj)
