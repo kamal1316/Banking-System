@@ -2,6 +2,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import React, { useState, useEffect } from 'react';
+import AdminNavbar from './AdminNavbar';
 
 function AccountRequests() {
 
@@ -36,6 +37,7 @@ function AccountRequests() {
 
     return (
         <>
+        <AdminNavbar/>
             <h2>Pending Requests</h2>
             <table className="req-table">
                 <thead>
@@ -51,7 +53,9 @@ function AccountRequests() {
                     {requests.map((req) => (
                         <tr key={req.id}>
                             <td>
-                                <Link to="/admin/accountRequests/details" params = {{state: {req}}} >#{req.id}</Link>
+                                {/* <Link to={{pathname: "/admin/accountRequests/details", state:"hello" }} >#{req.id}</Link> */}
+                                <Link to = {`/admin/accountRequests/details?data=${encodeURIComponent(JSON.stringify(req))}`}>#{req.id}</Link>
+                                
                                 </td>
                             
                         </tr>

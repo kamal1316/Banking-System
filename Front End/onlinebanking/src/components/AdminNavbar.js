@@ -1,12 +1,23 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import { useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 
 
 function AdminNavbar() {
+
+  const usenaviagte = useNavigate();
+  
+  const handleLogout = (e) => {
+    sessionStorage.clear();
+    usenaviagte('/home');
+  }
+
   return (
+
+
     <>
       <Navbar bg="danger" data-bs-theme="dark">
         <Container>
@@ -24,6 +35,7 @@ function AdminNavbar() {
               />
               <Button variant="primary">Search</Button>
             </Form>
+            <Button className='btn' onClick={handleLogout}> Logout </Button>
           </Nav>
         </Container>
       </Navbar>
