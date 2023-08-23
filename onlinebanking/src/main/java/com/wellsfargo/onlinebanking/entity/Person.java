@@ -1,10 +1,19 @@
 package com.wellsfargo.onlinebanking.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+@Entity
+@Table(name = "Person")
 public class Person {
+	private int id;
+	
 	private String userId;
 	private String name;
 	
@@ -61,6 +70,20 @@ public class Person {
 		this.accountType = "Savings";
 	}
 	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Person() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getBalance() {
 		return balance;
 	}

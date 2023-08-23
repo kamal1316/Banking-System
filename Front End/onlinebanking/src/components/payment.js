@@ -20,8 +20,13 @@ const Payment = () => {
     if(timestamp !== "") {
 
         let balance = sessionStorage.getItem('balance');
+        let fromAccount = sessionStorage.getItem('accountNumber');
 
-        if(amount < 0) {
+        if(fromAccount === toAccount) {
+            toast.error("To Account Number cannot be same as your Account Number.");
+            timestampChange("");
+        }
+        else if(amount < 0) {
             toast.error("Amount cannot be negative!!");
             timestampChange("");
         }
@@ -34,7 +39,7 @@ const Payment = () => {
             timestampChange("");
         }
         else {
-            let fromAccount = sessionStorage.getItem('accountNumber');
+            
             let transObject  = {fromAccount, toAccount, amount, mode, timestamp, remark};
 
             let token = sessionStorage.getItem('JwtToken');
