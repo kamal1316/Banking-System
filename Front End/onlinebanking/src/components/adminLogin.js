@@ -24,7 +24,7 @@ const AdminLogin = () => {
       let adminObj = { adminId, password };
       sessionStorage.setItem('adminId', adminId);
 
-      fetch("http://localhost:8080/admin/authenticate", {
+      fetch("http://localhost:8080/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(adminObj)
@@ -36,7 +36,7 @@ const AdminLogin = () => {
           return response.text();
         }
       }).then((data) => {
-        sessionStorage.setItem('AdminJwtToken', data);
+        sessionStorage.setItem('JwtToken', data);
         console.log(data);
         toast.success('Success');
         usenavigate('/adminDashboard');
