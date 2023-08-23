@@ -1,16 +1,85 @@
 import './personalDetails.css'; // Import the CSS file for styling
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import {Link, useParams } from 'react-router-dom';
-// import { toast } from "react-toastify";
+import { Link, useLocation } from 'react-router-dom';
+import { toast } from "react-toastify";
+import AdminNavbar from './AdminNavbar';
 
 function RequestDetails() {
 
-  const {details} = useParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const details = JSON.parse(decodeURIComponent(queryParams.get('data')));
+  console.log(details);
 
- 
+  let usenavigate = useNavigate();
+
+  const handleApprove = (e) => {
+    e.preventDefault();
+
+    // sessionStorage.setItem('reqId',details.id);
+    const reqId = details.id;
+    const token = sessionStorage.getItem('JwtToken');
+    console.log(reqId);
+
+
+    fetch(" http://localhost:8080/admin/accountRequests/approveRequest/" + reqId, {
+      method: "GET",
+      headers: { "Authorization" : `Bearer ${token}`,
+      "Content-Type": "application/json" }
+      }).then(res => {
+
+        if (!res.ok) {
+          return res.json().then(data => { throw new Error(data.message) });
+        }
+
+        return res.text();
+      }).then(data => {
+
+        toast.success('Approved successfully.')
+        usenavigate('/admin/accountRequests');
+      }).catch((err) => {
+        toast.error('Failed : ' + err.message);
+      });
+    
+  }
+
+  const handleReject = (e) => {
+    e.preventDefault();
+
+    const reqId = details.id;
+    
+    const token = sessionStorage.getItem('JwtToken');
+    
+
+
+      fetch("http://localhost:8080/admin/accountRequests/rejectRequest/" + {reqId}, {
+        method: "DELETE",
+        headers: { "Authorization" : `Bearer ${token}`,
+      "Content-Type": "application/json" }
+      }).then(res => {
+
+        if (!res.ok) {
+          return res.json().then(data => { throw new Error(data.message) });
+        }
+
+        return res.text();
+      }).then(data => {
+
+        toast.success('Rejected successfully.')
+        usenavigate('/admin/accountRequests');
+      }).catch((err) => {
+        toast.error('Failed : ' + err.message);
+      });
+    
+  }
+
+
 
   return (
+    <>
+    <AdminNavbar/>
     <div className="personal-details-container" >
       <h2>Request Details</h2>
       <div className="details">
@@ -18,7 +87,7 @@ function RequestDetails() {
           <label>Name:</label>
           <span>{details.name}</span>
         </div>
-        
+
         <div className="detail-item">
           <label>Father's Name:</label>
           <span>{details.fatherName}</span>
@@ -54,16 +123,17 @@ function RequestDetails() {
       </div>
 
       <div className='requestDetails'>
-      <Button variant="primary" >
-        <Link to="/admin/accountRequest/approve" className="btn btn-default">Approve</Link>
+        <Button variant="primary" onClick={handleApprove} >
+          Approve
         </Button>
-        
-        <Button variant="danger">
-        <Link to="admin/accountRequest/reject" className="btn btn-default">Reject</Link>
+
+        <Button variant="danger" onClick={handleReject}>
+          Reject
         </Button>
       </div>
-      
+
     </div>
+    </>
   );
 }
 

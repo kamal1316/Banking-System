@@ -21,8 +21,11 @@ const AdminLogin = () => {
   const ProceedAdminLogin = (e) => {
     e.preventDefault();
     if (validate()) {
-      let adminObj = { adminId, password };
+      let userId = adminId;
+      let adminObj = { userId, password };
       sessionStorage.setItem('adminId', adminId);
+
+      console.log(adminObj);
 
       fetch("http://localhost:8080/authenticate", {
         method: "POST",

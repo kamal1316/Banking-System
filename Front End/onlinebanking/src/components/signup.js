@@ -75,7 +75,7 @@ const Signup = () => {
                     return res.json().then(data => {throw new Error(data.message)});
                 }
 
-                return res.json();
+                return res.text();
             }).then(data => {
 
                 toast.success('Applied successfully.')
