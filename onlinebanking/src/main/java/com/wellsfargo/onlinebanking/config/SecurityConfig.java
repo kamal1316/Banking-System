@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     	http.cors().and()
     			.csrf().disable()
-        		.authorizeRequests().antMatchers("/authenticate", "/admin/openAccount", "/users/createUser", "/personalDetails/createPersonalDetails", "/forgotPassword/generateOTP", "/forgotPassword/verifyOTP", "/forgotPassword/resetPassword").permitAll()
+        		.authorizeRequests().antMatchers("/authenticate", "/admin/createRequest", "/users/createUser", "/personalDetails/createPersonalDetails", "/forgotPassword/generateOTP", "/forgotPassword/verifyOTP", "/forgotPassword/resetPassword").permitAll()
         		.anyRequest().authenticated()
                 .and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

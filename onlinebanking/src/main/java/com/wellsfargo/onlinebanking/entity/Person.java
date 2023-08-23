@@ -43,7 +43,7 @@ public class Person {
 	@Pattern(regexp = "^$|^[A-Z]{5}[0-9]{4}[A-Z]{1}$")
 	private String pan;
 	
-	@Min(value = 1)
+	@Min(value = 0)
 	private int balance;
 	
 	private String ifsc;
@@ -80,7 +80,7 @@ public class Person {
 	}
 	
 	public Person() {
-		super();
+//		super();
 		// TODO Auto-generated constructor stub
 	}
 
