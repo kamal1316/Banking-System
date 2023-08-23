@@ -8,9 +8,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.wellsfargo.onlinebanking.entity.Account;
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
@@ -19,6 +22,8 @@ import com.wellsfargo.onlinebanking.repository.PersonalDetailsRepository;
 
 
 @DataJpaTest
+@RunWith(SpringJUnit4ClassRunner.class)
+@ComponentScan(basePackages = "com.wellsfargo.onlinebanking.repository")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PersonalDetailsRepositoryTest {
 	@Autowired

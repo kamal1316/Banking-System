@@ -1,19 +1,26 @@
 package com.wellsfargo.onlinebanking.controller;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.RequestAlreadyExistsException;
+import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
 import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.service.AccountService;
+import com.wellsfargo.onlinebanking.service.AdminService;
 import com.wellsfargo.onlinebanking.service.PersonalDetailsService;
 import com.wellsfargo.onlinebanking.service.UserService;
 import com.wellsfargo.onlinebanking.entity.Account;
@@ -24,71 +31,62 @@ import com.wellsfargo.onlinebanking.entity.PersonalDetails;
 @CrossOrigin("http://localhost:3000")
 @RequestMapping("/admin")
 public class AdminController {
-	private int baseAccountNumber = 10000;
-	private int baseUserId = 4000;
+	@Autowired
+	AdminService adminService;
 	
 	@Autowired
 	UserService userService;
 	
-	@Autowired
-	PersonalDetailsService personalDetailsService;
-	
-	@Autowired	
-	AccountService accountService;
-	
-	String generatePassword() {
-		int len = 10;
-		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	
-		Random  rnd = new Random();
-		StringBuilder sb = new StringBuilder(len);
-		for (int i = 0; i < len; ++i) {
-			sb.append(AB.charAt(rnd.nextInt(AB.length())));
-		}
-		
-		return sb.toString();
+	@GetMapping("/accountRequests")
+	public ResponseEntity<List<Person>> getAllRequests() {
+		return ResponseEntity.ok(adminService.getAllRequests());
 	}
 	
-	@PostMapping("/openAccount")
-	public ResponseEntity<Person> openAccount(@Validated @RequestBody Person newPerson) throws UserAlreadyExistsException {
-		int accountNumber = ++baseAccountNumber;
-		int userId = ++baseUserId;
-		
-		String password = generatePassword();
-		
-		newPerson.setUserId(String.valueOf(userId));
-		newPerson.setPassword(password);
-		newPerson.setAccountNumber(String.valueOf(accountNumber));
-		
-		User user = new User(newPerson.getUserId(), newPerson.getAccountNumber(), newPerson.getPassword());
-		
-		PersonalDetails personalDetails = new PersonalDetails(newPerson.getUserId(), newPerson.getName(),newPerson.getEmail(), newPerson.getMobile(), newPerson.getAddress(), newPerson.getGender(), newPerson.getCountry(), newPerson.getFatherName() 
-				,newPerson.getAadhaarNumber(), newPerson.getPan());
-		
-		Account account = new Account(newPerson.getUserId(), newPerson.getAccountNumber(), newPerson.getName(), newPerson.getBalance(), newPerson.getIfsc(), newPerson.getAccountType(), newPerson.getBranch());
+	@PostMapping("/createRequest")
+	public ResponseEntity<String> createRequest(@Validated @RequestBody Person newPerson) throws RequestAlreadyExistsException {
 		
 		try {
-			userService.createUser(user);
+			Person createdPerson = adminService.createRequest(newPerson);
 		}
-		catch(UserAlreadyExistsException ex) {			
-			throw new UserAlreadyExistsException(ex.getMessage());
-		}
-		
-		try {
-			personalDetailsService.createPersonalDetails(personalDetails);
-		}
-		catch(UserAlreadyExistsException ex) {			
-			throw new UserAlreadyExistsException(ex.getMessage());
+		catch(RequestAlreadyExistsException ex) {
+			throw new RequestAlreadyExistsException(ex.getMessage());
 		}
 		
-		try {
-			accountService.createAccount(account);
-		}
-		catch(UserAlreadyExistsException ex) {			
-			throw new UserAlreadyExistsException(ex.getMessage());
-		}
-		
-		return ResponseEntity.ok(newPerson);
+		return ResponseEntity.ok("Account Creation Request successfully generated!!");
 	}
-
+	
+	@PostMapping("/accountRequests/approveRequest/{requestId}")
+	public ResponseEntity<String> approveRequest(@PathVariable int requestId) throws ResourceNotFoundException, UserAlreadyExistsException {
+		
+		try {
+			adminService.approveRequest(requestId);
+		}
+		catch(ResourceNotFoundException ex) {
+			throw new ResourceNotFoundException("Request not found!!");
+		}
+		catch(UserAlreadyExistsException ex) {
+			throw new UserAlreadyExistsException("User already Exists!!");
+		}
+		
+		return ResponseEntity.ok("Request Approved");
+	}
+	
+	@DeleteMapping("/accountRequests/rejectRequest/{requestId}")
+	public ResponseEntity<String> rejectRequest(@PathVariable int requestId) throws ResourceNotFoundException {
+		
+		try {
+			adminService.rejectRequest(requestId);
+		}
+		catch(ResourceNotFoundException ex) {
+			throw new ResourceNotFoundException("Request not found!!");
+		}
+		
+		return ResponseEntity.ok("Request Rejected!!");
+	}
+	
+	@GetMapping("/listUsers")
+	public ResponseEntity<List<User>> getAllUsers() {
+		return ResponseEntity.ok(userService.getAllUsers());
+	}
+	
 }
