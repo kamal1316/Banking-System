@@ -57,16 +57,15 @@ public class AdminController {
 	
 	@GetMapping("/accountRequests/approveRequest/{requestId}")
 	public ResponseEntity<String> approveRequest(@PathVariable int requestId) throws ResourceNotFoundException, UserAlreadyExistsException {
-		
 		try {
 			adminService.approveRequest(requestId);
 		}
 		catch(ResourceNotFoundException ex) {
 			throw new ResourceNotFoundException("Request not found!!");
 		}
-//		catch(UserAlreadyExistsException ex) {
-//			throw new UserAlreadyExistsException("User already Exists!!");
-//		}
+		catch(UserAlreadyExistsException ex) {
+			throw new UserAlreadyExistsException("User already Exists!!");
+		}
 		
 		return ResponseEntity.ok("Request Approved");
 	}

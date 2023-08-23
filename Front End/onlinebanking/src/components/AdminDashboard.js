@@ -10,7 +10,7 @@ const AdminDashboard = () => {
     useEffect(()=>{
         let token = sessionStorage.getItem('JwtToken');
         if(token===''||token===null){
-            usenavigate('/home');
+            usenavigate('/');
         }
     },[usenavigate]);
 

@@ -28,15 +28,18 @@ public class User {
 	private String accountNumber;
 	private String password;
 	
+	private boolean activeStatus;
+	
 	public User() {
 		super();
 	}
 	
-	public User(String userId, String accountNumber, String password) {
+	public User(String userId, String accountNumber, String password, boolean activeStatus) {
 		super();
 		setUserId(userId);
 		setAccountNumber(accountNumber);
 		setPassword(password);
+		setActiveStatus(activeStatus);
 	}
 	
 	@Id
@@ -74,4 +77,14 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public boolean isActiveStatus() {
+		return activeStatus;
+	}
+
+	public void setActiveStatus(boolean activeStatus) {
+		this.activeStatus = activeStatus;
+	}
+	
+	
 }

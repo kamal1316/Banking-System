@@ -29,7 +29,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testUserRepository_Save_NotNULL() {
 		
-		User testUser = new User("5006", "20021", "weqr1234");
+		User testUser = new User("5006", "20021", "weqr1234", true);
 		
 		User savedUser = userRepo.save(testUser);
 		
@@ -41,7 +41,7 @@ public class UserRepositoryTest {
 		
 		assertFalse(userRepo.existByUserId("5006"));
 		
-		User testUser = new User("5006", "20021", "weqr1234");
+		User testUser = new User("5006", "20021", "weqr1234", true);
 		
 		User savedUser = userRepo.save(testUser);
 		
@@ -55,7 +55,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testUserRepository_Save_Find() {
 		
-		User testUser = new User("5006", "12345", "weqr1234");
+		User testUser = new User("5006", "12345", "weqr1234", true);
 		
 		User savedUser = userRepo.save(testUser);
 		

@@ -52,7 +52,7 @@ public class UserControllerTest {
 	
 	@Before
 	public void init() {
-		User newUser = new User("1001", "10001", "qwerty");
+		User newUser = new User("1001", "10001", "qwerty", true);
 		
 		try {
 			when(userService.createUser(any(User.class))).thenReturn(newUser);
@@ -65,7 +65,7 @@ public class UserControllerTest {
 	@Test
 	public void testCreateUser() {
 		
-		User newUser = new User("1001", "10001", "qwerty");
+		User newUser = new User("1001", "10001", "qwerty", true);
 		
 		try {
 			mockMvc.perform(post("/createUser")

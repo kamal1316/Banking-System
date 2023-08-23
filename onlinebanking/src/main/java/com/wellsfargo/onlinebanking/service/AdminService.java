@@ -87,16 +87,12 @@ public class AdminService {
 		
 		String password = generatePassword();
 		
-		newPerson.setUserId(String.valueOf(userId));
-		newPerson.setPassword(password);
-		newPerson.setAccountNumber(String.valueOf(accountNumber));
+		User user = new User(String.valueOf(userId), String.valueOf(accountNumber), password, true);
 		
-		User user = new User(newPerson.getUserId(), newPerson.getAccountNumber(), newPerson.getPassword());
-		
-		PersonalDetails personalDetails = new PersonalDetails(newPerson.getUserId(), newPerson.getName(),newPerson.getEmail(), newPerson.getMobile(), newPerson.getAddress(), newPerson.getGender(), newPerson.getCountry(), newPerson.getFatherName() 
+		PersonalDetails personalDetails = new PersonalDetails(String.valueOf(userId), newPerson.getName(),newPerson.getEmail(), newPerson.getMobile(), newPerson.getAddress(), newPerson.getGender(), newPerson.getCountry(), newPerson.getFatherName() 
 				,newPerson.getAadhaarNumber(), newPerson.getPan());
 		
-		Account account = new Account(newPerson.getUserId(), newPerson.getAccountNumber(), newPerson.getName(), newPerson.getBalance(), newPerson.getIfsc(), newPerson.getAccountType(), newPerson.getBranch());
+		Account account = new Account(String.valueOf(userId), String.valueOf(accountNumber), newPerson.getName(), 10000, "WFIS0001", "savings", "HYD");
 		
 		try {
 			userService.createUser(user);

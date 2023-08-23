@@ -12,7 +12,7 @@ function AdminNavbar() {
   
   const handleLogout = (e) => {
     sessionStorage.clear();
-    usenaviagte('/home');
+    usenaviagte('/');
   }
 
   return (

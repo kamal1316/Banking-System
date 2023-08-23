@@ -117,7 +117,7 @@ public class PersonalDetailsService implements IPersonalDetailsService {
         	
         	User oldUser = userRepo.findByUserId(details.getUserId());
             
-            User updatedUser = new User (oldUser.getUserId(), oldUser.getAccountNumber(), request.getNewPassword());
+            User updatedUser = new User (oldUser.getUserId(), oldUser.getAccountNumber(), request.getNewPassword(), oldUser.isActiveStatus());
             
             userService.updateUser(updatedUser);
 

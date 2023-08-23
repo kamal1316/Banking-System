@@ -16,6 +16,7 @@ import javax.validation.constraints.Pattern;
 @Table(name="Account")
 public class Account {
 		
+	private int id;
 	private String userId;
 	
 //	@OneToOne(mappedBy = "user")
@@ -26,7 +27,7 @@ public class Account {
     
 	private String name;
 	
-	@Min(value = 1)
+	@Min(value = 0)
     private int balance;
     
     private String IFSC;
@@ -49,8 +50,15 @@ public class Account {
 	
 
 	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	@Column(name = "userId", nullable = false)
-
 	public String getUserId() {
 		return userId;
 	}

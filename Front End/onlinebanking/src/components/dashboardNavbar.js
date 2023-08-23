@@ -12,7 +12,7 @@ const DashboardNavbar = () => {
 
   const handleLogout = (e) => {
     sessionStorage.clear();
-    usenaviagte('/home');
+    usenaviagte('/');
   }
 
   return (

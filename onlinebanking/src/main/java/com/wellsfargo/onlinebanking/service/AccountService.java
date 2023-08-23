@@ -36,7 +36,7 @@ public class AccountService implements IAccountService{
 	
 	@Override
 	public Account createAccount(Account newAccount) throws UserAlreadyExistsException {
-	
+		
 		if(accountRepository.existByUserId(newAccount.getUserId())) {
 			throw new UserAlreadyExistsException("User with the same User Id already exists!!");
 		}
