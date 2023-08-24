@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
 import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.repository.UserRepository;
 
@@ -72,10 +73,23 @@ public class UserService implements IUserService {
 		changedUser.setUserId(updatedUser.getUserId());
 		changedUser.setAccountNumber(updatedUser.getAccountNumber());
 		changedUser.setPassword(updatedUser.getPassword());
+		changedUser.setActiveStatus(updatedUser.isActiveStatus());
 		
 		return userRepo.save(changedUser);
 	}
-	
-	
-	
+
+	@Override
+	public void changeActiveStatus(String userId) throws ResourceNotFoundException {
+		
+		User oldUser = userRepo.findByUserId(userId);
+		
+		if(oldUser == null) {
+			throw new ResourceNotFoundException("User Not Found!!");
+		}
+		
+		oldUser.setActiveStatus(!oldUser.isActiveStatus());
+		
+		userRepo.save(oldUser);
+	}
+
 }

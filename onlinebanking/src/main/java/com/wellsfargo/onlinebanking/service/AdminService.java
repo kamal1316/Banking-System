@@ -117,8 +117,6 @@ public class AdminService {
 		
 		return newPerson;
 	}
-
-	
 	
 	public void rejectRequest(int requestId)  throws ResourceNotFoundException {
 		Person accountToBeCreated = requestRepo.findById(requestId).get();;

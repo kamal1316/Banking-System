@@ -20,7 +20,7 @@ const MyCard = () => {
 
     fetch(" http://localhost:8080/accounts/" + sessionStorage.getItem('userId'), {
       method: "GET",
-      headers: { "Authorization" : `Bearer ${token}`,
+      headers: { "Authorization" : `User ${token}`,
       "Content-Type": "application/json" }
     }).then((res) => {
         if(!res.ok) {

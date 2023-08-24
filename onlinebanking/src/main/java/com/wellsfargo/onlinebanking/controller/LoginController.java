@@ -1,6 +1,7 @@
 package com.wellsfargo.onlinebanking.controller;
 
 import com.wellsfargo.onlinebanking.entity.*;
+import com.wellsfargo.onlinebanking.service.AdminDetailsService;
 import com.wellsfargo.onlinebanking.util.JwtUtil;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 @RestController
@@ -23,6 +25,9 @@ public class LoginController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private AdminDetailsService adminDetailsService;
 	
 	@GetMapping("/")
 	public String logIn() {
@@ -38,6 +43,22 @@ public class LoginController {
         } catch (Exception ex) {
             throw new Exception("invalid username/password");
         }
+        return jwtUtil.generateToken(authRequest.getUserId());
+    }
+	
+	@PostMapping("/authenticateAdmin")
+    public String generateTokenAdmin(@RequestBody AuthRequest authRequest) throws Exception {
+        
+//            authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(authRequest.getUserId(), authRequest.getPassword())
+//            );
+        	UserDetails admin = adminDetailsService.loadUserByUsername(authRequest.getUserId());
+        	
+        	if(!authRequest.getPassword().equals(admin.getPassword())) {
+        		throw new Exception("invlaid username/password !!");
+        	}
+        	
+        
         return jwtUtil.generateToken(authRequest.getUserId());
     }
 	

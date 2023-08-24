@@ -46,7 +46,7 @@ const Payment = () => {
 
             fetch("http://localhost:8080/transaction/executeTransaction", {
                 method: "POST",
-                headers: { "Authorization" : `Bearer ${token}`,
+                headers: { "Authorization" : `User ${token}`,
                 "Content-Type": "application/json" },
                 body: JSON.stringify(transObject)
             }).then((res) => {

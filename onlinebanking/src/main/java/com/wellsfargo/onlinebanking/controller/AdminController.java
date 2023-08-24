@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,10 +62,10 @@ public class AdminController {
 			adminService.approveRequest(requestId);
 		}
 		catch(ResourceNotFoundException ex) {
-			throw new ResourceNotFoundException("Request not found!!");
+			throw new ResourceNotFoundException(ex.getMessage());
 		}
 		catch(UserAlreadyExistsException ex) {
-			throw new UserAlreadyExistsException("User already Exists!!");
+			throw new UserAlreadyExistsException(ex.getMessage());
 		}
 		
 		return ResponseEntity.ok("Request Approved");
@@ -77,7 +78,7 @@ public class AdminController {
 			adminService.rejectRequest(requestId);
 		}
 		catch(ResourceNotFoundException ex) {
-			throw new ResourceNotFoundException("Request not found!!");
+			throw new ResourceNotFoundException(ex.getMessage());
 		}
 		
 		return ResponseEntity.ok("Request Rejected!!");
@@ -86,6 +87,18 @@ public class AdminController {
 	@GetMapping("/listUsers")
 	public ResponseEntity<List<User>> getAllUsers() {
 		return ResponseEntity.ok(userService.getAllUsers());
+	}
+	
+	@PutMapping("/changeActiveStatus/{userId}")
+	public ResponseEntity<String> changeActiveStatus(@PathVariable String userId) throws ResourceNotFoundException {
+		try {
+			userService.changeActiveStatus(userId);
+		}
+		catch (ResourceNotFoundException ex) {
+			throw new ResourceNotFoundException(ex.getMessage());
+		}
+		
+		return ResponseEntity.ok("Successfuly changed status!!");
 	}
 	
 }

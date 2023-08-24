@@ -14,7 +14,7 @@ function AccountRequests() {
         fetch(" http://localhost:8080/admin/accountRequests", {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Admin ${token}`,
                 "Content-Type": "application/json"
             }
         }).then((res) => {

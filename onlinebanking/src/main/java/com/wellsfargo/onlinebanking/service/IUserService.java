@@ -3,6 +3,7 @@ package com.wellsfargo.onlinebanking.service;
 import java.util.List;
 
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
 import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 
 public interface IUserService {
@@ -24,4 +25,6 @@ public interface IUserService {
 	boolean existByAccountNumber(String accountNumber);
 
 	User updateUser(User updatedUser);
+
+	void changeActiveStatus(String userId) throws ResourceNotFoundException;
 }
