@@ -35,8 +35,9 @@ function AdminNavbar() {
               />
               <Button variant="primary">Search</Button>
             </Form>
-            <Button className='btn' onClick={handleLogout}> Logout </Button>
+            
           </Nav>
+          <Button className='btn float-right' onClick={handleLogout}> Logout </Button>
         </Container>
       </Navbar>
     </>

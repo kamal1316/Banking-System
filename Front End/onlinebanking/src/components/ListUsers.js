@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function ListUsers() {
+
+const usenavigate = useNavigate();
 
   const [users, setUsers] = useState([]);
 
@@ -35,6 +39,37 @@ function ListUsers() {
 
     }, []);
 
+    const handleActiveStatus = (e) => {
+        e.preventDefault();
+    
+        
+        
+        const token = sessionStorage.getItem('JwtToken');
+        const userId = sessionStorage.getItem('userId');
+        
+    
+    
+          fetch("http://localhost:8080/admin/changeActiveStatus/" + userId, {
+            method: "PUT",
+            headers: { "Authorization" : `Bearer ${token}`,
+          "Content-Type": "application/json" }
+          }).then(res => {
+    
+            if (!res.ok) {
+              return res.json().then(data => { throw new Error(data.message) });
+            }
+    
+            return res.text();
+          }).then(data => {
+    
+            toast.success('changed status successfully.')
+            usenavigate('/admin/listUsers');
+          }).catch((err) => {
+            toast.error('Failed : ' + err.message);
+          });
+        
+      }
+
   return (
     <>
     <AdminNavbar/>
@@ -62,7 +97,7 @@ function ListUsers() {
                                 {user.userId}
                                 </td>
                                 <td>{user.accountNumber}</td>
-                                <td>{user.activeStatus ? "Active" : "Inactive"}</td>
+                                <td> <Button onClick={handleActiveStatus} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
                             
                         </tr>
                     ))}
