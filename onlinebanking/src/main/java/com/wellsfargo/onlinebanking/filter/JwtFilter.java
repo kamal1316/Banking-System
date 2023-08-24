@@ -1,6 +1,7 @@
 package com.wellsfargo.onlinebanking.filter;
 
 import com.wellsfargo.onlinebanking.util.JwtUtil;
+import com.wellsfargo.onlinebanking.service.AdminDetailsService;
 import com.wellsfargo.onlinebanking.service.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,9 @@ public class JwtFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
     @Autowired
     private CustomUserDetailsService service;
-
+    
+    @Autowired
+    private AdminDetailsService adminService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
@@ -33,25 +36,46 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String token = null;
         String userName = null;
-
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            token = authorizationHeader.substring(7); //eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY3NDgyNDI2OCwiaWF0IjoxNjc0NjQ0MjY4fQ.fK0KxNJRy6Sg-g-cc9LrlpErgqLGPRdbtWbPd1wjuAU
+        
+        if (authorizationHeader != null && authorizationHeader.startsWith("User ")) {
+            token = authorizationHeader.substring(5); //eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY3NDgyNDI2OCwiaWF0IjoxNjc0NjQ0MjY4fQ.fK0KxNJRy6Sg-g-cc9LrlpErgqLGPRdbtWbPd1wjuAU
             userName = jwtUtil.extractUserId(token);
-        }
+            
+            if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = service.loadUserByUsername(userName);
 
-            UserDetails userDetails = service.loadUserByUsername(userName);
+                if (jwtUtil.validateToken(token, userDetails)) {
 
-            if (jwtUtil.validateToken(token, userDetails)) {
-
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken
-                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken
+                            .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                }
             }
         }
+        
+        if (authorizationHeader != null && authorizationHeader.startsWith("Admin ")) {
+            token = authorizationHeader.substring(6); //eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImV4cCI6MTY3NDgyNDI2OCwiaWF0IjoxNjc0NjQ0MjY4fQ.fK0KxNJRy6Sg-g-cc9LrlpErgqLGPRdbtWbPd1wjuAU
+            userName = jwtUtil.extractUserId(token);
+            
+            if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+                UserDetails userDetails = adminService.loadUserByUsername(userName);
+
+                if (jwtUtil.validateToken(token, userDetails)) {
+
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken
+                            .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                }
+            }
+        }
+
+        
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

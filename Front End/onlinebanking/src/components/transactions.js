@@ -13,7 +13,7 @@ function Transactions() {
 
     fetch(" http://localhost:8080/transaction/" + sessionStorage.getItem('accountNumber') + "/transactions", {
       method: "GET",
-      headers: { "Authorization" : `Bearer ${token}`,
+      headers: { "Authorization" : `User ${token}`,
       "Content-Type": "application/json" }
     }).then((res) => {
 

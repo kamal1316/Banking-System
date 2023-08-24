@@ -15,7 +15,7 @@ function ListUsers() {
         fetch(" http://localhost:8080/admin/listUsers", {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Admin ${token}`,
                 "Content-Type": "application/json"
             }
         }).then((res) => {
