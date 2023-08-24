@@ -19,6 +19,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         User user = repository.findByUserId(userId);
-        return new org.springframework.security.core.userdetails.User(user.getUserId(), user.getPassword(), new ArrayList<>());
+        
+        if(user.isActiveStatus()) {
+        	return new org.springframework.security.core.userdetails.User(user.getUserId(), user.getPassword(), new ArrayList<>());
+        }
+        
+        throw new UsernameNotFoundException("Your account is inactive!!");
+//        return new org.springframework.security.core.userdetails.User(null, null, new ArrayList<>());
     }
 }
