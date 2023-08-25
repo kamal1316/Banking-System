@@ -14,7 +14,7 @@ function AccountRequests() {
         fetch(" http://localhost:8080/admin/accountRequests", {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Admin ${token}`,
                 "Content-Type": "application/json"
             }
         }).then((res) => {
@@ -38,6 +38,7 @@ function AccountRequests() {
     return (
         <>
         <AdminNavbar/>
+        <div className='m-3'>
             <h2>Pending Requests</h2>
             <table className="req-table">
                 <thead>
@@ -62,6 +63,7 @@ function AccountRequests() {
                     ))}
                 </tbody>
             </table>
+            </div>
         </>
 
 

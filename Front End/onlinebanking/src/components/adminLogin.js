@@ -27,7 +27,7 @@ const AdminLogin = () => {
 
       console.log(adminObj);
 
-      fetch("http://localhost:8080/authenticate", {
+      fetch("http://localhost:8080/authenticateAdmin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(adminObj)

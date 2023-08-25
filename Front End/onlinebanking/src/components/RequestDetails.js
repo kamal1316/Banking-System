@@ -26,7 +26,7 @@ function RequestDetails() {
 
     fetch(" http://localhost:8080/admin/accountRequests/approveRequest/" + reqId, {
       method: "GET",
-      headers: { "Authorization" : `Bearer ${token}`,
+      headers: { "Authorization" : `Admin ${token}`,
       "Content-Type": "application/json" }
       }).then(res => {
 
@@ -56,7 +56,7 @@ function RequestDetails() {
 
       fetch("http://localhost:8080/admin/accountRequests/rejectRequest/" + reqId, {
         method: "DELETE",
-        headers: { "Authorization" : `Bearer ${token}`,
+        headers: { "Authorization" : `Admin ${token}`,
       "Content-Type": "application/json" }
       }).then(res => {
 
