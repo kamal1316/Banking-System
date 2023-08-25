@@ -74,7 +74,7 @@ public class TransactionController {
 	public ResponseEntity<String> executeWithdraw(@Validated @RequestBody Withdraw withdraw)  {
             
 		Account accountHolder = accountService.getAccountByUserId(withdraw.getUserId());
-		//System.out.println("Reached inside");
+	
 		
 		if(accountHolder.getBalance() < withdraw.getAmount()) {
 			throw new Error("Insufficient Balance!!");
@@ -82,9 +82,8 @@ public class TransactionController {
 
 		accountHolder.setBalance(accountHolder.getBalance()-withdraw.getAmount());
 		
-		
 		accountService.updateAccount(accountHolder);
-		//Transaction(int refId, String fromAccount, String toAccount, int amount, String mode, String timestamp, String remark)
+		
 		Transaction transaction = new Transaction();
 		transaction.setAmount(withdraw.getAmount());
 		transaction.setFromAccount(accountHolder.getAccountNumber());

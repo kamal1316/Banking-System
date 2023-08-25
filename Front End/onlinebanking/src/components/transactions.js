@@ -50,7 +50,7 @@ function Transactions() {
         </thead>
         <tbody>
           {transactionData.map((transaction) => (
-            <tr key={transaction.refId}>
+            <tr key={transaction.refId} >
               <td>{transaction.refId}</td>
               <td>{transaction.mode}</td>
 
