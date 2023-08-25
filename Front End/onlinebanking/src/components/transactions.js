@@ -3,6 +3,8 @@ import './transactions.css';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
+import DashboardNavbar from './dashboardNavbar';
+import Footer from './footer';
 
 function Transactions() {
 
@@ -35,6 +37,8 @@ function Transactions() {
   }, []);
 
   return (
+    <>
+    <DashboardNavbar/>
     <div style={{ padding: "30px" }}>
       <h2>Transaction History</h2>
       <table className="transaction-table">
@@ -54,7 +58,7 @@ function Transactions() {
               <td>{transaction.refId}</td>
               <td>{transaction.mode}</td>
 
-             { ((transaction.mode) == ("withdraw") ?
+             { ((transaction.mode) === ("withdraw") ?
 
                 (<><td>{transaction.fromAccount}</td><td>- ₹{transaction.amount}</td></>)
 
@@ -81,6 +85,8 @@ function Transactions() {
         </Button>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 

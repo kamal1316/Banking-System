@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { CardGroup } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import React from 'react';
-import Footer from './footer'; 
+import React from 'react'; 
 import {Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
@@ -87,7 +86,7 @@ const MyCard = () => {
       </Card.Body>
     </Card>
     </CardGroup>
-    <Footer> </Footer>
+    
     </div>
   );
 }

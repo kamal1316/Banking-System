@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-
+import Footer from './footer';
 import DashboardNavbar from './dashboardNavbar';
 import MyCard from './mycard';
 import Payment from './payment';
@@ -22,6 +22,7 @@ const Dashboard = () => {
     <div>
       <DashboardNavbar/>
       <MyCard/>
+      <Footer> </Footer>
     </div>
   );
 };

@@ -138,6 +138,7 @@ function ListUsers() {
                                 <td>{user.accountNumber}</td>
                                 <td> <Button onClick={(e) => handleActiveStatus(e, user.userId)} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
 
+                                
                         </tr>
                     ))}
                 </tbody>
