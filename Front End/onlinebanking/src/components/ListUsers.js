@@ -12,6 +12,23 @@ function ListUsers() {
 const usenavigate = useNavigate();
 
   const [users, setUsers] = useState([]);
+  
+  const [query, setQuery] = useState("");
+
+  const search_parameters = Object.keys(Object.assign({}, ...users));
+
+  function search(users) {
+
+    return users.filter((users) =>
+
+      search_parameters.some((parameter) =>
+
+        users[parameter].toString().toLowerCase().includes(query)
+
+      )
+
+    );
+  }
 
     useEffect(() => {
         let token = sessionStorage.getItem('JwtToken');
@@ -74,7 +91,27 @@ const usenavigate = useNavigate();
     <>
     <AdminNavbar/>
 
-            <Table Registered Users>
+    <div className="input-box m-3">
+
+        <input
+
+          type="search"
+
+          name="search-form"
+
+          id="search-form"
+
+          className="search-input"
+
+          onChange={(e) => setQuery(e.target.value)}
+
+          placeholder="Search user"
+
+        />
+
+      </div>
+
+            <Table Registered Users className='m-3'>
                 <thead>
                     <tr>
                         <th>  
@@ -90,7 +127,8 @@ const usenavigate = useNavigate();
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {search(users).map((user) => (
+                      
                         <tr key={user.userId}>
                           {console.log(user)}
                             <td>
