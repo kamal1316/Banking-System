@@ -14,7 +14,7 @@ function PersonalDetails() {
 
     fetch(" http://localhost:8080/personalDetails/" + userId, {
       method: "GET",
-      headers: { "Authorization" : `Bearer ${token}`,
+      headers: { "Authorization" : `User ${token}`,
       "Content-Type": "application/json" }
     }).then((res) => {
       if(!res.ok) {

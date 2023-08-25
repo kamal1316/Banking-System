@@ -98,27 +98,28 @@ public class AdminService {
 			userService.createUser(user);
 		}
 		catch(UserAlreadyExistsException ex) {			
+			System.out.println("Exception in user");
 			throw new UserAlreadyExistsException(ex.getMessage());
 		}
 		
 		try {
 			personalDetailsService.createPersonalDetails(personalDetails);
 		}
-		catch(UserAlreadyExistsException ex) {			
+		catch(UserAlreadyExistsException ex) {
+			System.out.println("Exception in personaldetails");
 			throw new UserAlreadyExistsException(ex.getMessage());
 		}
 		
 		try {
 			accountService.createAccount(account);
 		}
-		catch(UserAlreadyExistsException ex) {			
+		catch(UserAlreadyExistsException ex) {	
+			System.out.println("Exception in account");
 			throw new UserAlreadyExistsException(ex.getMessage());
 		}
 		
 		return newPerson;
 	}
-
-	
 	
 	public void rejectRequest(int requestId)  throws ResourceNotFoundException {
 		Person accountToBeCreated = requestRepo.findById(requestId).get();;

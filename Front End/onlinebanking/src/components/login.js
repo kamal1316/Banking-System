@@ -35,7 +35,8 @@ const Login = () => {
         }).then((response) => {
             console.log(response);
             if(!response.ok) {
-                throw new Error('Please Enter valid credentials');
+                // throw new Error('Please Enter valid credentials');
+                return response.json().then(data => {throw new Error(data.message)});
             }
             else {
                 return response.text();

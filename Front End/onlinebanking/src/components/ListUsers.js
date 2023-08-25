@@ -12,6 +12,7 @@ function ListUsers() {
 const usenavigate = useNavigate();
 
   const [users, setUsers] = useState([]);
+
   
   const [query, setQuery] = useState("");
 
@@ -30,13 +31,16 @@ const usenavigate = useNavigate();
     );
   }
 
+  const [clickCount, setClickCount] = useState(0);
+
+
     useEffect(() => {
         let token = sessionStorage.getItem('JwtToken');
 
         fetch(" http://localhost:8080/admin/listUsers", {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                "Authorization": `Admin ${token}`,
                 "Content-Type": "application/json"
             }
         }).then((res) => {
@@ -54,21 +58,16 @@ const usenavigate = useNavigate();
             toast.error(err.message);
         })
 
-    }, []);
+    }, [clickCount]);
 
-    const handleActiveStatus = (e) => {
+    const handleActiveStatus = (e, userId) => {
         e.preventDefault();
-    
-        
         
         const token = sessionStorage.getItem('JwtToken');
-        const userId = sessionStorage.getItem('userId');
-        
-    
     
           fetch("http://localhost:8080/admin/changeActiveStatus/" + userId, {
             method: "PUT",
-            headers: { "Authorization" : `Bearer ${token}`,
+            headers: { "Authorization" : `Admin ${token}`,
           "Content-Type": "application/json" }
           }).then(res => {
     
@@ -79,12 +78,14 @@ const usenavigate = useNavigate();
             return res.text();
           }).then(data => {
     
-            toast.success('changed status successfully.')
-            usenavigate('/admin/listUsers');
+            toast.success('changed status successfully.');
+            setClickCount(clickCount + 1);
+            // usenavigate('/admin/listUsers');
           }).catch((err) => {
             toast.error('Failed : ' + err.message);
           });
         
+          
       }
 
   return (
@@ -130,12 +131,11 @@ const usenavigate = useNavigate();
                     {search(users).map((user) => (
                       
                         <tr key={user.userId}>
-                          {console.log(user)}
                             <td>
                                 {user.userId}
                                 </td>
                                 <td>{user.accountNumber}</td>
-                                <td> <Button onClick={handleActiveStatus} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
+                                <td> <Button onClick={(e) => handleActiveStatus(e, user.userId)} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
                             
                         </tr>
                     ))}
