@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <DashboardNavbar />
+      <DashboardNavbar/>
       <MyCard/>
     </div>
   );

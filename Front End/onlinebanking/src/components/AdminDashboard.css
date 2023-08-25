@@ -1,9 +1,6 @@
-/* Styling for the centered heading */
-   body {
-     overflow-x: hidden;
-   }
-   .home-container {
+.admin-container {
     display: flex;
+    overflow: hidden !important;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start; /* Change to flex-start for top alignment */
@@ -15,7 +12,7 @@
     color: white;
     padding-top: 80px; /* Add padding to shift content down */
   }
-  .home-heading {
+.admin-heading {
     display: flex;
     flex-direction: column;
     font-size: 70px;
@@ -26,9 +23,9 @@
     margin-bottom: 50px;
     color: white;
   }
-  
-  /* Styling for the buttons */
-  .home-button {
+
+   /* Styling for the buttons */
+   .admin-button {
     border-radius: 30px;
     background-color: white;
     color: black;
@@ -41,34 +38,19 @@
     transition: background-color 0.3s;
   }
   
-  .home-button:hover {
+  .admin-button:hover {
     background-color: #0056b3;
     color: white !important;
   }
   
   /* Styling for the link within the button */
-  .home-button a {
+  .admin-button a {
     text-decoration: none;
     color: rgb(223, 8, 8);
     font-weight: bold;
   }
   
 /* Container for the home page */
-
-.home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* Change to flex-start for top alignment */
-    height: 100vh;
-    background-image: url('https://s.yimg.com/uu/api/res/1.2/U3dbtNCkqPjp3Z9ksEVteQ--~B/aD0xOTk3O3c9MzAwMDtzbT0xO2FwcGlkPXl0YWNoeW9u/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-images/2020-02/1cd93d50-4ece-11ea-bfb5-fe3091f6d2b2');
-    
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    padding-top: 80px; /* Add padding to shift content down */
-  }
 
   
   /* Other styles as before */

@@ -89,7 +89,7 @@ const Signup = () => {
 
     return (
         <>
-        <Navbar> </Navbar>
+        <Navbar />
         <div className="signup-container">
             <div className="offset-lg-3 col-lg-6">
                 <form className="container" onSubmit={handlesubmit} style = {{padding: "20px"}}>

@@ -18,7 +18,7 @@ const DashboardNavbar = () => {
   return (
     <Navbar expand="lg" className="navbar-body">
       <Container>
-        <Navbar.Brand href="#home">Wells Fargo Banking App</Navbar.Brand>
+        <Navbar.Brand href="/" onClick={handleLogout}>Wells Fargo Banking App</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -32,7 +32,7 @@ const DashboardNavbar = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link href="/changepassword">Change Password</Nav.Link>
+            <Nav.Link href="/resetPassword">Change Password</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
 
             <Nav.Link href="/login" onClick={handleLogout}>Logout</Nav.Link>
@@ -41,6 +41,7 @@ const DashboardNavbar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    
   );
 };
 

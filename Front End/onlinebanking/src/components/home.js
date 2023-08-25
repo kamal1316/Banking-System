@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import {React, useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './navbar'; 
 import Footer from './footer'; 
 import './home.css';
 
 const Home = () => {
-  const navigate = useNavigate();
 
-  useEffect(() => {
+  const usenavigate = useNavigate();
+
+  useEffect(()=>{
     let token = sessionStorage.getItem('JwtToken');
-    if (!(token === '' || token === null)) {
-      navigate('/dashboard');
+    if(!(token===''||token===null)){
+        usenavigate('/dashboard');
     }
-  }, [navigate]);
+  },[usenavigate]);
 
   return (
     <div>

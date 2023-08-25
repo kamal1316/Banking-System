@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: red;
+    background-color: #ffae00;
     color: rgb(19, 15, 15);
     padding: 40px 40px;
     font-size: 15px;
@@ -20,21 +20,25 @@
     color: rgb(24, 21, 21);
     font-weight: bold;
     margin-right: 15px;
+    text-decoration: none;
     transition: color 0.3s;
   }
   
   .nav-link:hover {
     color: #f8f9fa !important;
+    text-decoration: none;
   }
   
   /* Styling for the dropdown menu */
   .navbar-nav .nav-item.dropdown:hover .nav-link {
     color: #f8f9fa !important;
+    text-decoration: none;
   }
   
   /* Styling for the dropdown items */
   .dropdown-item {
     font-weight: bold;
+    text-decoration: none;
   }
   
   /* Styling for the logout link */

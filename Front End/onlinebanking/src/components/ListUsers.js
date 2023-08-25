@@ -1,17 +1,18 @@
 import Table from 'react-bootstrap/Table';
-
+import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
+import Footer from './footer'; 
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function ListUsers() {
 
-const usenavigate = useNavigate();
+    const [users, setUsers] = useState([]);
 
-  const [users, setUsers] = useState([]);
+    const usenavigate = useNavigate();
 
   
   const [query, setQuery] = useState("");
@@ -88,9 +89,9 @@ const usenavigate = useNavigate();
           
       }
 
-  return (
-    <>
-    <AdminNavbar/>
+    return (
+        <>
+            <AdminNavbar />
 
     <div className="input-box m-3">
 
@@ -115,16 +116,16 @@ const usenavigate = useNavigate();
             <Table Registered Users className='m-3'>
                 <thead>
                     <tr>
-                        <th>  
+                        <th>
                             User ID
-                          </th>
-                          <th>  
+                        </th>
+                        <th>
                             Account Number
-                          </th>
-                          <th>  
+                        </th>
+                        <th>
                             Status
-                          </th>
-                        
+                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -136,13 +137,14 @@ const usenavigate = useNavigate();
                                 </td>
                                 <td>{user.accountNumber}</td>
                                 <td> <Button onClick={(e) => handleActiveStatus(e, user.userId)} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
-                            
+
                         </tr>
                     ))}
                 </tbody>
-                </Table>
-            </>
-  );
+            </Table>
+            <Footer/> 
+        </>
+    );
 }
 
 export default ListUsers;
