@@ -21,12 +21,12 @@ const AdminDashboard = () => {
       <AdminNavbar/>
       <div className="admin-container">
         <h1 className="admin-heading">Welcome Back Admin</h1>
-        <button className="home-button">
+        {/* <button className="home-button">
           <Link to="/admin/listUsers">All Users</Link>
         </button>
         <button className="admin-button">
           <Link to="/admin/accountRequests">Account Requests</Link>
-        </button>
+        </button> */}
         
       </div>
       <Footer> </Footer>

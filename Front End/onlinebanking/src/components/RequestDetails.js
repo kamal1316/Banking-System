@@ -123,11 +123,11 @@ function RequestDetails() {
       </div>
 
       <div className='requestDetails'>
-        <Button variant="primary" onClick={handleApprove} >
+        <Button className='m-3' variant="primary" onClick={handleApprove} >
           Approve
         </Button>
 
-        <Button variant="danger" onClick={handleReject}>
+        <Button className='m-3' variant="danger" onClick={handleReject}>
           Reject
         </Button>
       </div>

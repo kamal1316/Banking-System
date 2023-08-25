@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
 import Footer from './footer'; 
-// import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function ListUsers() {
@@ -104,6 +103,7 @@ function ListUsers() {
           id="search-form"
 
           className="search-input"
+          style ={{padding: '10px', margin: '10px',width: '300px', height: '50px'}}
 
           onChange={(e) => setQuery(e.target.value)}
 
@@ -112,8 +112,8 @@ function ListUsers() {
         />
 
       </div>
-
-            <Table Registered Users className='m-3'>
+          <h2 className='text-center p-3'>Registered Users</h2>
+            <Table  className='m-3'>
                 <thead>
                     <tr>
                         <th>
