@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
+import { Button} from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
 
 function AccountRequests() {
 
@@ -35,35 +37,46 @@ function AccountRequests() {
     }, []);
 
 
+
     return (
         <>
-        <AdminNavbar/>
-        <div className='m-3'>
-            <h2>Pending Requests</h2>
-            <table className="req-table">
-                <thead>
-                    <tr>
-                        <th>
-                            
-                            Request Id
-                            </th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    {requests.map((req) => (
-                        <tr key={req.id}>
-                            <td>
-                                {/* <Link to={{pathname: "/admin/accountRequests/details", state:"hello" }} >#{req.id}</Link> */}
-                                <Link to = {`/admin/accountRequests/details?data=${encodeURIComponent(JSON.stringify(req))}`}>#{req.id}</Link>
-                                
-                                </td>
-                            
+            <AdminNavbar />
+            <div className='m-5'>
+                <h2 className='text-center p-3'>Pending Request</h2>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>#Req Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th></th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {requests.map((req) => (
+                            <tr key={req.id}>
+                                <td>
+                                    {/* <Link to={{pathname: "/admin/accountRequests/details", state:"hello" }} >#{req.id}</Link> */}
+                                    {/* <Link to={`/admin/accountRequests/details?data=${encodeURIComponent(JSON.stringify(req))}`}>#{req.id}</Link> */}
+                                    {req.id}
+                                </td>
+                                <td>{req.name}</td>
+                                <td>{req.email}</td>
+                                <td>
+                                    <Button>
+                                         <Link className='btn btn-sm' to={`/admin/accountRequests/details?data=${encodeURIComponent(JSON.stringify(req))}`}>More Details</Link>
+                                    </Button>
+                                </td>
+
+                            </tr>
+                        ))}
+                        
+        
+
+                    </tbody>
+                </Table>
             </div>
+            
         </>
 
 
