@@ -4,6 +4,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import static org.mockito.ArgumentMatchers.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wellsfargo.onlinebanking.entity.User;
+import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
 import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
 import com.wellsfargo.onlinebanking.service.UserService;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -60,6 +62,9 @@ public class UserControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();	
 		}
+		
+		when(userService.getUserByUserId("1001")).thenReturn(newUser);
+		when(userService.getUserByUserId("1002")).thenReturn(null);
 	}
 	
 	@Test
@@ -68,18 +73,14 @@ public class UserControllerTest {
 		User newUser = new User("1001", "10001", "qwerty", true);
 		
 		try {
-			mockMvc.perform(post("/createUser")
+			mockMvc.perform(post("/users/createUser")
 			        .content(om.writeValueAsString(newUser))
-			        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON)
-					.header("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MDAxIiwiZXhwIjoxNjkyOTAyMTYwLCJpYXQiOjE2OTI3MjIxNjB9.m01HB7VATv-3dkAMQYNPlFw-SrBGeJz0auT8tHq2Akk"))
-			        /*.andDo(print())*/
-			        .andExpect(status().isCreated())
+			        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+			        .andExpect(status().isOk())
 			        .andExpect(jsonPath("$.userId", is("1001")))
 			        .andExpect(jsonPath("$.accountNumber", is("10001")))
+			        .andExpect(jsonPath("$.activeStatus", is(true)))
 			        .andExpect(jsonPath("$.password", is("qwerty")));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,6 +92,48 @@ public class UserControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testGetUserByUserId() {
+				
+		try {
+			mockMvc.perform(get("/users/1001")
+			        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+//			        .header(HttpHeaders.AUTHORIZATION, "User eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MDA1IiwiZXhwIjoxNjkzMTE1MTQwLCJpYXQiOjE2OTI5MzUxNDB9.TxMi0t5foyeGGDv9-SIN1Yq47SsJBvavfDTosBqlCq0"))
+			        .andExpect(status().isOk())
+			        .andExpect(jsonPath("$.userId", is("1001")))
+			        .andExpect(jsonPath("$.accountNumber", is("10001")))
+			        .andExpect(jsonPath("$.activeStatus", is(true)))
+			        .andExpect(jsonPath("$.password", is("qwerty")));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+       
+		verify(userService, times(1)).getUserByUserId("1001");
+
+	}
+	
+	@Test
+	public void testGetUserByUserId_notFound() {
+				
+		try {
+			mockMvc.perform(get("/users/1002")
+			        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+//			        .header(HttpHeaders.AUTHORIZATION, "User eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MDA1IiwiZXhwIjoxNjkzMTE1MTQwLCJpYXQiOjE2OTI5MzUxNDB9.TxMi0t5foyeGGDv9-SIN1Yq47SsJBvavfDTosBqlCq0"))
+			        .andExpect(status().isNotFound());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+		}
+		
+
+       
+		verify(userService, times(1)).getUserByUserId("1002");
+
 	}
 	
 }
