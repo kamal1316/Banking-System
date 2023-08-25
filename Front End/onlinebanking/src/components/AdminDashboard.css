@@ -1,9 +1,6 @@
-/* Styling for the centered heading */
-   body {
-     overflow-x: hidden;
-   }
-   .home-container {
+.admin-container {
     display: flex;
+    overflow: hidden !important;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start; /* Change to flex-start for top alignment */
@@ -15,7 +12,7 @@
     color: white;
     padding-top: 80px; /* Add padding to shift content down */
   }
-  .home-heading {
+.admin-heading {
     display: flex;
     flex-direction: column;
     font-size: 70px;
@@ -26,9 +23,9 @@
     margin-bottom: 50px;
     color: white;
   }
-  
-  /* Styling for the buttons */
-  .home-button {
+
+   /* Styling for the buttons */
+   .admin-button {
     border-radius: 30px;
     background-color: white;
     color: black;
@@ -41,13 +38,13 @@
     transition: background-color 0.3s;
   }
   
-  .home-button:hover {
+  .admin-button:hover {
     background-color: #0056b3;
     color: white !important;
   }
   
   /* Styling for the link within the button */
-  .home-button a {
+  .admin-button a {
     text-decoration: none;
     color: rgb(223, 8, 8);
     font-weight: bold;

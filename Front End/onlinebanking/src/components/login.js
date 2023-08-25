@@ -66,9 +66,9 @@ const Login = () => {
 
   return (
     <> 
-    <Navbar > </Navbar>
+   <Navbar />
     <div className="login-container">
-        <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
+        <div className="offset-lg-3 col-lg-6" >
             <form onSubmit={ProceedLogin} className="container">
                 <div className="card">
                     <div className="card-header">

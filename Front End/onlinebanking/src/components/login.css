@@ -1,11 +1,15 @@
 /* Container for the login page */
+body {
+     overflow: hidden ;
+  }
 .login-container {
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: left; 
     justify-content: center;
-    height: 100vh;
-    background-image: url('https://c1.wallpaperflare.com/preview/151/776/839/wells-fargo-stagecoach-western-west.jpg'); 
+    padding: 20px 20px;
+    height: 85vh;
+    background-image:url('https://th.bing.com/th/id/OIP.qvL4tHrDO_Wh2F2hipSt_gAAAA?pid=ImgDet&rs=1.yimg.com/uu/api/res/1.2/U3dbtNCkqPjp3Z9ksEVteQ--~B/aD0xOTk3O3c9MzAwMDtzbT0xO2FwcGlkPXl0YWNoeW9u/https://media-mbst-pub-ue1.s3.amazonaws.com/creatr-images/2020-02/1cd93d50-4ece-11ea-bfb5-fe3091f6d2b2');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -14,7 +18,7 @@
   /* Styling for the card */
   .card{
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }

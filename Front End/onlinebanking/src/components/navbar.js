@@ -4,17 +4,17 @@ import './navbar.css';
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <Link to="/" className="navbar-brand">
+    <nav className="navbar" >
+      <Link to="/" className="navbar-brand" >
         Wells Fargo Banking App
       </Link>
       <Link to="/" className="navbar-brand">
-        email : admin@wellsfargo.com
+        Email : admin@wellsfargo.com
       </Link>
       <Link to="/" className="navbar-brand">
         Contact : 1800696969
       </Link>
-      <ul className="navbar-links">
+      {/* <ul className="navbar-links">
         <li>
           <Link to="/login" className="navbar-link">
             Login
@@ -25,8 +25,7 @@ const Navbar = () => {
             Open a new account
           </Link>
         </li>
-        {/* Add more navigation links as needed */}
-      </ul>
+      </ul> */}
     </nav>
   );
 };

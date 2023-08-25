@@ -66,7 +66,7 @@ const AdminLogin = () => {
     <> 
     <Navbar > </Navbar>
     <div className="login-container">
-        <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
+        <div className="offset-lg-3 col-lg-6" style={{ marginTop: '10px' }}>
             <form onSubmit={ProceedAdminLogin} className="container">
                 <div className="card">
                     <div className="card-header">

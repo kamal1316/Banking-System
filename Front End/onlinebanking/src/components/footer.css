@@ -1,8 +1,12 @@
 /* Styling for the footer */
-.footer {
-    background-color: red; /* Change background color to red */
-    color: rgb(20, 18, 18);
+footer {
+    background-color: #ffae00; /* Change background color to red */
+    color:black;
     text-align: center;
     padding: 20px; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   }
+  
   

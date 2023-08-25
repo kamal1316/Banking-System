@@ -16,26 +16,19 @@ function AdminNavbar() {
   }
 
   return (
-
-
     <>
-      <Navbar bg="danger" data-bs-theme="dark">
+      <Navbar  bg="ffae00" data-bs-theme="dark" >
         <Container>
-          <Navbar.Brand href="#home">Admin</Navbar.Brand>
-          <Nav className="me-auto">
+          <Navbar.Brand href="/adminDashboard">Admin</Navbar.Brand>
+          <Nav className="mr-auto">
             {/* <Link to="/home">Home</Link> */}
-            <Link className='btn' to="/admin/accountRequests">Account Requests</Link>
-            <Link className='btn' to="/admin/listUsers">All Users</Link>
+            {/* <Link className='btn' style ={{padding: '10px', margin: '10px'}} to="/admin/accountRequests">Account Requests</Link>
+            <Link className='btn' style ={{padding: '10px', margin: '10px'}} to="/admin/listUsers">All Users</Link> */}
             <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search User"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="primary">Search</Button>
+              <Form.Control type="search" placeholder="Search User" style ={{padding: '10px', margin: '10px',width: '300px', height: '50px'}} aria-label="Search" />
+              <Button className='btn' style ={{padding: '10px',margin: '10px' ,width: '80px', height: '50px'} } >Search</Button>
             </Form>
-            <Button className='btn' onClick={handleLogout}> Logout </Button>
+            <Button className='btn' style ={{margin: '10px', height: '50px'} }onClick={handleLogout}> Logout </Button>
           </Nav>
         </Container>
       </Navbar>

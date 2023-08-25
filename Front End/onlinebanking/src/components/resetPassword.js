@@ -3,6 +3,8 @@ import {Button,Form} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
+import Navbar from './navbar'; 
+import Footer from './footer';
 
 const ResetPassword = () => {
   const [email,setEmail] = useState('');
@@ -38,7 +40,10 @@ const ResetPassword = () => {
   
 
 return(
-<div className="row">
+    <>
+    
+<div className="row" style={{"overflow": "hidden"}}>
+<Navbar />
         <div className="offset-lg-3 col-lg-6" style={{ marginTop: '100px' }}>
             <form className="container" onSubmit={handleSendResetLink}>
                 <div className="card">
@@ -61,7 +66,10 @@ return(
                 </div>
             </form>
         </div>
+        <Footer/> 
     </div>
+    
+        </>
 );
 }
 
