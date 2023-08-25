@@ -24,7 +24,7 @@ public class Transaction {
 	@Min(value = 1)
 	private int amount;
 	
-	@Pattern(regexp = "^(ntfs|rtgs|imps)$")
+	@Pattern(regexp = "^(ntfs|rtgs|imps|withdraw)$")
 	private String mode;
 	
 	private String timestamp;
