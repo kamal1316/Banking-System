@@ -30,6 +30,10 @@ const DashboardNavbar = () => {
               <NavDropdown.Item >
                 <Link to ={"/payment"} >Quick Transfer</Link>
               </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item >
+                <Link to ={"/withdraw"} >Withdraw Money</Link>
+              </NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="/changepassword">Change Password</Nav.Link>

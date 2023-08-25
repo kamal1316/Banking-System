@@ -6,6 +6,7 @@ import AdminLogin from './components/adminLogin';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
 import Payment from './components/payment';
+import Withdraw from './components/withdraw';
 import Transactions from './components/transactions';
 import PersonalDetails from './components/personalDetails';
 import Success from './components/success';
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/openAccount"  element={<Signup/>}></Route> 
           <Route path="/dashboard"  element={<Dashboard/>}></Route> 
           <Route path="/payment"  element={<Payment/>}></Route> 
+          <Route path="/withdraw"  element={<Withdraw/>}></Route> 
           <Route path="/changePassword" element={<ChangePassword/>}></Route>
           <Route path="/transactions"  element={<Transactions/>}></Route> 
           <Route path="/personalDetails"  element={<PersonalDetails/>}></Route>
