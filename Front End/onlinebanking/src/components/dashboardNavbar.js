@@ -18,21 +18,19 @@ const DashboardNavbar = () => {
   return (
     <Navbar expand="lg" className="navbar-body">
       <Container>
-        <Navbar.Brand href="/" onClick={handleLogout}>Wells Fargo Banking App</Navbar.Brand>
+        <Navbar.Brand to="/">Wells Fargo Banking App</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             
             <NavDropdown title="Fund Transfer" id="basic-nav-dropdown">
-              <NavDropdown.Item >To Beneficiary</NavDropdown.Item>
-              <NavDropdown.Divider />
               <NavDropdown.Item >
-                <Link to ={"/payment"} >Quick Transfer</Link>
+                <Link className='btn' to ={"/payment"} >Quick Transfer</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item >
-                <Link to ={"/withdraw"} >Withdraw Money</Link>
+                <Link className='btn' to ={"/withdraw"} >Withdraw Money</Link>
               </NavDropdown.Item>
             </NavDropdown>
 
