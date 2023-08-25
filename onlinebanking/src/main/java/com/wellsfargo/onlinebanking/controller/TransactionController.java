@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.onlinebanking.entity.Account;
 import com.wellsfargo.onlinebanking.entity.Transaction;
+import com.wellsfargo.onlinebanking.entity.Withdraw;
 import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
 import com.wellsfargo.onlinebanking.service.AccountService;
 import com.wellsfargo.onlinebanking.service.TransactionService;
@@ -67,5 +68,32 @@ public class TransactionController {
 		transService.createTransaction(transaction);
 		
 		return ResponseEntity.ok("Successfully transfered");
+	}
+	
+	@PostMapping("/executeWithdraw")
+	public ResponseEntity<String> executeWithdraw(@Validated @RequestBody Withdraw withdraw)  {
+            
+		Account accountHolder = accountService.getAccountByUserId(withdraw.getUserId());
+	
+		
+		if(accountHolder.getBalance() < withdraw.getAmount()) {
+			throw new Error("Insufficient Balance!!");
+		}
+
+		accountHolder.setBalance(accountHolder.getBalance()-withdraw.getAmount());
+		
+		accountService.updateAccount(accountHolder);
+		
+		Transaction transaction = new Transaction();
+		transaction.setAmount(withdraw.getAmount());
+		transaction.setFromAccount(accountHolder.getAccountNumber());
+		transaction.setToAccount(accountHolder.getAccountNumber());
+		transaction.setMode("withdraw");
+		transaction.setTimestamp(withdraw.getTimestamp());
+		transaction.setRemark("");
+	
+		transService.createTransaction(transaction); 
+		
+		return ResponseEntity.ok("Successfully Withdrawn");
 	}
 }
