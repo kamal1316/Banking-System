@@ -53,12 +53,12 @@ function Transactions() {
           </tr>
         </thead>
         <tbody>
-          {transactionData.map((transaction) => (
+          {transactionData.map(transaction => (
 
 
-            <tr key={transaction.refId} className={transaction.mode === 'withdraw' ? 'withdraw-row' :
-            transaction.toAccount === sessionStorage.getItem('accountNumber') ? 'credit-row' : 
-            transaction.toAccount !== sessionStorage.getItem('accountNumber') ? 'debit-row' : ''}>
+            <tr key={transaction.refId} style={transaction.mode === 'withdraw' ?  {backgroundColor:'#87CEEBAA'}:
+            transaction.toAccount === sessionStorage.getItem('accountNumber') ?  {backgroundColor:'#FF0000AA'} : 
+            {backgroundColor:'#00FF00AA'}}>
 
               
               <td>{transaction.refId}</td>
