@@ -57,8 +57,8 @@ function Transactions() {
 
 
             <tr key={transaction.refId} style={transaction.mode === 'withdraw' ?  {backgroundColor:'#87CEEBAA'}:
-            transaction.toAccount === sessionStorage.getItem('accountNumber') ?  {backgroundColor:'#FF0000AA'} : 
-            {backgroundColor:'#00FF00AA'}}>
+            transaction.toAccount === sessionStorage.getItem('accountNumber') ?  {backgroundColor:'#00FF00AA'} : 
+            {backgroundColor:'#FF0000AA'}}>
 
               
               <td>{transaction.refId}</td>
