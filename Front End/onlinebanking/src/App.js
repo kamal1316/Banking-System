@@ -21,6 +21,7 @@ import AdminDashboard from './components/AdminDashboard';
 import RequestDetails from './components/RequestDetails';
 import AccountRequests from './components/AccountRequests';
 import ListUsers from './components/ListUsers';
+import AdminTransactions from './components/adminTransactions';
 
 const App = () => {
 
@@ -49,6 +50,7 @@ const App = () => {
           <Route path='/admin/listUsers' element = {<ListUsers/>}></Route>
           <Route path="/verifyStep" element ={<VerifyStep/>}></Route>
           <Route path="/resetStep" element ={<ResetStep/>}></Route>
+          <Route path = "/userTransaction" element = {<AdminTransactions/>}></Route>
         </Routes>
       </div>
     </BrowserRouter></>

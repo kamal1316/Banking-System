@@ -25,23 +25,23 @@ const DashboardNavbar = () => {
           <Nav className="me-auto">
             
             <NavDropdown title="Fund Transfer" id="basic-nav-dropdown">
-              <NavDropdown.Item >To Beneficiary</NavDropdown.Item>
-              <NavDropdown.Divider />
+              
               <NavDropdown.Item >
-                <Link to ={"/payment"} >Quick Transfer</Link>
+                <Link className='btn btn-sm' to = {"/payment"} >Quick Transfer</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item >
-                <Link to ={"/withdraw"} >Withdraw Money</Link>
+                <Link className='btn btn-sm' to ={"/withdraw"} >Withdraw Money</Link>
               </NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link href="/resetPassword">Change Password</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
 
-            <Nav.Link href="/login" onClick={handleLogout}>Logout</Nav.Link>
+            
 
           </Nav>
+          <Nav.Link className='float-right' to ={"/login"} onClick={handleLogout}>Logout</Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>

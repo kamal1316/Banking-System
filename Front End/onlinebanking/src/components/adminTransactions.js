@@ -3,21 +3,24 @@ import './transactions.css';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
-import DashboardNavbar from './dashboardNavbar';
 import Footer from './footer';
+import { useLocation } from 'react-router-dom/dist';
+import AdminNavbar from './AdminNavbar';
 
-
-function Transactions() {
-
+function AdminTransactions() {
+    const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const accountNumber = JSON.parse(decodeURIComponent(queryParams.get('data')));
+  console.log(accountNumber);
   const [transactionData, setTransactionData] = useState([]);
 
   useEffect(() => {
     let token = sessionStorage.getItem('JwtToken');
 
-    fetch(" http://localhost:8080/transaction/" + sessionStorage.getItem('accountNumber') + "/transactions", {
+    fetch(" http://localhost:8080/transaction/" + accountNumber + "/transactions", {
       method: "GET",
       headers: {
-        "Authorization": `User ${token}`,
+        "Authorization": `Admin ${token}`,
         "Content-Type": "application/json"
       }
     }).then((res) => {
@@ -39,7 +42,7 @@ function Transactions() {
 
   return (
     <>
-    <DashboardNavbar/>
+    <AdminNavbar/>
     <div style={{ padding: "30px" }}>
       <h2>Transaction History</h2>
       <table className="transaction-table">
@@ -59,14 +62,14 @@ function Transactions() {
               <td>{transaction.refId}</td>
               <td>{transaction.mode}</td>
 
-             { ((transaction.mode) == ("withdraw") ?
+             { ((transaction.mode) === ("withdraw") ?
 
                 (<><td>{transaction.fromAccount}</td><td>- ₹{transaction.amount}</td></>)
 
                 :
 
                 (<>
-                  {transaction.toAccount === sessionStorage.getItem('accountNumber') ?
+                  {transaction.toAccount === accountNumber ?
                     (<><td>{transaction.fromAccount}</td><td>₹{transaction.amount}</td></>) :
                     (<><td>{transaction.toAccount}</td><td> - ₹{transaction.amount}</td></>)}
                 </>)
@@ -81,8 +84,8 @@ function Transactions() {
       </table>
 
       <div style={{ padding: "10px" }}>
-        <Button variant="primary" >
-          <Link to="/dashboard" className="btn btn-default">Back To Dashboard</Link>
+        <Button className='btn-sm' variant="primary" >
+          <Link to="/admin/listUsers" className="btn btn-default">Back</Link>
         </Button>
       </div>
     </div>
@@ -92,4 +95,4 @@ function Transactions() {
 }
 
 
-export default Transactions;
+export default AdminTransactions;
