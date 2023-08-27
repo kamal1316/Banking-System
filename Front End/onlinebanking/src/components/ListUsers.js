@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
 import Footer from './footer'; 
 import { useNavigate } from 'react-router-dom';
+import AdminTransactions from './adminTransactions';
 
 function ListUsers() {
 
@@ -88,6 +89,7 @@ function ListUsers() {
           
       }
 
+
     return (
         <>
             <AdminNavbar />
@@ -125,6 +127,7 @@ function ListUsers() {
                         <th>
                             Status
                         </th>
+                        <th></th>
 
                     </tr>
                 </thead>
@@ -137,6 +140,7 @@ function ListUsers() {
                                 </td>
                                 <td>{user.accountNumber}</td>
                                 <td> <Button onClick={(e) => handleActiveStatus(e, user.userId)} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
+                                <td> <Button> <Link className='btn btn-sm' to={`/userTransaction?data=${encodeURIComponent(JSON.stringify(user.accountNumber))}`}>Show All Transactions</Link></Button></td>
 
                                 
                         </tr>

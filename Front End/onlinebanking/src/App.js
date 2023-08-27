@@ -6,7 +6,6 @@ import AdminLogin from './components/adminLogin';
 import Signup from './components/signup';
 import Dashboard from './components/dashboard';
 import Payment from './components/payment';
-import Withdraw from './components/withdraw';
 import Transactions from './components/transactions';
 import PersonalDetails from './components/personalDetails';
 import Success from './components/success';
@@ -21,6 +20,7 @@ import AdminDashboard from './components/AdminDashboard';
 import RequestDetails from './components/RequestDetails';
 import AccountRequests from './components/AccountRequests';
 import ListUsers from './components/ListUsers';
+import AdminTransactions from './components/adminTransactions';
 
 const App = () => {
 
@@ -36,7 +36,6 @@ const App = () => {
           <Route path="/openAccount"  element={<Signup/>}></Route> 
           <Route path="/dashboard"  element={<Dashboard/>}></Route> 
           <Route path="/payment"  element={<Payment/>}></Route> 
-          <Route path="/withdraw"  element={<Withdraw/>}></Route> 
           <Route path="/changePassword" element={<ChangePassword/>}></Route>
           <Route path="/transactions"  element={<Transactions/>}></Route> 
           <Route path="/personalDetails"  element={<PersonalDetails/>}></Route>
@@ -49,6 +48,7 @@ const App = () => {
           <Route path='/admin/listUsers' element = {<ListUsers/>}></Route>
           <Route path="/verifyStep" element ={<VerifyStep/>}></Route>
           <Route path="/resetStep" element ={<ResetStep/>}></Route>
+          <Route path = "/userTransaction" element = {<AdminTransactions/>}></Route>
         </Routes>
       </div>
     </BrowserRouter></>
