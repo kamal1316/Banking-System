@@ -24,9 +24,14 @@ public class BaseSeq {
 
 	public BaseSeq() {
 		super();
-		this.accountNumber = 10001;
-		this.userId = 4001;
-		// TODO Auto-generated constructor stub
+	}
+
+	
+
+	public BaseSeq(int accountNumber, int userId) {
+		super();
+		this.accountNumber = accountNumber;
+		this.userId = userId;
 	}
 
 
