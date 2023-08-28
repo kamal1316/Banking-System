@@ -5,6 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link, useNavigate } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const DashboardNavbar = () => {
 
@@ -31,18 +32,21 @@ const DashboardNavbar = () => {
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item >
+                
                 <Link className='btn btn-sm' to ={"/withdraw"} >Withdraw Money</Link>
 
               </NavDropdown.Item>
             </NavDropdown>
-
-            <Nav.Link href="/resetPassword">Change Password</Nav.Link>
+            <LinkContainer to="/resetPassword">
+            <Nav.Link >Change Password</Nav.Link>
+            </LinkContainer>
+            
             <Nav.Link href="/contact">Contact Us</Nav.Link>
 
             
 
           </Nav>
-          <Nav.Link className='float-right' to ={"/login"} onClick={handleLogout}>Logout</Nav.Link>
+          <Nav.Link className='float-right text-danger' to ={"/login"} onClick={handleLogout}>Logout</Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
