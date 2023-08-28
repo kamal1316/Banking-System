@@ -6,13 +6,27 @@ import { toast } from "react-toastify";
 import Footer from './footer';
 import { useLocation } from 'react-router-dom/dist';
 import AdminNavbar from './AdminNavbar';
-
+import ReactPaginate from 'react-paginate';
 function AdminTransactions() {
-    const location = useLocation();
+  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const accountNumber = JSON.parse(decodeURIComponent(queryParams.get('data')));
   console.log(accountNumber);
   const [transactionData, setTransactionData] = useState([]);
+
+  const itemsPerPage =5;
+
+  const pageCount=Math.ceil(transactionData.length/itemsPerPage);
+
+  const [currentPage, setCurrentPage]=useState(0);
+
+  const offset =currentPage * itemsPerPage;
+  
+  const currentTransactions=transactionData.slice(offset,offset + itemsPerPage);
+
+  const handlePageChange =({selected}) => {
+    setCurrentPage(selected);
+  }
 
   useEffect(() => {
     let token = sessionStorage.getItem('JwtToken');
@@ -57,8 +71,10 @@ function AdminTransactions() {
           </tr>
         </thead>
         <tbody>
-          {transactionData.map((transaction) => (
-            <tr key={transaction.refId} >
+          {currentTransactions.map((transaction) => (
+            <tr key={transaction.refId}  style={transaction.mode === 'withdraw' ?  {backgroundColor:'#87CEEBAA'}:
+            transaction.toAccount === accountNumber ?  {backgroundColor:'#00FF00AA'} : 
+            {backgroundColor:'#FF0000AA'}}>
               <td>{transaction.refId}</td>
               <td>{transaction.mode}</td>
 
@@ -82,6 +98,17 @@ function AdminTransactions() {
           ))}
         </tbody>
       </table>
+
+      <ReactPaginate
+      
+      pageCount={pageCount}
+      onPageChange={handlePageChange}
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+      pageLinkClassName={'page-link'}
+      disableInitialCallback={true}
+      />
 
       <div style={{ padding: "10px" }}>
         <Button className='btn-sm' variant="primary" >
