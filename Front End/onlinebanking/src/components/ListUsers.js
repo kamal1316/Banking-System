@@ -115,39 +115,45 @@ function ListUsers() {
         />
 
       </div>
-      <h2 className='text-center p-3'>Registered Users</h2>
-      <Table className='m-3'>
-        <thead>
-          <tr>
-            <th>
-              User ID
-            </th>
-            <th>
-              Account Number
-            </th>
-            <th>
-              Status
-            </th>
 
-          </tr>
-        </thead>
-        <tbody>
-          {search(users).map((user) => (
+          <h2 className='text-center p-3'>Registered Users</h2>
+            <Table  className='m-3'>
+                <thead>
+                    <tr>
+                        <th>
+                            User ID
+                        </th>
+                        <th>
+                            Account Number
+                        </th>
+                        <th>
+                            Active Status
+                        </th>
+                        <th>
+                          
+                        </th>
 
-            <tr key={user.userId}>
-              <td>
-                {user.userId}
-              </td>
-              <td>{user.accountNumber}</td>
-              <td> <Button onClick={(e) => handleActiveStatus(e, user.userId)} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
-              
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-      <Footer />
-    </>
-  );
+                    </tr>
+                </thead>
+                <tbody>
+                    {search(users).map((user) => (
+                      
+                        <tr key={user.userId}>
+                            <td>
+                                {user.userId}
+                                </td>
+                                <td>{user.accountNumber}</td>
+                                <td> <Button onClick={(e) => handleActiveStatus(e, user.userId)} >{user.activeStatus ? "Active" : "Inactive"}</Button> </td>
+                                <td> <Button> <Link className='btn btn-sm' to={`/userTransaction?data=${encodeURIComponent(JSON.stringify(user.accountNumber))}`}>Show All Transactions</Link></Button></td>
+
+                                
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+            <Footer/> 
+        </>
+    );
 }
 
 export default ListUsers;
