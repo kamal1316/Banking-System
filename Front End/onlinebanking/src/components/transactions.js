@@ -5,11 +5,25 @@ import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 import DashboardNavbar from './dashboardNavbar';
 import Footer from './footer';
+import ReactPaginate from 'react-paginate';
 
-function Transactions() {
+function Transactions({transactions}) {
 
   const [transactionData, setTransactionData] = useState([]);
 
+  const itemsPerPage =5;
+
+  const pageCount=Math.ceil(transactionData.length/itemsPerPage);
+
+  const [currentPage, setCurrentPage]=useState(0);
+
+  const offset =currentPage * itemsPerPage;
+  
+  const currentTransactions=transactionData.slice(offset,offset + itemsPerPage);
+
+  const handlePageChange =({selected}) => {
+    setCurrentPage(selected);
+  }
   useEffect(() => {
     let token = sessionStorage.getItem('JwtToken');
 
@@ -53,12 +67,12 @@ function Transactions() {
           </tr>
         </thead>
         <tbody>
-          {transactionData.map((transaction) => (
+          {currentTransactions.map(transaction => (
 
 
-            <tr key={transaction.refId} className={transaction.mode === 'withdraw' ? 'withdraw-row' :
-            transaction.toAccount === sessionStorage.getItem('accountNumber') ? 'credit-row' : 
-            transaction.toAccount !== sessionStorage.getItem('accountNumber') ? 'debit-row' : ''}>
+            <tr key={transaction.refId} style={transaction.mode === 'withdraw' ?  {backgroundColor:'#87CEEBAA'}:
+            transaction.toAccount === sessionStorage.getItem('accountNumber') ?  {backgroundColor:'#00FF00AA'} : 
+            {backgroundColor:'#FF0000AA'}}>
 
               
               <td>{transaction.refId}</td>
@@ -84,6 +98,16 @@ function Transactions() {
           ))}
         </tbody>
       </table>
+      <ReactPaginate
+      
+      pageCount={pageCount}
+      onPageChange={handlePageChange}
+      containerClassName={'pagination'}
+      subContainerClassName={'pages pagination'}
+      activeClassName={'active'}
+      pageLinkClassName={'page-link'}
+      disableInitialCallback={true}
+      />
 
       <div style={{ padding: "10px" }}>
         <Button variant="primary" >

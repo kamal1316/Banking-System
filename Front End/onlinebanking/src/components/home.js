@@ -22,7 +22,7 @@ const Home = () => {
         <h1 className="home-heading">Welcome to our Banking App</h1>
         <button className="home-button">
           <Link to="/login">Login</Link>
-        </button>
+        </button> 
         <button className="home-button">
           <Link to="/openAccount">New User? Apply for an account</Link>
         </button>

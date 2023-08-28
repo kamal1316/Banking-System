@@ -29,13 +29,27 @@
     background-color: #f2f2f2;
   }
   
-  /* background colour for rows of transaction details */
-  .credit-row{
-    background-color:rgb(139, 209, 139);
-  }
-  .debit-row{
-    background-color:rgb(219, 120, 120);
-  }
-  .withdraw-row{
-    background-color:rgb(70, 165, 160)
-  }
+ .pagination {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 20px;
+ }
+
+ .page-link {
+  margin:  0 5px;
+cursor: pointer;
+text-decoration: none;
+color: #119ed6;
+padding: 5px 8px;
+border: px solid #ccc;
+border-radius: 3px;
+ }
+ .page-link.active{
+  background-color: #007bff;
+  color:white;
+  border:1px solid #007bff;
+ }
+ .pagination .previous, .pagination .next{
+  display: none;
+ }
