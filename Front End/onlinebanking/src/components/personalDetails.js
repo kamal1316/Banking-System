@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import {Link } from 'react-router-dom';
 import { toast } from "react-toastify";
+import Footer from './footer';
+import DashboardNavbar from './dashboardNavbar';
 
 function PersonalDetails() {
 
@@ -32,6 +34,8 @@ function PersonalDetails() {
   }, []);
 
   return (
+    <>
+    <DashboardNavbar/>
     <div className="personal-details-container">
       <h2>Personal Details</h2>
       <div className="details">
@@ -86,6 +90,8 @@ function PersonalDetails() {
       </div>
       
     </div>
+    <Footer/>
+    </>
   );
 }
 

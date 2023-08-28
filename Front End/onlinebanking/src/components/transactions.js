@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import DashboardNavbar from './dashboardNavbar';
 import Footer from './footer';
 
-
 function Transactions() {
 
   const [transactionData, setTransactionData] = useState([]);
@@ -55,11 +54,17 @@ function Transactions() {
         </thead>
         <tbody>
           {transactionData.map((transaction) => (
-            <tr key={transaction.refId} >
+
+
+            <tr key={transaction.refId} className={transaction.mode === 'withdraw' ? 'withdraw-row' :
+            transaction.toAccount === sessionStorage.getItem('accountNumber') ? 'credit-row' : 
+            transaction.toAccount !== sessionStorage.getItem('accountNumber') ? 'debit-row' : ''}>
+
+              
               <td>{transaction.refId}</td>
               <td>{transaction.mode}</td>
 
-             { ((transaction.mode) == ("withdraw") ?
+             { ((transaction.mode) === ("withdraw") ?
 
                 (<><td>{transaction.fromAccount}</td><td>- ₹{transaction.amount}</td></>)
 
