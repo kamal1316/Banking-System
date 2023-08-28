@@ -26,9 +26,6 @@ public class AdminService {
 	@Autowired
 	RequestRepository requestRepo;
 	
-	private int baseAccountNumber = 10000;
-	private int baseUserId = 4000;
-	
 	@Autowired
 	UserService userService;
 	
@@ -87,17 +84,11 @@ public class AdminService {
 	}
 	
 	public Person openAccount( Person newPerson) throws UserAlreadyExistsException {
-//		int accountNumber = ++baseAccountNumber;
-//		int userId = ++baseUserId;
 		
 		BaseSeq baseSeq = baseSeqRepo.findAll().get(0);
 		
 		int accountNumber = baseSeq.getAccountNumber()+1;
 		int userId = baseSeq.getUserId()+1;
-		
-		baseSeq.setAccountNumber(accountNumber);
-		baseSeq.setUserId(userId);
-		baseSeqRepo.save(baseSeq);
 		
 		String password = generatePassword();
 		
@@ -112,7 +103,6 @@ public class AdminService {
 			userService.createUser(user);
 		}
 		catch(UserAlreadyExistsException ex) {			
-			System.out.println("Exception in user");
 			throw new UserAlreadyExistsException(ex.getMessage());
 		}
 		
@@ -120,17 +110,22 @@ public class AdminService {
 			personalDetailsService.createPersonalDetails(personalDetails);
 		}
 		catch(UserAlreadyExistsException ex) {
-			System.out.println("Exception in personaldetails");
+			userService.deleteUser(user);
 			throw new UserAlreadyExistsException(ex.getMessage());
 		}
 		
 		try {
 			accountService.createAccount(account);
 		}
-		catch(UserAlreadyExistsException ex) {	
-			System.out.println("Exception in account");
+		catch(UserAlreadyExistsException ex) {
+			userService.deleteUser(user);
+			personalDetailsService.deletePersonalDetails(personalDetails);
 			throw new UserAlreadyExistsException(ex.getMessage());
 		}
+		
+		baseSeq.setAccountNumber(accountNumber);
+		baseSeq.setUserId(userId);
+		baseSeqRepo.save(baseSeq);
 		
 		return newPerson;
 	}
