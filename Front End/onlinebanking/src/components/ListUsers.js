@@ -6,24 +6,10 @@ import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar';
 import Footer from './footer';
 import { useNavigate } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
+
 function ListUsers() {
 
   const [users, setUsers] = useState([]);
-
-  const itemsPerPage =5;
-
-  const pageCount=Math.ceil(users.length/itemsPerPage);
-
-  const [currentPage, setCurrentPage]=useState(0);
-
-  const offset =currentPage * itemsPerPage;
-  
-  const currentUsers=users.slice(offset,offset + itemsPerPage);
-
-  const handlePageChange =({selected}) => {
-    setCurrentPage(selected);
-  }
 
   const usenavigate = useNavigate();
 
@@ -150,7 +136,7 @@ function ListUsers() {
                     </tr>
                 </thead>
                 <tbody>
-                    {search(currentUsers).map((user) => (
+                    {search(users).map((user) => (
                       
                         <tr key={user.userId}>
                             <td>
@@ -165,16 +151,6 @@ function ListUsers() {
                     ))}
                 </tbody>
             </Table>
-            <ReactPaginate
-      
-      pageCount={pageCount}
-      onPageChange={handlePageChange}
-      containerClassName={'pagination'}
-      subContainerClassName={'pages pagination'}
-      activeClassName={'active'}
-      pageLinkClassName={'page-link'}
-      disableInitialCallback={true}
-      />
             <Footer/> 
         </>
     );
