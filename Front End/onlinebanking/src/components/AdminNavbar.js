@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 
 function AdminNavbar() {
@@ -16,28 +17,35 @@ function AdminNavbar() {
   }
 
   return (
-    <>
-      <Navbar  bg="ffae00" data-bs-theme="dark" >
+    // <>
+      <Navbar expand="lg" className="navbar-body"  >
         <Container>
           <Navbar.Brand href="/adminDashboard">Admin Dashboard</Navbar.Brand>
-          <Nav className="mr-auto">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
             {/* <Link to="/home">Home</Link> */}
 
-             <Link className='btn' style ={{padding: '10px', margin: '10px', color: "black"}} to="/admin/accountRequests">Account Requests</Link>
-            <Link className='btn' style ={{padding: '10px', margin: '10px', color: "black"}} to="/admin/listUsers">All Users</Link> 
-{/*<Form className="d-flex">
-              {/*<Form.Control type="search" placeholder="Search User" style ={{padding: '10px', margin: '10px',width: '300px', height: '50px'}} aria-label="Search" />
-              <Button className='btn' style ={{padding: '10px',margin: '10px' ,width: '80px', height: '50px'} } >Search</Button>
-            </Form>*/}
-            
+             {/* <Link className='btn text-dark w-auto
 
-
+'   to="/admin/accountRequests">Account Requests</Link> */}
+            <LinkContainer to ="/admin/listUsers">
+              <Nav.Link className='text-dark'>All Users</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/admin/accountRequests">
+              <Nav.Link className='text-dark'>Account Requests</Nav.Link>
+              </LinkContainer> 
+            {/* <Nav.Link  to="/admin/listUsers">All Users</Nav.Link>  */}
           </Nav>
-          {/* <Button className='btn float-right' onClick={handleLogout}> Logout </Button> */}
-          <Button className='btn float-right  h-50' style ={{margin: '10px', height: '50px'} }onClick={handleLogout}> Logout </Button>
+            
+          <Nav>
+          <Nav.Link className='float-right text-danger' to ={"/login"} onClick={handleLogout}>Logout</Nav.Link>
+          </Nav>
+          
+          </Navbar.Collapse>
         </Container>
       </Navbar>
-    </>
+    // </>
   )
 }
 
