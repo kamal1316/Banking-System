@@ -10,12 +10,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.wellsfargo.onlinebanking.entity.Account;
+import com.wellsfargo.onlinebanking.entity.BaseSeq;
 import com.wellsfargo.onlinebanking.entity.Person;
 import com.wellsfargo.onlinebanking.entity.PersonalDetails;
 import com.wellsfargo.onlinebanking.entity.User;
 import com.wellsfargo.onlinebanking.exception.RequestAlreadyExistsException;
 import com.wellsfargo.onlinebanking.exception.ResourceNotFoundException;
 import com.wellsfargo.onlinebanking.exception.UserAlreadyExistsException;
+import com.wellsfargo.onlinebanking.repository.BaseSeqRepository;
 import com.wellsfargo.onlinebanking.repository.RequestRepository;
 
 @Service
@@ -35,6 +37,9 @@ public class AdminService {
 	
 	@Autowired	
 	AccountService accountService;
+	
+	@Autowired
+	BaseSeqRepository baseSeqRepo;
 	
 	public List<Person> getAllRequests() {
 	
@@ -82,8 +87,17 @@ public class AdminService {
 	}
 	
 	public Person openAccount( Person newPerson) throws UserAlreadyExistsException {
-		int accountNumber = ++baseAccountNumber;
-		int userId = ++baseUserId;
+//		int accountNumber = ++baseAccountNumber;
+//		int userId = ++baseUserId;
+		
+		BaseSeq baseSeq = baseSeqRepo.findAll().get(0);
+		
+		int accountNumber = baseSeq.getAccountNumber()+1;
+		int userId = baseSeq.getUserId()+1;
+		
+		baseSeq.setAccountNumber(accountNumber);
+		baseSeq.setUserId(userId);
+		baseSeqRepo.save(baseSeq);
 		
 		String password = generatePassword();
 		
